@@ -9,8 +9,8 @@
     },
     "examDefaults": {
       "questionCount": 20,
-      "timeLimitSec": 1200,
-      "passingPercent": 70
+      "timeLimitSec": 1500,
+      "passingPercent": 80
     },
     "errorReview": {
       "maxPerSession": 15,
@@ -29,7 +29,7 @@
       "id": "anthropologie",
       "title": "physio - anthropologie",
       "file": "themes/anthropologie.json",
-      "tags": ["S1", "physio", "anthropologie"],
+      "tags": ["S1", "physiologie", "anthropologie"],
       "locale": "fr-FR"
     },
     {
@@ -43,14 +43,14 @@
       "id": "Physiologie-neurotransmission",
       "title": "Physiologie - neurotransmission",
       "file": "themes/neurotransmission.json",
-      "tags": ["S1", "langues"],
+      "tags": ["S1", "physiologie"],
       "locale": "fr-FR"
     },
     {
       "id": "Physiologie-muscle_strié",
       "title": "Physiologie - muscle strié",
       "file": "themes/physio-muscle.json",
-      "tags": ["S1", "langues"],
+      "tags": ["S1", "physiologie"],
       "locale": "fr-FR"
     },
     {
@@ -63,3 +63,4 @@
     
   ]
 }
+
