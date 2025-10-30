@@ -47,7 +47,7 @@
 ## 🏗️ Structure du projet
 
 ```
-ergo-quiz/
+ergo-mate/
 ├── index.html                      # Page principale (SPA)
 ├── manifest.webmanifest            # Configuration PWA
 ├── sw.js                           # Service Worker (cache offline)
@@ -114,15 +114,15 @@ Accédez directement à l'application : **[ergo-mate.mehdydriouech.fr](http://er
 
 **Sur desktop (Chrome/Edge) :**
 1. Cliquez sur l'icône ➕ dans la barre d'adresse
-2. "Installer Ergo Quiz"
+2. "Installer Ergo Mate"
 3. L'app s'ouvre dans sa propre fenêtre
 
 ### 💻 Développement local
 
 ```bash
 # Cloner le repository
-git clone https://github.com/mehdy-driouech/ergo-quiz.git
-cd ergo-quiz
+git clone https://github.com/mehdy-driouech/ErgoMate.git
+cd ErgoMate
 
 # Lancer un serveur local
 python -m http.server 8000
@@ -253,7 +253,7 @@ Le code source de **Ergo Mate** est distribué sous licence **Creative Commons A
 
 **Besoin d'aide ou vous avez des questions ?**
 - 📧 Email : [contact via le site](https://www.mehdydriouech.fr)
-- 🐛 Issues : [GitHub Issues](https://github.com/mehdy-driouech/ergo-quiz/issues)
+- 🐛 Issues : [GitHub Issues](https://github.com/mehdy-driouech/ErgoMate/issues)
 - 💡 Suggestions : Ouvrez une discussion sur GitHub
 
 ---
