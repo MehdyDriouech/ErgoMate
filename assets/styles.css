@@ -167,6 +167,50 @@ html[data-theme="dark"] .app-header {
   align-items: center;
 }
 
+/* Bouton burger menu - caché par défaut sur desktop */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 101;
+  position: relative;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-base);
+}
+
+.burger-menu:hover {
+  background: var(--btn-ghost);
+}
+
+.burger-line {
+  width: 100%;
+  height: 3px;
+  background: var(--fg);
+  border-radius: 3px;
+  transition: all var(--transition-base);
+  transform-origin: center;
+}
+
+/* Animation du burger en X */
+.burger-menu.open .burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-menu.open .burger-line:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.burger-menu.open .burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .app-footer {
   display: flex;
   justify-content: center;
@@ -706,17 +750,64 @@ strong {
 }
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE MOBILE
    ========================================= */
+   
 @media (max-width: 768px) {
+  /* HEADER MOBILE */
   .app-header {
     padding: 12px 16px;
+    flex-wrap: nowrap;
   }
   
   .app-header h1 {
     font-size: 1.25rem;
+    flex: 1;
   }
   
+  /* Afficher le burger menu sur mobile */
+  .burger-menu {
+    display: flex;
+  }
+  
+  /* Navigation mobile - cachée par défaut */
+  .app-header nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--card);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 80px 20px 20px;
+    gap: 8px;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    transition: right var(--transition-base);
+    z-index: 100;
+    overflow-y: auto;
+  }
+  
+  html[data-theme="dark"] .app-header nav {
+    background: var(--card);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Menu ouvert */
+  .app-header nav.mobile-open {
+    right: 0;
+  }
+  
+  /* Boutons de navigation mobile */
+  .app-header nav .btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 14px 20px;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+  }
+  
+  /* CONTENU PRINCIPAL */
   main {
     padding: 16px 12px 60px;
   }
@@ -726,59 +817,100 @@ strong {
   }
   
   .btn {
-    padding: 10px 18px;
-    font-size: 0.9rem;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    min-height: 44px; /* Zone tactile recommandée */
   }
   
+  /* QUIZ HEADER */
   .quiz-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 16px;
   }
   
+  /* CHOIX DE QUESTIONS - Zone tactile améliorée */
   .choice {
-    padding: 12px 16px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    min-height: 56px;
   }
   
-  .actions, .quiz-actions {
+  .choice input[type="radio"],
+  .choice input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  
+  .choice span {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  /* ACTIONS - Boutons empilés verticalement sur mobile */
+  .actions,
+  .quiz-actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .actions .btn,
+  .quiz-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Ordre logique des boutons quiz sur mobile */
+  .quiz-actions {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #btn-submit {
+    order: 1;
+  }
+  
+  #btn-next {
+    order: 2;
+  }
+  
+  #btn-quit {
+    order: 3;
+  }
+  
+  /* FOOTER MOBILE - Layout vertical */
+  .app-footer {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    margin-top: 32px;
+  }
+  
+  .app-footer small {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
+    text-align: center;
   }
   
+  .app-footer small span:nth-child(2) {
+    display: none; /* Cacher le séparateur • */
+  }
+  
+  .network-status {
+    margin-top: 8px;
+  }
+  
+  /* DASHBOARD */
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   
-  .dashboard-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 420px) {
-  .card {
-    padding: 12px;
-    border-radius: var(--radius-md);
-  }
-  
-  .btn {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-  }
-  
-  .badge {
-    font-size: 0.75rem;
-    padding: 4px 10px;
-  }
-  
-  .actions .btn {
-    flex: 1 1 calc(50% - 4px);
-    min-width: 0;
-  }
-  
-  .fc-title {
-    font-size: 1.1rem;
-  }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
+  .stat-card {
+    padding: 16px;
   }
   
   .stat-icon {
@@ -788,74 +920,91 @@ strong {
   .stat-value {
     font-size: 1.5rem;
   }
-}
-
-.loading {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid var(--card-border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+  
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  /* EXPORT BUTTONS */
+  .export-buttons {
+    flex-direction: column;
+  }
+  
+  .export-buttons .btn {
+    width: 100%;
+  }
+  
+  /* FLASHCARDS */
+  .flashcard-container {
+    min-height: 250px;
+  }
+  
+  .flashcard-face {
+    padding: 24px;
+    min-height: 250px;
+  }
+  
+  .fc-title {
+    font-size: 1.1rem;
+  }
+  
+  .fc-answer {
+    font-size: 1rem;
+    padding: 12px;
   }
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-solid);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--card-border);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted);
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+/* TRÈS PETITS ÉCRANS */
+@media (max-width: 420px) {
+  .app-header {
+    padding: 10px 12px;
   }
-}
-
-*:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-
-button:focus-visible,
-.btn:focus-visible {
-  outline-offset: 4px;
+  
+  .app-header h1 {
+    font-size: 1.1rem;
+  }
+  
+  .app-header nav {
+    width: 100%;
+    right: -100%;
+  }
+  
+  .card {
+    padding: 12px;
+    border-radius: var(--radius-md);
+  }
+  
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    min-height: 44px;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+  
+  .choice {
+    padding: 14px 16px;
+  }
+  
+  .fc-title {
+    font-size: 1rem;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-value {
+    font-size: 1.25rem;
+  }
+  
+  .stat-icon {
+    font-size: 1.75rem;
+  }
 }
 
 /* ============================================ */
@@ -1173,3 +1322,21 @@ html[data-theme="dark"] .error-message {
   color: #ef4444;
 }
 
+/* Overlay pour le menu mobile */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  backdrop-filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+  .app-header nav.mobile-open ~ .mobile-overlay {
+    display: block;
+  }
+}
