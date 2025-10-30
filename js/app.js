@@ -4,6 +4,7 @@
 // - Historique détaillé avec statistiques
 // - Tracking du temps moyen par question
 // - Export/Import des données
+// - Mode recherche
 
 ///////////////////////////
 // THÈME AUTO-ADAPTATIF  //
@@ -67,7 +68,7 @@ const state = {
       title: 'Ergo Quiz',
       defaultLocale: 'fr-FR',
       modes: { enabled: ['practice','mcq_only','exam','error_review'], default: 'practice' },
-      examDefaults: { questionCount: 20, timeLimitSec: 1200, passingPercent: 70 },
+      examDefaults: { questionCount: 20, timeLimitSec: 1500, passingPercent: 80 },
       errorReview: { maxPerSession: 15, decayOnCorrect: 1 }
     }
   },
@@ -158,16 +159,16 @@ const els = {
     results: document.getElementById('view-results'),
     flashcards: document.getElementById('view-flashcards'),
     history: document.getElementById('view-history'),
-    dashboard: document.getElementById('view-dashboard'), // US 3.1
-    importTheme: document.getElementById('view-import-theme'), // Import thèmes
-    customThemes: document.getElementById('view-custom-themes') // Gestion thèmes perso
+    dashboard: document.getElementById('view-dashboard'),
+    importTheme: document.getElementById('view-import-theme'),
+    customThemes: document.getElementById('view-custom-themes')
   },
   btnHome: document.getElementById('btn-home'),
   btnHistory: document.getElementById('btn-history'),
-  btnDashboard: document.getElementById('btn-dashboard'), // US 3.1
+  btnDashboard: document.getElementById('btn-dashboard'),
   btnTheme: document.getElementById('btn-theme'),
-  btnAddTheme: document.getElementById('btn-add-theme'), // Ajouter un thème
-  btnManageThemes: document.getElementById('btn-manage-themes'), // Gérer les thèmes perso
+  btnAddTheme: document.getElementById('btn-add-theme'),
+  btnManageThemes: document.getElementById('btn-manage-themes'),
   themesList: document.getElementById('themes-list'),
   quizTitle: document.getElementById('quiz-title'),
   quizThemeTitle: document.getElementById('quiz-theme-title'),
@@ -191,10 +192,14 @@ const els = {
   btnFcNext: document.getElementById('btn-fc-next'),
   btnFcBack: document.getElementById('btn-fc-back'),
   historyList: document.getElementById('history-list'),
-  dashboardContent: document.getElementById('dashboard-content'), // US 3.1
-  btnExport: document.getElementById('btn-export'), // US 3.4
-  btnImport: document.getElementById('btn-import'), // US 3.4
-  fileImport: document.getElementById('file-import') // US 3.4
+  dashboardContent: document.getElementById('dashboard-content'),
+  btnExport: document.getElementById('btn-export'),
+  btnImport: document.getElementById('btn-import'),
+  fileImport: document.getElementById('file-import'),
+  searchInput: document.getElementById('search-themes'),
+  btnClearSearch: document.getElementById('btn-clear-search'),
+  searchResultsCount: document.getElementById('search-results-count'),
+  examTimer: document.getElementById('exam-timer')
 };
 
 /////////////////////
@@ -233,7 +238,7 @@ function getExpectedIds(q) {
 function labelForMode(mode, title) {
   const map = {
     practice: `Entraînement (${title})`,
-    mcq_only: `QCM (${title})`,
+    //mcq_only: `QCM (${title})`,
     exam: `Examen (${title})`,
     error_review: `Révision d'erreurs (${title})`,
     flashcard: `Flashcards (${title})`
@@ -247,6 +252,58 @@ function formatTime(ms) {
   const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;
   return `${minutes}m ${secs}s`;
+}
+
+/////////////////////////////
+// RECHERCHE DE THÈMES     //
+/////////////////////////////
+
+/**
+ * Normalise une chaîne pour la recherche (sans accents, minuscules)
+ */
+function normalizeString(str) {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+/**
+ * Vérifie si un thème correspond à la requête de recherche
+ */
+function themeMatchesSearch(theme, query) {
+  if (!query || query.trim() === '') return true;
+  
+  const normalizedQuery = normalizeString(query.trim());
+  const normalizedTitle = normalizeString(theme.title || '');
+  const normalizedTags = (theme.tags || []).map(tag => normalizeString(tag));
+  
+  // Recherche dans le titre
+  if (normalizedTitle.includes(normalizedQuery)) {
+    return true;
+  }
+  
+  // Recherche dans les tags
+  return normalizedTags.some(tag => tag.includes(normalizedQuery));
+}
+
+/**
+ * Surligne les termes de recherche dans le texte
+ */
+function highlightSearchTerm(text, query) {
+  if (!query || query.trim() === '') return text;
+  
+  const normalizedQuery = normalizeString(query.trim());
+  const normalizedText = normalizeString(text);
+  const index = normalizedText.indexOf(normalizedQuery);
+  
+  if (index === -1) return text;
+  
+  const before = text.substring(0, index);
+  const match = text.substring(index, index + query.length);
+  const after = text.substring(index + query.length);
+  
+  return `${before}<span class="search-highlight">${match}</span>${after}`;
 }
 
 /////////////////////////////
@@ -369,9 +426,7 @@ async function preloadThemeCounts() {
 /////////////////////////////
 // RENDU DES THÈMES        //
 /////////////////////////////
-function renderThemes() {
-  if (!els.themesList) return;
-  
+function renderThemes(searchQuery = '') {
   // Fusionner thèmes officiels et personnalisés
   const allThemes = getAllThemes();
   
@@ -381,19 +436,47 @@ function renderThemes() {
     return cB - cA;
   });
 
+  // Filtrer les thèmes selon la recherche
+  const filteredThemes = sorted.filter(theme => themeMatchesSearch(theme, searchQuery));
+  
   els.themesList.innerHTML = '';
   
-  sorted.forEach((theme, index) => {
+  // Afficher le compteur de résultats
+  if (searchQuery && searchQuery.trim() !== '') {
+    els.searchResultsCount.hidden = false;
+    els.searchResultsCount.textContent = `${filteredThemes.length} thème(s) trouvé(s)`;
+  } else {
+    els.searchResultsCount.hidden = true;
+  }
+  
+  // Afficher un message si aucun résultat
+  if (filteredThemes.length === 0) {
+    els.themesList.innerHTML = `
+      <div class="card" style="text-align: center; padding: 48px 24px;">
+        <div style="font-size: 3rem; margin-bottom: 16px;">🔍</div>
+        <h3 style="margin: 0 0 8px 0;">Aucun thème trouvé</h3>
+        <p class="muted" style="margin: 0;">
+          Essayez avec d'autres mots-clés
+        </p>
+      </div>
+    `;
+    return;
+  }
+  
+  filteredThemes.forEach((theme, index) => {
     const errorTotal = getThemeErrorTotal(theme.id);
     const qCount = state.themeCounts[theme.id] || (theme.questions?.length || '?');
 
     const card = document.createElement('article');
-    card.className = 'card';
+    card.className = 'card search-match';
     card.style.animationDelay = `${index * 50}ms`;
 
-    const tagsHtml = (theme.tags || []).map(tag => 
-      `<span class="badge">${tag}</span>`
-    ).join('');
+    // Surligner les termes de recherche dans le titre et les tags
+    const highlightedTitle = highlightSearchTerm(theme.title, searchQuery);
+    const tagsHtml = (theme.tags || []).map(tag => {
+      const highlightedTag = highlightSearchTerm(tag, searchQuery);
+      return `<span class="badge">${highlightedTag}</span>`;
+    }).join('');
 
     const errorBadge = errorTotal > 0 
       ? `<span class="badge danger" title="Questions à revoir">❌ ${errorTotal}</span>` 
@@ -406,7 +489,7 @@ function renderThemes() {
 
     card.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-        <h3 style="margin: 0; flex: 1;">${theme.title}</h3>
+        <h3 style="margin: 0; flex: 1;">${highlightedTitle}</h3>
         <span class="badge success">📚 ${qCount}</span>
       </div>
       <div class="meta">
@@ -417,9 +500,6 @@ function renderThemes() {
       <div class="actions" style="margin-top: 16px;">
         <button class="btn primary" data-mode="practice" data-id="${theme.id}">
           🎯 Entraînement
-        </button>
-        <button class="btn" data-mode="mcq_only" data-id="${theme.id}">
-          ✅ QCM
         </button>
         <button class="btn" data-mode="exam" data-id="${theme.id}">
           🏆 Examen
@@ -544,7 +624,7 @@ function bindEvents() {
     e.target.value = '';
   });
 
-  // Support du clavier
+  // Support du clavier pour quiz
   document.addEventListener('keydown', (e) => {
     if (!els.views.quiz?.hidden) {
       if (e.key === 'Enter' && !state.locked) {
@@ -565,6 +645,34 @@ function bindEvents() {
       } else if (e.key === 'ArrowLeft') {
         flashPrev();
       }
+    }
+  });
+
+  // Événements de recherche
+  els.searchInput?.addEventListener('input', (e) => {
+    const query = e.target.value;
+    renderThemes(query);
+    
+    // Afficher/masquer le bouton clear
+    if (els.btnClearSearch) {
+      els.btnClearSearch.hidden = query.trim() === '';
+    }
+  });
+  
+  els.btnClearSearch?.addEventListener('click', () => {
+    if (els.searchInput) {
+      els.searchInput.value = '';
+      els.searchInput.focus();
+      els.btnClearSearch.hidden = true;
+      renderThemes('');
+    }
+  });
+  
+  // Raccourci clavier : Ctrl+K ou Cmd+K pour focus sur la recherche
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      els.searchInput?.focus();
     }
   });
 }
