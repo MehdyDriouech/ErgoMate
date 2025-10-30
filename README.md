@@ -233,7 +233,7 @@ Engineering Manager & Formateur
 
 ## 📄 Licence
 
-Le code source de **Ergo Quiz** est distribué sous licence **Creative Commons Attribution - NonCommercial 4.0 International (CC BY-NC 4.0)**.
+Le code source de **Ergo Mate** est distribué sous licence **Creative Commons Attribution - NonCommercial 4.0 International (CC BY-NC 4.0)**.
 
 ### Vous êtes libre de :
 - ✅ **Partager** : copier, redistribuer le matériel
@@ -242,6 +242,8 @@ Le code source de **Ergo Quiz** est distribué sous licence **Creative Commons A
 ### Sous les conditions suivantes :
 - 📛 **Attribution** : Créditez l'auteur (Mehdy Driouech) avec un lien vers [www.mehdydriouech.fr](https://www.mehdydriouech.fr)
 - 🚫 **Pas d'utilisation commerciale** : Usage non-commercial uniquement
+
+### Pour la mise à disposition par des écoles, me contacter
 
 📜 **Texte complet** : [creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
