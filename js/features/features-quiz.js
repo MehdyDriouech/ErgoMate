@@ -14,6 +14,64 @@ function shuffleArray(array) {
 }
 
 /////////////////////////////
+// TIMER MODE EXAMEN       //
+/////////////////////////////
+let examTimerInterval = null;
+
+function startExamTimer(durationSeconds) {
+  // Arrêter le timer précédent s'il existe
+  if (examTimerInterval) {
+    clearInterval(examTimerInterval);
+  }
+  
+  const endTime = Date.now() + (durationSeconds * 1000);
+  
+  function updateTimer() {
+    const remaining = Math.max(0, endTime - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    
+    if (els.examTimer) {
+      els.examTimer.hidden = false;
+      els.examTimer.innerHTML = `
+        <span class="timer-icon">⏱️</span>
+        <span>${minutes}:${seconds.toString().padStart(2, '0')}</span>
+      `;
+      
+      // Changer la couleur selon le temps restant
+      els.examTimer.classList.remove('warning', 'danger');
+      if (totalSeconds <= 60) {
+        els.examTimer.classList.add('danger');
+      } else if (totalSeconds <= 300) { // 5 minutes
+        els.examTimer.classList.add('warning');
+      }
+    }
+    
+    // Terminer l'examen si le temps est écoulé
+    if (remaining <= 0) {
+      clearInterval(examTimerInterval);
+      examTimerInterval = null;
+      alert('⏰ Temps écoulé ! L\'examen est terminé.');
+      showResults();
+    }
+  }
+  
+  updateTimer(); // Mise à jour immédiate
+  examTimerInterval = setInterval(updateTimer, 1000);
+}
+
+function stopExamTimer() {
+  if (examTimerInterval) {
+    clearInterval(examTimerInterval);
+    examTimerInterval = null;
+  }
+  if (els.examTimer) {
+    els.examTimer.hidden = true;
+  }
+}
+
+/////////////////////////////
 // DÉMARRAGE QUIZ/SESSION  //
 /////////////////////////////
 async function startTheme(themeId, mode) {
@@ -31,9 +89,7 @@ async function startTheme(themeId, mode) {
 
   let questions = await loadThemeQuestions(theme);
 
-  if (mode === 'mcq_only') {
-    questions = questions.filter(q => q.type === 'mcq');
-  } else if (mode === 'error_review') {
+  if (mode === 'error_review') {
     const errors = loadErrors();
     const themeErrors = errors?.[themeId] || {};
     const errorQids = Object.keys(themeErrors).filter(qid => themeErrors[qid] > 0);
@@ -41,11 +97,14 @@ async function startTheme(themeId, mode) {
     const max = state.config.app.errorReview.maxPerSession || 15;
     questions = questions.slice(0, max);
   } else if (mode === 'exam') {
+    // Mélanger d'abord pour avoir un échantillon aléatoire
+    questions = shuffleArray(questions);
     const cfg = state.config.app.examDefaults;
-    questions = questions.slice(0, cfg.questionCount);
+    // Prendre 20 questions ou moins si pas assez disponibles
+    questions = questions.slice(0, Math.min(cfg.questionCount, questions.length));
   }
 
-  // ✨ Mélanger les questions si demandé (sauf en mode examen)
+  // ✨ Mélanger les questions si demandé (sauf en mode examen où c'est déjà fait)
   if (theme.settings?.shuffleQuestions && mode !== 'exam') {
     questions = shuffleArray(questions);
   }
@@ -59,6 +118,14 @@ async function startTheme(themeId, mode) {
   
   if (els.quizTitle) els.quizTitle.textContent = labelForMode(mode, theme.title);
   if (els.quizThemeTitle) els.quizThemeTitle.textContent = theme.title;
+  
+  // Démarrer le timer pour le mode examen
+  if (mode === 'exam') {
+    const cfg = state.config.app.examDefaults;
+    startExamTimer(cfg.timeLimitSec);
+  } else {
+    stopExamTimer();
+  }
   
   showView('quiz');
   renderQuestion();
@@ -236,6 +303,7 @@ function nextQuestion() {
 
 function quitQuiz() {
   if (!confirm('Quitter la session en cours ?')) return;
+  stopExamTimer(); // Arrêter le timer si mode examen
   showThemes();
 }
 
@@ -243,6 +311,9 @@ function quitQuiz() {
 // RÉSULTATS & HISTO    //
 //////////////////////////
 function showResults() {
+  // Arrêter le timer du mode examen
+  stopExamTimer();
+  
   const total = state.questions.length || 0;
   const percent = total ? Math.round((state.score / total) * 100) : 0;
   const themeTitle = state.currentTheme?.title || '';
@@ -300,7 +371,7 @@ function renderHistory() {
   if (!items.length) {
     els.historyList.innerHTML = `
       <article class="card">
-        <p class="muted">📭 Aucun historique pour le moment.</p>
+        <p class="muted">🔭 Aucun historique pour le moment.</p>
       </article>
     `;
     return;
@@ -311,7 +382,6 @@ function renderHistory() {
     const date = d.toLocaleString('fr-FR');
     const modeEmoji = {
       practice: '🎯',
-      mcq_only: '✅',
       exam: '🏆',
       error_review: '🔄',
       flashcard: '🎴'
