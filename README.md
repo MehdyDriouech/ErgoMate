@@ -1,7 +1,7 @@
 # 🧠 Ergo mate
 
 **Ergo mate** est une PWA d'entraînement médical, conçue pour les étudiants et professionnels en ergothérapie, santé et sciences du soin. L'objectif : apprendre, réviser et s'auto-évaluer à travers des quiz thématiques courts, visuels et accessibles, **même hors ligne**.
-
+🌐 [ErgoMate](http://ergo-mate.mehdydriouech.fr/)
 ---
 
 ## ✨ Fonctionnalités principales
@@ -224,8 +224,10 @@ Les contributions sont les bienvenues !
 ## 👨‍💻 Développé par
 
 **Mehdy Driouech**  
-Engineering Manager & Formateur en IA / UX Learning  
+Engineering Manager & Formateur 
 🌐 [www.mehdydriouech.fr](https://www.mehdydriouech.fr)
+
+
 
 ---
 
@@ -256,7 +258,7 @@ Le code source de **Ergo Quiz** est distribué sous licence **Creative Commons A
 
 ## 🙏 Remerciements
 
-Merci à tous les étudiants et professionnels de santé qui utilisent et testent cette application. Votre feedback aide à améliorer continuellement l'expérience d'apprentissage.
+Merci à toutes les personnes qui utilisent et testent cette application. Votre feedback aide à améliorer continuellement l'expérience d'apprentissage.
 
 ---
 
