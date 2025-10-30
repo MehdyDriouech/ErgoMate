@@ -284,6 +284,10 @@ async function loadThemeQuestions(theme) {
       if (!customTheme) {
         throw new Error('Thème personnalisé introuvable');
       }
+      // ✨ NOUVEAU : Fusionner les settings du thème personnalisé
+      if (customTheme.settings) {
+        theme.settings = { ...theme.settings, ...customTheme.settings };
+      }
       return customTheme.questions || [];
     } else if (theme.path) {
       // Si le thème a un attribut "path"
@@ -312,6 +316,11 @@ async function loadThemeQuestions(theme) {
       return [];
     }
     
+    // ✨ NOUVEAU : Fusionner les settings du JSON dans l'objet theme
+    if (data.settings) {
+      theme.settings = { ...theme.settings, ...data.settings };
+    }
+    
     // Retourner les questions
     let questions = Array.isArray(data) ? data : (data.questions || []);
     
@@ -337,33 +346,6 @@ async function loadThemeQuestions(theme) {
   }
 }
 
-async function loadThemeQuestionsoldversionwitouthoffline(theme) {
-  // Si c'est un thème personnalisé, charger depuis localStorage
-  if (theme.isCustom) {
-    const customTheme = getCustomTheme(theme.id);
-    if (!customTheme) {
-      throw new Error('Thème personnalisé introuvable');
-    }
-    let qs = customTheme.questions || [];
-    if (theme.settings?.shuffleQuestions || customTheme.settings?.shuffleQuestions) {
-      qs = shuffle(qs);
-    }
-    return qs;
-  }
-  
-  // Sinon, charger depuis le fichier
-  const rel = theme?.file;
-  if (!rel) return [];
-  const url = `./data/${rel}`;
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error(`Fichier thème introuvable: ${url}`);
-  const data = await res.json();
-  let qs = Array.isArray(data) ? data : (data.questions || []);
-  if (data?.settings?.shuffleQuestions || theme?.settings?.shuffleQuestions) {
-    qs = shuffle(qs);
-  }
-  return qs;
-}
 
 async function fetchThemeCount(theme){
   if (!theme?.file) return 0;
