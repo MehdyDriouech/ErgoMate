@@ -1,0 +1,369 @@
+{
+"id": "physio-muscle",
+"title": "Physiologie du muscle strié squelettique",
+"locale": "fr-FR",
+"meta": { "author": "Me. CHENIVESSE", "source": "PDF", "updatedAt": "2025-10-07" },
+"settings": { "shuffleQuestions": true, "shuffleChoices": true },
+"questions": [
+{
+"id": "muscle_q001",
+"type": "mcq",
+"prompt": "Quel est le pourcentage du poids corporel représenté par les muscles striés squelettiques chez l'homme ?",
+"choices": [
+{ "id": "A", "label": "20%" },
+{ "id": "B", "label": "30%" },
+{ "id": "C", "label": "40%" },
+{ "id": "D", "label": "50%" }
+],
+"answer": "C",
+"rationale": "Chez l’homme les muscles striés squelettiques représentent 40% du poids du corps.",
+"difficulty": 1,
+"tags": ["généralités", "muscles"]
+},
+{
+"id": "muscle_q002",
+"type": "true_false",
+"prompt": "Le tissu musculaire cardiaque est strié et involontaire.",
+"answer": true,
+"rationale": "Le tissu musculaire cardiaque est strié et involontaire, se contractant à un rythme relativement constant.",
+"difficulty": 1,
+"tags": ["types de muscles", "cardiaque"]
+},
+{
+"id": "muscle_q003",
+"type": "mcq",
+"prompt": "Quelle est une fonction principale des muscles ?",
+"choices": [
+{ "id": "A", "label": "Production du mouvement" },
+{ "id": "B", "label": "Digestion des aliments" },
+{ "id": "C", "label": "Filtration du sang" },
+{ "id": "D", "label": "Production d'hormones" }
+],
+"answer": "A",
+"rationale": "Les fonctions incluent la production du mouvement, le maintien de la posture, la stabilisation des articulations et le dégagement de chaleur.",
+"difficulty": 1,
+"tags": ["fonctions", "muscles"]
+},
+{
+"id": "muscle_q004",
+"type": "mcq",
+"prompt": "Quelle propriété permet au muscle de s'adapter au type d'effort selon l'entraînement ?",
+"choices": [
+{ "id": "A", "label": "Excitabilité" },
+{ "id": "B", "label": "Contractilité" },
+{ "id": "C", "label": "Élasticité" },
+{ "id": "D", "label": "Plasticité" }
+],
+"answer": "D",
+"rationale": "La plasticité est l'adaptation au type d’effort selon l’entraînement suivi.",
+"difficulty": 2,
+"tags": ["propriétés", "plasticité"]
+},
+{
+"id": "muscle_q005",
+"type": "true_false",
+"prompt": "L'endomysium est une gaine de tissu conjonctif recouvrant la fibre musculaire.",
+"answer": true,
+"rationale": "L’endomysium est la gaine de tissu conjonctif recouvrant la fibre.",
+"difficulty": 1,
+"tags": ["anatomie microscopique", "endomysium"]
+},
+{
+"id": "muscle_q006",
+"type": "mcq",
+"prompt": "Quelle est la longueur maximale d'une fibre musculaire striée ?",
+"choices": [
+{ "id": "A", "label": "5 cm" },
+{ "id": "B", "label": "10 cm" },
+{ "id": "C", "label": "15 cm" },
+{ "id": "D", "label": "20 cm" }
+],
+"answer": "C",
+"rationale": "Fibre musculaire striée : Grande cellule cylindrique pouvant atteindre 15 cm de long.",
+"difficulty": 2,
+"tags": ["histologie", "fibre"]
+},
+{
+"id": "muscle_q007",
+"type": "true_false",
+"prompt": "Le sarcolemme est riche en glycoprotéine et en réticuline.",
+"answer": true,
+"rationale": "Le sarcolemme est riche en glycoprotéine et en réticuline.",
+"difficulty": 1,
+"tags": ["sarcolemme", "anatomie"]
+},
+{
+"id": "muscle_q008",
+"type": "mcq",
+"prompt": "Qu'est-ce qu'une unité motrice ?",
+"choices": [
+{ "id": "A", "label": "1 motoneurone alpha + cellules musculaires dépendantes" },
+{ "id": "B", "label": "Un groupe de myofibrilles" },
+{ "id": "C", "label": "Un sarcomère" },
+{ "id": "D", "label": "Un faisceau de nerfs" }
+],
+"answer": "A",
+"rationale": "1 unité motrice (UM)= 1 MOTONEURONE ALPHA + CELLULES MUSCULAIRES QUI EN DÉPENDENT.",
+"difficulty": 2,
+"tags": ["innervation", "unité motrice"]
+},
+{
+"id": "muscle_q009",
+"type": "true_false",
+"prompt": "Les artères fournissent les nutriments et l’oxygène nécessaires à la contraction musculaire.",
+"answer": true,
+"rationale": "Les artères fournissent les nutriments et l’oxygène nécessaires à la contraction du tissu musculaire.",
+"difficulty": 1,
+"tags": ["vascularisation", "artères"]
+},
+{
+"id": "muscle_q010",
+"type": "mcq",
+"prompt": "Où se situent les motoneurones alpha ?",
+"choices": [
+{ "id": "A", "label": "Dans la matière grise de la corne antérieure de la moelle épinière" },
+{ "id": "B", "label": "Dans le cortex cérébral" },
+{ "id": "C", "label": "Dans les ganglions spinaux" },
+{ "id": "D", "label": "Dans les muscles" }
+],
+"answer": "A",
+"rationale": "Les neurones moteurs alpha sont situés dans la matière grise de la corne antérieure de la moelle épinière.",
+"difficulty": 2,
+"tags": ["innervation", "motoneurones"]
+},
+{
+"id": "muscle_q011",
+"type": "mcq",
+"prompt": "Quel neurotransmetteur est libéré à la plaque motrice ?",
+"choices": [
+{ "id": "A", "label": "Acétylcholine" },
+{ "id": "B", "label": "Dopamine" },
+{ "id": "C", "label": "Sérotonine" },
+{ "id": "D", "label": "GABA" }
+],
+"answer": "A",
+"rationale": "L'acétylcholine est libérée dans la fente synaptique à la plaque motrice.",
+"difficulty": 2,
+"tags": ["transmission", "acétylcholine"]
+},
+{
+"id": "muscle_q012",
+"type": "true_false",
+"prompt": "La dépolarisation de la fibre musculaire est due à l'entrée massive d'ions sodium.",
+"answer": true,
+"rationale": "La dépolarisation est due à l'ouverture de canaux sodium voltage-dépendants, entraînant une entrée massive d'ions sodium.",
+"difficulty": 1,
+"tags": ["dépolarisation", "sodium"]
+},
+{
+"id": "muscle_q013",
+"type": "mcq",
+"prompt": "Qu'est-ce que la triade dans le muscle ?",
+"choices": [
+{ "id": "A", "label": "Un tubule T et deux citernes adjacentes de réticulum sarcoplasmique" },
+{ "id": "B", "label": "Trois types de filaments" },
+{ "id": "C", "label": "Trois unités motrices" },
+{ "id": "D", "label": "Trois bandes A" }
+],
+"answer": "A",
+"rationale": "Chaque tubule T et deux citernes adjacentes de Réticulum sarcoplasmique = UNE TRIADE.",
+"difficulty": 2,
+"tags": ["triade", "réticulum"]
+},
+{
+"id": "muscle_q014",
+"type": "true_false",
+"prompt": "Le réticulum sarcoplasmique est le lieu de stockage du Ca2+.",
+"answer": true,
+"rationale": "Le réticulum sarcoplasmique est le lieu de stockage du Ca2+.",
+"difficulty": 1,
+"tags": ["réticulum", "calcium"]
+},
+{
+"id": "muscle_q015",
+"type": "mcq",
+"prompt": "Quelle est l'unité fonctionnelle de la cellule musculaire ?",
+"choices": [
+{ "id": "A", "label": "Sarcomère" },
+{ "id": "B", "label": "Myofibrille" },
+{ "id": "C", "label": "Fibre" },
+{ "id": "D", "label": "Faisceau" }
+],
+"answer": "A",
+"rationale": "Sarcomere : Unité fonctionnelle de la cellule musculaire.",
+"difficulty": 2,
+"tags": ["sarcomère", "unité"]
+},
+{
+"id": "muscle_q016",
+"type": "mcq",
+"prompt": "Quel filament est composé d'actine ?",
+"choices": [
+{ "id": "A", "label": "Filaments fins" },
+{ "id": "B", "label": "Filaments épais" },
+{ "id": "C", "label": "Filaments intermédiaires" },
+{ "id": "D", "label": "Filaments longitudinaux" }
+],
+"answer": "A",
+"rationale": "Filaments fins (diamètre environ 7mm) : actine.",
+"difficulty": 2,
+"tags": ["filaments", "actine"]
+},
+{
+"id": "muscle_q017",
+"type": "true_false",
+"prompt": "La myosine forme les filaments épais.",
+"answer": true,
+"rationale": "Filaments épais : Myosine.",
+"difficulty": 1,
+"tags": ["myosine", "filaments"]
+},
+{
+"id": "muscle_q018",
+"type": "mcq",
+"prompt": "Quelle protéine bloque le site de liaison sur l'actine au repos ?",
+"choices": [
+{ "id": "A", "label": "Tropomyosine" },
+{ "id": "B", "label": "Troponine" },
+{ "id": "C", "label": "Nébuline" },
+{ "id": "D", "label": "Desmine" }
+],
+"answer": "A",
+"rationale": "Au repos, la tête myosine est à distance de l’actine par interposition Tropomyosine.",
+"difficulty": 2,
+"tags": ["tropomyosine", "repos"]
+},
+{
+"id": "muscle_q019",
+"type": "mcq",
+"prompt": "Quel ion déclenche la contraction en se liant à la troponine ?",
+"choices": [
+{ "id": "A", "label": "Calcium" },
+{ "id": "B", "label": "Sodium" },
+{ "id": "C", "label": "Potassium" },
+{ "id": "D", "label": "Magnésium" }
+],
+"answer": "A",
+"rationale": "Arrivée de Ca2+ : Levée de l’interposition par la Tropomyosine.",
+"difficulty": 2,
+"tags": ["calcium", "contraction"]
+},
+{
+"id": "muscle_q020",
+"type": "true_false",
+"prompt": "La relaxation musculaire nécessite un retour à la concentration initiale en calcium.",
+"answer": true,
+"rationale": "Retour à la concentration initiale en calcium pour la relaxation.",
+"difficulty": 1,
+"tags": ["relaxation", "calcium"]
+},
+{
+"id": "muscle_q021",
+"type": "mcq",
+"prompt": "Quelle voie produit le plus d'ATP ?",
+"choices": [
+{ "id": "A", "label": "Anaérobie alactique" },
+{ "id": "B", "label": "Anaérobie lactique" },
+{ "id": "C", "label": "Aérobie" },
+{ "id": "D", "label": "Toutes égales" }
+],
+"answer": "C",
+"rationale": "La voie aérobie produit 36 à 138 ATP.",
+"difficulty": 2,
+"tags": ["ATP", "voies"]
+},
+{
+"id": "muscle_q022",
+"type": "mcq",
+"prompt": "Quel type de fibre est adapté au travail aérobie ?",
+"choices": [
+{ "id": "A", "label": "Type I" },
+{ "id": "B", "label": "Type IIb" },
+{ "id": "C", "label": "Type IIa" },
+{ "id": "D", "label": "Type III" }
+],
+"answer": "A",
+"rationale": "Fibres de type I ou ST (slow twitch) adaptées au travail aérobie.",
+"difficulty": 2,
+"tags": ["fibres", "type I"]
+},
+{
+"id": "muscle_q023",
+"type": "true_false",
+"prompt": "Les fibres de type II sont pauvres en myoglobine.",
+"answer": true,
+"rationale": "Les fibres de type II sont pauvres en myoglobine.",
+"difficulty": 1,
+"tags": ["fibres", "type II"]
+},
+{
+"id": "muscle_q024",
+"type": "mcq",
+"prompt": "Quelle est la conséquence d'un entraînement d'endurance sur les muscles ?",
+"choices": [
+{ "id": "A", "label": "Augmentation de la densité capillaire" },
+{ "id": "B", "label": "Diminution du nombre de mitochondries" },
+{ "id": "C", "label": "Réduction de la taille des fibres" },
+{ "id": "D", "label": "Aucune adaptation" }
+],
+"answer": "A",
+"rationale": "Entraînement d’intensité faible mais de longue durée : Augmentation de la densité capillaire.",
+"difficulty": 2,
+"tags": ["entraînement", "endurance"]
+},
+{
+"id": "muscle_q025",
+"type": "mcq",
+"prompt": "Quelles cellules sont impliquées dans la réparation musculaire ?",
+"choices": [
+{ "id": "A", "label": "Cellules satellites" },
+{ "id": "B", "label": "Cellules gliales" },
+{ "id": "C", "label": "Cellules endothéliales" },
+{ "id": "D", "label": "Cellules épithéliales" }
+],
+"answer": "A",
+"rationale": "Cellules satellites musculaires = cellules souches situées entre la lame basale et les cellules musculaires striées.",
+"difficulty": 2,
+"tags": ["réparation", "satellites"]
+},
+{
+"id": "muscle_q026",
+"type": "true_false",
+"prompt": "Le nombre de cellules satellites est plus élevé chez les athlètes que chez les sédentaires.",
+"answer": true,
+"rationale": "Le graphique montre un nombre plus élevé de cellules satellites chez les athlètes.",
+"difficulty": 1,
+"tags": ["satellites", "athlètes"]
+},
+{
+"id": "muscle_q027",
+"type": "mcq",
+"prompt": "Quelle enzyme dégrade l'acétylcholine dans la fente synaptique ?",
+"choices": [
+{ "id": "A", "label": "Acétylcholinestérase" },
+{ "id": "B", "label": "ATPase" },
+{ "id": "C", "label": "SDH" },
+{ "id": "D", "label": "PFK" }
+],
+"answer": "A",
+"rationale": "La dégradation de l’acétylcholine donne 2 molécules: acétate et choline qui va rejoindre la terminaison nerveuse et reformer de nouvelles molécules d’Acétylcholine.",
+"difficulty": 2,
+"tags": ["acétylcholinestérase", "dégradation"]
+},
+{
+"id": "muscle_q028",
+"type": "mcq",
+"prompt": "Quelle est la bande I dans le sarcomère ?",
+"choices": [
+{ "id": "A", "label": "Isotrope (laisse passer la lumière)" },
+{ "id": "B", "label": "Anisotrope (ne laisse pas passer la lumière)" },
+{ "id": "C", "label": "Zone H" },
+{ "id": "D", "label": "Ligne M" }
+],
+"answer": "A",
+"rationale": "Bande I : Isotrope (laisse passer la lumière).",
+"difficulty": 2,
+"tags": ["sarcomère", "bande I"]
+}
+]
+}

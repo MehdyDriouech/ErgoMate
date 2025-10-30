@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta name="theme-color" content="#06b6d4" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="Ergo Mate - Application de révision pour étudiants en ergothérapie avec quiz, flashcards, tableau de bord et suivi de progression" />
+  
+  <title>Ergo Mate - Quiz & Flashcards pour Ergothérapie</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Ergo Mate" />
+  
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 24 24'%3E%3Cpath fill='%2306b6d4' d='M10.5 2a1 1 0 0 1 1-1h.99a1 1 0 0 1 1 1v2.02h2.01a1 1 0 0 1 1 1v.99a1 1 0 0 1-1 1H13.49v2.02a1 1 0 0 1-1 1h-.99a1 1 0 0 1-1-1V7.01H7.49a1 1 0 0 1 1-1h3.01zM6 11c-2.21 0-4 1.79-4 4v3c0 1.66 1.34 3 3 3h14a3 3 0 0 0 3-3v-3c0-2.21-1.79-4-4-4z'/%3E%3C/svg%3E" />
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+</head>
+<body>
+  <noscript>
+    <div style="padding: 20px; text-align: center; background: #fef2f2; color: #991b1b;">
+      ⚠️ Veuillez activer JavaScript pour utiliser l'application.
+    </div>
+  </noscript>
+
+  <header class="app-header" role="banner">
+    <h1 id="app-title">🎓 Ergo Mate</h1>
+    <nav aria-label="Navigation principale">
+      <button id="btn-home" class="btn ghost" aria-label="Retour aux thèmes" title="Thèmes">
+        🏠 Accueil
+      </button>
+      <button id="btn-dashboard" class="btn ghost" aria-label="Tableau de bord" title="Tableau de bord">
+        📊 Dashboard
+      </button>
+      <button id="btn-history" class="btn ghost" aria-label="Voir l'historique" title="Historique">
+        📚 Historique
+      </button>
+      <!--<button id="btn-add-theme" class="btn ghost" aria-label="Ajouter un thème">
+        ➕ Thème
+      </button> -->
+      <button id="btn-manage-themes" class="btn ghost" aria-label="Gérer mes thèmes">
+        📚 Mes Thèmes
+      </button>
+      <button id="btn-theme" class="btn ghost" aria-label="Changer le thème" title="Thème">
+        🌙
+      </button>
+    </nav>
+  </header>
+
+  <main id="app" role="main">
+    
+    <!-- ========================================
+         VUE : LISTE DES THÈMES
+         ======================================== -->
+    <section id="view-themes" class="view active" aria-labelledby="themes-title">
+      
+      <div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);">
+        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+          
+          <figure aria-hidden="true" style="margin: 0; flex-shrink: 0;">
+            <svg width="120" height="120" viewBox="0 0 120 120" role="img" xmlns="http://www.w3.org/2000/svg">
+              <title>Illustration médicale</title>
+              <desc>Stéthoscope formant un cœur, symbole d'apprentissage en santé.</desc>
+              <defs>
+                <linearGradient id="grad1" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#06b6d4"/>
+                  <stop offset="100%" stop-color="#10b981"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="56" fill="#ECFEFF" stroke="#BAE6FD" stroke-width="2"/>
+              <path d="M40 50c0-8 6-14 14-14s14 6 14 14-6 14-14 14-14-6-14-14z" fill="url(#grad1)"/>
+              <path d="M74 40c10 0 18 8 18 18 0 7-4 13-10 16" fill="none" stroke="#0891b2" stroke-width="4" stroke-linecap="round"/>
+              <path d="M30 82c6 6 14 10 22 10 8 0 16-4 22-10" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round"/>
+              <path d="M84 72v10a8 8 0 0 0 8 8h6" fill="none" stroke="#06b6d4" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </figure>
+
+          <div style="flex: 1; min-width: 240px;">
+            <h2 id="themes-title" style="margin: 0 0 8px 0; font-size: clamp(1.25rem, 3vw, 1.75rem);">
+              Ergo Mate, ton compagnon pour réussir
+            </h2>
+            <p class="muted" style="margin: 0 0 16px 0; font-size: 1rem;">
+              Quiz interactifs, flashcards animées, tableau de bord et suivi de progression. 
+              L'outil idéal pour tes révisions en ergothérapie.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--card-border);">
+          <h3 style="margin: 0 0 12px 0; font-size: 1.1rem;">💡 Conseils pour maximiser ta mémorisation</h3>
+          <ul style="margin: 0; padding-left: 24px; display: grid; gap: 8px;">
+            <li><strong>Répétition espacée :</strong> Refais un thème 24h puis 72h plus tard pour ancrer durablement.</li>
+            <li><strong>Sessions courtes :</strong> 10-15 minutes par session, 2-3 thèmes ciblés pour rester concentré.</li>
+            <li><strong>Alternance :</strong> Mélange QCM et flashcards pour stimuler différentes formes de mémoire.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="themes-list" class="card-list" role="list"></div>
+      
+    </section>
+
+    <!-- ========================================
+         VUE : TABLEAU DE BORD - US 3.1
+         ======================================== -->
+    <section id="view-dashboard" class="view" aria-labelledby="dashboard-title" hidden>
+      
+      <div class="card" style="margin-bottom: 24px; background: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);">
+        <h2 id="dashboard-title" style="margin: 0 0 8px 0;">📊 Tableau de bord</h2>
+        <p class="muted" style="margin: 0;">Vue d'ensemble de vos progrès et statistiques détaillées</p>
+      </div>
+
+      <div id="dashboard-content"></div>
+
+      <!-- US 3.4 - Export/Import Section -->
+      <div class="export-section">
+        <h3>💾 Gestion des données</h3>
+        <p class="muted" style="margin-bottom: 16px;">
+          Exportez vos données pour les sauvegarder ou les transférer sur un autre appareil. 
+          Importez des données pour fusionner avec votre historique actuel.
+        </p>
+        <div class="export-buttons">
+          <button id="btn-export" class="btn primary">
+            📥 Exporter mes données
+          </button>
+          <button id="btn-import" class="btn ghost">
+            📤 Importer des données
+          </button>
+          <input type="file" id="file-import" accept=".json" aria-label="Importer un fichier de données" />
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- ========================================
+         VUE : QUIZ
+         ======================================== -->
+    <section id="view-quiz" class="view" aria-labelledby="quiz-title" hidden>
+      
+      <div class="quiz-header">
+        <div>
+          <h2 id="quiz-title" style="margin: 0;">Quiz</h2>
+          <span id="quiz-theme-title" class="badge" style="margin-top: 8px;"></span>
+        </div>
+        <div class="quiz-meta">
+          <span id="quiz-progress" class="muted"></span>
+        </div>
+      </div>
+
+      <div id="question-container" class="card"></div>
+
+      <div class="quiz-actions">
+        <button id="btn-submit" class="btn primary">
+          ✓ Valider
+        </button>
+        <button id="btn-next" class="btn" disabled>
+          → Suivant
+        </button>
+        <button id="btn-quit" class="btn ghost">
+          ✕ Quitter
+        </button>
+      </div>
+      
+    </section>
+
+    <!-- ========================================
+         VUE : RÉSULTATS
+         ======================================== -->
+    <section id="view-results" class="view" aria-labelledby="results-title" hidden>
+      
+      <div class="card" style="text-align: center; padding: 32px;">
+        <h2 id="results-title" style="margin-bottom: 16px;">🎯 Résultats</h2>
+        <p id="results-summary" style="font-size: 1.25rem; font-weight: 600; margin-bottom: 24px;"></p>
+      </div>
+
+      <div id="results-details" class="card-list" style="margin-top: 24px;"></div>
+
+      <div class="actions" style="margin-top: 24px;">
+        <button id="btn-retry" class="btn primary">
+          🔄 Rejouer le thème
+        </button>
+        <button id="btn-back-themes" class="btn ghost">
+          ← Retour aux thèmes
+        </button>
+      </div>
+      
+    </section>
+
+    <!-- ========================================
+         VUE : FLASHCARDS
+         ======================================== -->
+    <section id="view-flashcards" class="view" aria-labelledby="flashcards-title" hidden>
+      
+      <div class="quiz-header">
+        <div>
+          <h2 id="flashcards-title" style="margin: 0;">🎴 Flashcards</h2>
+          <span id="flashcards-theme-title" class="badge" style="margin-top: 8px;"></span>
+        </div>
+        <div class="quiz-meta">
+          <span id="flashcards-progress" class="muted"></span>
+        </div>
+      </div>
+
+      <div class="flashcard-container">
+        <article id="flashcard" class="card flashcard" aria-live="polite">
+        </article>
+      </div>
+
+      <div class="actions" style="margin-top: 24px;">
+        <button id="btn-show-answer" class="btn primary">
+          👁️ Afficher la réponse
+        </button>
+        <button id="btn-know" class="btn" style="background: var(--accent); color: white;" hidden>
+          ✅ Je savais
+        </button>
+        <button id="btn-dont-know" class="btn ghost" hidden>
+          ❌ Je me suis trompé
+        </button>
+        <div style="flex: 1;"></div>
+        <button id="btn-fc-prev" class="btn ghost">
+          ← Précédent
+        </button>
+        <button id="btn-fc-next" class="btn">
+          Suivant →
+        </button>
+      </div>
+
+      <div style="margin-top: 16px; text-align: center;">
+        <button id="btn-fc-back" class="btn ghost">
+          ✕ Retour aux thèmes
+        </button>
+      </div>
+
+      <div class="card" style="margin-top: 24px; background: rgba(14, 165, 233, 0.05);">
+        <p class="muted" style="margin: 0; font-size: 0.875rem; text-align: center;">
+          💡 <strong>Astuce :</strong> Utilisez les touches ← → pour naviguer et Espace/Entrée pour révéler
+        </p>
+      </div>
+      
+    </section>
+
+    <!-- ========================================
+         VUE : HISTORIQUE - US 3.2
+         ======================================== -->
+    <section id="view-history" class="view" aria-labelledby="history-title" hidden>
+      
+      <div class="card" style="margin-bottom: 24px;">
+        <h2 id="history-title" style="margin: 0;">📚 Historique de vos sessions</h2>
+        <p class="muted" style="margin: 8px 0 0 0;">
+          Retrouvez vos 200 dernières sessions avec détails complets : date, mode, score et temps moyen
+        </p>
+      </div>
+
+      <div id="history-list" class="card-list"></div>
+      
+    </section>
+
+<!-- ============================================ -->
+<!-- 2. VUE D'IMPORT DE THÈME -->
+<!-- ============================================ -->
+
+<!-- Ajoutez cette section après les vues existantes : -->
+<section id="view-import-theme" class="view" hidden>
+  <header class="view-header">
+    <div class="view-header-content">
+      <h2>📥 Importer un thème personnalisé</h2>
+      <button id="btn-import-close" class="btn ghost" aria-label="Fermer">
+        ✕ Fermer
+      </button>
+    </div>
+  </header>
+
+  <div class="import-container">
+    <article class="card">
+      <h3 style="margin: 0 0 16px 0;">📁 Sélectionnez votre fichier JSON</h3>
+      
+      <div id="drop-zone" class="drop-zone">
+        <div class="drop-zone-content">
+          <div class="drop-icon">📄</div>
+          <p class="drop-text">Glissez votre fichier JSON ici</p>
+          <p class="muted">ou</p>
+          <button id="btn-select-file" class="btn primary">
+            📂 Choisir un fichier
+          </button>
+          <input type="file" id="file-theme-import" accept=".json" hidden />
+          <p class="muted" style="margin-top: 16px; font-size: 0.85rem;">
+            Fichiers acceptés : .json • Taille max : 5MB
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Prévisualisation du thème -->
+    <div id="theme-preview" hidden></div>
+
+    <!-- Erreurs de validation -->
+    <div id="validation-errors" hidden></div>
+
+    <!-- Bouton de confirmation -->
+    <div style="text-align: center; margin-top: 24px;">
+      <button id="btn-confirm-import" class="btn primary large" hidden>
+        ✅ Importer ce thème
+      </button>
+    </div>
+
+    <!-- Aide -->
+    <article class="card" style="margin-top: 24px; background: var(--bg-secondary);">
+      <h4 style="margin: 0 0 12px 0;">💡 Format attendu</h4>
+      <p class="muted" style="margin: 0 0 12px 0;">
+        Votre fichier JSON doit contenir un objet avec la structure suivante :
+      </p>
+      <pre style="background: var(--bg); padding: 12px; border-radius: 8px; overflow-x: auto; font-size: 0.85rem;"><code>{
+  "title": "Nom du thème",
+  "description": "Description du thème",
+  "tags": ["tag1", "tag2"],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "prompt": "Question ?",
+      "choices": [
+        { "id": "a", "label": "Réponse A" },
+        { "id": "b", "label": "Réponse B" }
+      ],
+      "answer": "a",
+      "rationale": "Explication"
+    }
+  ]
+}</code></pre>
+      <p class="muted" style="margin: 12px 0 0 0; font-size: 0.85rem;">
+        <strong>Types de questions supportés :</strong> mcq (QCM), true_false (Vrai/Faux), fill_in (Complétion)
+      </p>
+    </article>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 3. VUE DE GESTION DES THÈMES PERSONNALISÉS -->
+<!-- ============================================ -->
+
+<section id="view-custom-themes" class="view" hidden>
+  <header class="view-header">
+    <div class="view-header-content">
+      <h2>📚 Mes Thèmes Personnalisés</h2>
+      <button id="btn-custom-close" class="btn ghost" aria-label="Fermer" onclick="showThemes()">
+        ✕ Fermer
+      </button>
+    </div>
+  </header>
+
+  <div style="margin-bottom: 24px; text-align: center;">
+    <button class="btn primary" onclick="showThemeImportView()">
+      ➕ Ajouter un nouveau thème
+    </button>
+  </div>
+
+  <div id="custom-themes-list">
+    <!-- Liste générée dynamiquement par JS -->
+  </div>
+</section>
+
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <small>
+      <span style="opacity: 0.7;">🔒 Données stockées localement</span>
+      <span style="margin: 0 8px; opacity: 0.5;">•</span>
+      <span style="opacity: 0.7;">⚡ Fonctionne hors-ligne</span>
+    </small>
+    <div id="network-status" class="network-status">
+    <span class="status-dot"></span>
+    <span class="status-text">En ligne</span>
+    </div>
+  </footer>
+
+<!--<script type="module" src="js/app.js"></script> -->
+  
+  <script src="js/app.js"></script>
+  <script src="js/features/features-quiz.js"></script>
+  <script src="js/features/features-flashcards.js"></script>
+  <script src="js/features/features-dashboard.js"></script>
+  <script src="js/features/features-export.js"></script>
+  <script src="js/features/features-theme-validator.js"></script>
+  <script src="js/features/features-custom-themes.js"></script>
+  <script src="js/features/features-theme-import.js"></script>
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('✅ Service Worker enregistré:', registration.scope);
+            
+            // Détecter les mises à jour
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('🔄 Nouvelle version disponible ! Rechargez la page.');
+                  // Tu peux afficher une notification ici
+                }
+              });
+            });
+          })
+          .catch(error => {
+            console.error('❌ Erreur enregistrement SW:', error);
+          });
+      });
+    }
+  </script>
+  
+  <script>
+    window.addEventListener('load', () => {
+      const updateOnlineStatus = () => {
+        const footer = document.querySelector('.app-footer small');
+        if (!footer) return;
+        
+        if (!navigator.onLine) {
+          footer.innerHTML = '<span style="color: var(--warning);">📡 Mode hors-ligne</span>';
+        } else {
+          footer.innerHTML = `
+            <span style="opacity: 0.7;">🔒 Données stockées localement</span>
+            <span style="margin: 0 8px; opacity: 0.5;">•</span>
+            <span style="opacity: 0.7;">⚡ Fonctionne hors-ligne</span>
+          `;
+        }
+      };
+      
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+      updateOnlineStatus();
+    });
+  </script>
+</body>
+</html>

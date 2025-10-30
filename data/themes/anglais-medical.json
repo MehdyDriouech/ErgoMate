@@ -1,0 +1,33 @@
+{
+  "id": "anglais-medical",
+  "title": "Anglais médical",
+  "locale": "fr-FR",
+  "meta": { "author": "Self", "source": "Glossaire S1", "updatedAt": "2025-10-07" },
+  "settings": { "shuffleQuestions": true, "shuffleChoices": false },
+  "questions": [
+    {
+      "id": "eng_med_q001",
+      "type": "mcq",
+      "prompt": "Traduire « range of motion » :",
+      "choices": [
+        { "id": "A", "label": "Amplitude articulaire" },
+        { "id": "B", "label": "Douleur irradiée" },
+        { "id": "C", "label": "Muscle antagoniste" },
+        { "id": "D", "label": "Réflexe rotulien" }
+      ],
+      "answer": "A",
+      "rationale": "« Range of motion » = amplitude articulaire.",
+      "difficulty": 1,
+      "tags": ["vocabulaire"]
+    },
+    {
+      "id": "eng_med_q002",
+      "type": "fill_in",
+      "prompt": "Traduire « swelling » : ________",
+      "answer": ["gonflement", "œdème", "oedeme", "œdeme"],
+      "rationale": "« Swelling » peut se traduire par gonflement / œdème selon le contexte.",
+      "difficulty": 1,
+      "tags": ["vocabulaire"]
+    }
+  ]
+}

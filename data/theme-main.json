@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "app": {
+    "title": "Ergo Quiz",
+    "defaultLocale": "fr-FR",
+    "modes": {
+      "enabled": ["practice", "mcq_only", "exam", "error_review"],
+      "default": "practice"
+    },
+    "examDefaults": {
+      "questionCount": 20,
+      "timeLimitSec": 1200,
+      "passingPercent": 70
+    },
+    "errorReview": {
+      "maxPerSession": 15,
+      "decayOnCorrect": 1
+    }
+  },
+  "themes": [
+    {
+      "id": "anatomie-ms",
+      "title": "Anatomie - Membres supérieurs",
+      "file": "themes/anatomie-ms.json",
+      "tags": ["S1", "anatomie", "membre_sup"],
+      "locale": "fr-FR"
+    },
+    {
+      "id": "anthropologie",
+      "title": "physio - anthropologie",
+      "file": "themes/anthropologie.json",
+      "tags": ["S1", "physio", "anthropologie"],
+      "locale": "fr-FR"
+    },
+    {
+      "id": "physio-cardio",
+      "title": "Physiologie - Cardio",
+      "file": "themes/physio-cardio.json",
+      "tags": ["S1", "physiologie"],
+      "locale": "fr-FR"
+    },
+    {
+      "id": "Physiologie-neurotransmission",
+      "title": "Physiologie - neurotransmission",
+      "file": "themes/neurotransmission.json",
+      "tags": ["S1", "langues"],
+      "locale": "fr-FR"
+    },
+    {
+      "id": "Physiologie-muscle_strié",
+      "title": "Physiologie - muscle strié",
+      "file": "themes/physio-muscle.json",
+      "tags": ["S1", "langues"],
+      "locale": "fr-FR"
+    },
+    {
+      "id": "anglais-medical",
+      "title": "Anglais médical",
+      "file": "themes/anglais-medical.json",
+      "tags": ["S1", "langues"],
+      "locale": "fr-FR"
+    }
+    
+  ]
+}

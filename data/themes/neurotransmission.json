@@ -1,0 +1,369 @@
+{
+"id": "neurotransmission-basics",
+"title": "Base de la neurotransmission",
+"locale": "fr-FR",
+"meta": { "author": "Dr ROUSSEL J.", "source": "PowerPoint 2025 V2", "updatedAt": "2025-10-07" },
+"settings": { "shuffleQuestions": true, "shuffleChoices": true },
+"questions": [
+{
+"id": "neuro_q001",
+"type": "mcq",
+"prompt": "Quelle est la cellule de base du tissu nerveux ?",
+"choices": [
+{ "id": "A", "label": "Astrocyte" },
+{ "id": "B", "label": "Neurone" },
+{ "id": "C", "label": "Cellule de Schwann" },
+{ "id": "D", "label": "Oligodendrocyte" }
+],
+"answer": "B",
+"rationale": "Le neurone est défini comme la cellule de base du tissu nerveux, capable de recevoir, analyser et produire des informations.",
+"difficulty": 1,
+"tags": ["neurone", "système nerveux"]
+},
+{
+"id": "neuro_q002",
+"type": "true_false",
+"prompt": "Les astrocytes sont des cellules gliales du système nerveux central avec un rôle morpho-fonctionnel important.",
+"answer": true,
+"rationale": "Les astrocytes sont mentionnés comme cellules gliales du SNC avec un rôle important.",
+"difficulty": 1,
+"tags": ["cellules gliales", "astrocytes"]
+},
+{
+"id": "neuro_q003",
+"type": "mcq",
+"prompt": "Quels sont les composants principaux d'un neurone ?",
+"choices": [
+{ "id": "A", "label": "Dendrites, Corps cellulaire, Axone" },
+{ "id": "B", "label": "Queue hydrophobe, Tête hydrophile" },
+{ "id": "C", "label": "Électrons, Ions" },
+{ "id": "D", "label": "Vésicules, Récepteurs" }
+],
+"answer": "A",
+"rationale": "Les composants incluent dendrites, corps cellulaire, axone, cône axonal, terminaison synaptique.",
+"difficulty": 2,
+"tags": ["morphologie", "neurone"]
+},
+{
+"id": "neuro_q004",
+"type": "true_false",
+"prompt": "La gaine de myéline est formée par les cellules de Schwann.",
+"answer": true,
+"rationale": "La gaine de myéline est mentionnée comme formée par les cellules de Schwann.",
+"difficulty": 1,
+"tags": ["myéline", "cellules de Schwann"]
+},
+{
+"id": "neuro_q005",
+"type": "mcq",
+"prompt": "Quelle est la fonction principale des dendrites ?",
+"choices": [
+{ "id": "A", "label": "Transmission de l'information" },
+{ "id": "B", "label": "Réception et analyse de l'information" },
+{ "id": "C", "label": "Stockage des neurotransmetteurs" },
+{ "id": "D", "label": "Production d'énergie" }
+],
+"answer": "B",
+"rationale": "Les dendrites sont impliquées dans la réception et l'analyse de l'information.",
+"difficulty": 2,
+"tags": ["dendrites", "fonction"]
+},
+{
+"id": "neuro_q006",
+"type": "mcq",
+"prompt": "Comment est codée l'information dans le système nerveux ?",
+"choices": [
+{ "id": "A", "label": "Codage électrique et chimique" },
+{ "id": "B", "label": "Codage mécanique uniquement" },
+{ "id": "C", "label": "Codage optique" },
+{ "id": "D", "label": "Codage thermique" }
+],
+"answer": "A",
+"rationale": "L'information est codée électriquement et chimiquement.",
+"difficulty": 1,
+"tags": ["codage", "information"]
+},
+{
+"id": "neuro_q007",
+"type": "true_false",
+"prompt": "L'électricité dans le neurone est un mouvement de charges, principalement des ions.",
+"answer": true,
+"rationale": "L'électricité est décrite comme un mouvement de charges, et les ions sont les particules porteuses de charge dans l'organisme.",
+"difficulty": 1,
+"tags": ["électricité", "ions"]
+},
+{
+"id": "neuro_q008",
+"type": "mcq",
+"prompt": "Quel est le potentiel de repos approximatif d'un neurone ?",
+"choices": [
+{ "id": "A", "label": "-80 mV" },
+{ "id": "B", "label": "+50 mV" },
+{ "id": "C", "label": "0 mV" },
+{ "id": "D", "label": "-20 mV" }
+],
+"answer": "A",
+"rationale": "Le potentiel de repos est environ -80 mV, dû à la perméabilité préférentielle au K+.",
+"difficulty": 2,
+"tags": ["potentiel de repos", "membrane"]
+},
+{
+"id": "neuro_q009",
+"type": "mcq",
+"prompt": "Quelle pompe maintient le potentiel de repos ?",
+"choices": [
+{ "id": "A", "label": "Na/K ATPase" },
+{ "id": "B", "label": "Ca ATPase" },
+{ "id": "C", "label": "Cl pump" },
+{ "id": "D", "label": "H pump" }
+],
+"answer": "A",
+"rationale": "La Na/K ATPase maintient activement le potentiel de repos.",
+"difficulty": 2,
+"tags": ["pompes", "potentiel de repos"]
+},
+{
+"id": "neuro_q010",
+"type": "true_false",
+"prompt": "Les canaux ioniques peuvent être activés par variation du potentiel de membrane.",
+"answer": true,
+"rationale": "Les canaux ioniques dépendants du voltage sont activés par variation du Em.",
+"difficulty": 1,
+"tags": ["canaux ioniques", "activation"]
+},
+{
+"id": "neuro_q011",
+"type": "mcq",
+"prompt": "Qu'est-ce que le potentiel d'action ?",
+"choices": [
+{ "id": "A", "label": "Somme des courants ioniques à un instant T" },
+{ "id": "B", "label": "Potentiel constant de la membrane" },
+{ "id": "C", "label": "Hyperpolarisation permanente" },
+{ "id": "D", "label": "Repolarisation lente" }
+],
+"answer": "A",
+"rationale": "Le PA est la somme des courants ioniques à l’instant T, avec dépolarisation et repolarisation.",
+"difficulty": 2,
+"tags": ["potentiel d'action", "courants"]
+},
+{
+"id": "neuro_q012",
+"type": "true_false",
+"prompt": "La théorie du tout ou rien s'applique au potentiel d'action.",
+"answer": true,
+"rationale": "Le PA suit la théorie du tout ou rien, avec un seuil d'activation.",
+"difficulty": 1,
+"tags": ["potentiel d'action", "théorie"]
+},
+{
+"id": "neuro_q013",
+"type": "mcq",
+"prompt": "Comment se propage le potentiel d'action ?",
+"choices": [
+{ "id": "A", "label": "De manière unidirectionnelle le long de l'axone" },
+{ "id": "B", "label": "Dans les deux sens" },
+{ "id": "C", "label": "Seulement dans les dendrites" },
+{ "id": "D", "label": "Par sauts aléatoires" }
+],
+"answer": "A",
+"rationale": "La propagation est unidirectionnelle due aux propriétés des canaux ioniques.",
+"difficulty": 2,
+"tags": ["propagation", "PA"]
+},
+{
+"id": "neuro_q014",
+"type": "mcq",
+"prompt": "Qu'est-ce qui influence la vitesse de propagation du PA ?",
+"choices": [
+{ "id": "A", "label": "Diamètre de l'axone et myélinisation" },
+{ "id": "B", "label": "Couleur du neurone" },
+{ "id": "C", "label": "Nombre de dendrites" },
+{ "id": "D", "label": "Type de neurotransmetteur" }
+],
+"answer": "A",
+"rationale": "La vitesse dépend du diamètre et de la myélinisation de l'axone.",
+"difficulty": 2,
+"tags": ["vitesse", "propagation"]
+},
+{
+"id": "neuro_q015",
+"type": "true_false",
+"prompt": "La conduction saltatoire se produit dans les axones myélinisés.",
+"answer": true,
+"rationale": "Les axones myélinisés ont une conduction saltatoire, plus rapide.",
+"difficulty": 1,
+"tags": ["conduction", "myéline"]
+},
+{
+"id": "neuro_q016",
+"type": "mcq",
+"prompt": "Quelle maladie altère la gaine de myéline ?",
+"choices": [
+{ "id": "A", "label": "Sclérose en plaques" },
+{ "id": "B", "label": "Alzheimer" },
+{ "id": "C", "label": "Parkinson" },
+{ "id": "D", "label": "Épilepsie" }
+],
+"answer": "A",
+"rationale": "La sclérose en plaques est une maladie auto-immune altérant la myéline.",
+"difficulty": 2,
+"tags": ["maladies", "myéline"]
+},
+{
+"id": "neuro_q017",
+"type": "true_false",
+"prompt": "Un neurone libère un seul type de neurotransmetteur mais peut en recevoir plusieurs.",
+"answer": true,
+"rationale": "Un neurone libère un seul neurotransmetteur mais reçoit plusieurs types.",
+"difficulty": 1,
+"tags": ["neurotransmetteurs", "libération"]
+},
+{
+"id": "neuro_q018",
+"type": "mcq",
+"prompt": "Quel est un exemple de neurotransmetteur excitateur ?",
+"choices": [
+{ "id": "A", "label": "GABA" },
+{ "id": "B", "label": "Glutamate" },
+{ "id": "C", "label": "Sérotonine inhibitrice" },
+{ "id": "D", "label": "Acide gamma aminobutyrique" }
+],
+"answer": "B",
+"rationale": "Le glutamate est un neurotransmetteur excitateur.",
+"difficulty": 2,
+"tags": ["neurotransmetteurs", "excitateur"]
+},
+{
+"id": "neuro_q019",
+"type": "mcq",
+"prompt": "Où se fait la synthèse des neurotransmetteurs ?",
+"choices": [
+{ "id": "A", "label": "Corps cellulaire" },
+{ "id": "B", "label": "Dendrites" },
+{ "id": "C", "label": "Axone" },
+{ "id": "D", "label": "Fente synaptique" }
+],
+"answer": "A",
+"rationale": "La synthèse et maturation se font au niveau du corps cellulaire.",
+"difficulty": 2,
+"tags": ["synthèse", "neurotransmetteurs"]
+},
+{
+"id": "neuro_q020",
+"type": "true_false",
+"prompt": "Les récepteurs ionotropiques sont des protéines membranaires canalaires.",
+"answer": true,
+"rationale": "Les récepteurs ionotropiques sont canalaires, entraînant un mouvement ionique direct.",
+"difficulty": 1,
+"tags": ["récepteurs", "ionotropique"]
+},
+{
+"id": "neuro_q021",
+"type": "mcq",
+"prompt": "Quel est l'effet d'un neurotransmetteur inhibiteur ?",
+"choices": [
+{ "id": "A", "label": "Dépolarisation" },
+{ "id": "B", "label": "Hyperpolarisation" },
+{ "id": "C", "label": "Repolarisation" },
+{ "id": "D", "label": "Excitation" }
+],
+"answer": "B",
+"rationale": "Les inhibiteurs causent une hyperpolarisation via un courant repolarisant.",
+"difficulty": 2,
+"tags": ["inhibiteur", "effet"]
+},
+{
+"id": "neuro_q022",
+"type": "mcq",
+"prompt": "Qu'est-ce que la sommation spatiale ?",
+"choices": [
+{ "id": "A", "label": "Intégration d'afférences de différents neurones" },
+{ "id": "B", "label": "Intégration d'afférences successives du même neurone" },
+{ "id": "C", "label": "Libération de neurotransmetteurs" },
+{ "id": "D", "label": "Propagation du PA" }
+],
+"answer": "A",
+"rationale": "La sommation spatiale intègre des messages de plusieurs afférences spatiales.",
+"difficulty": 2,
+"tags": ["sommation", "intégration"]
+},
+{
+"id": "neuro_q023",
+"type": "true_false",
+"prompt": "La période réfractaire absolue permet un nouveau PA avec une stimulation forte.",
+"answer": false,
+"rationale": "Pendant la période réfractaire absolue, un nouveau PA est impossible.",
+"difficulty": 1,
+"tags": ["période réfractaire", "PA"]
+},
+{
+"id": "neuro_q024",
+"type": "mcq",
+"prompt": "Quel anesthésique local bloque les canaux sodiques ?",
+"choices": [
+{ "id": "A", "label": "Lidocaïne" },
+{ "id": "B", "label": "Aspirine" },
+{ "id": "C", "label": "Paracétamol" },
+{ "id": "D", "label": "Ibuprofène" }
+],
+"answer": "A",
+"rationale": "La lidocaïne bloque les canaux sodiques dépendants du potentiel.",
+"difficulty": 2,
+"tags": ["anesthésiques", "canaux"]
+},
+{
+"id": "neuro_q025",
+"type": "mcq",
+"prompt": "Quels ions sont impliqués dans le potentiel de repos ?",
+"choices": [
+{ "id": "A", "label": "Na+, K+, Ca2+" },
+{ "id": "B", "label": "Électrons uniquement" },
+{ "id": "C", "label": "Protons" },
+{ "id": "D", "label": "Neutrons" }
+],
+"answer": "A",
+"rationale": "Na+ (140mM ext, 15mM int), K+ (5mM ext, 130mM int), Ca2+ sont impliqués.",
+"difficulty": 2,
+"tags": ["ions", "potentiel de repos"]
+},
+{
+"id": "neuro_q026",
+"type": "true_false",
+"prompt": "La synapse électrique utilise des jonctions communicantes.",
+"answer": true,
+"rationale": "Les synapses électriques impliquent des jonctions communicantes comme les gap-junctions.",
+"difficulty": 1,
+"tags": ["synapse", "électrique"]
+},
+{
+"id": "neuro_q027",
+"type": "mcq",
+"prompt": "Quel est le rôle du calcium dans la libération des neurotransmetteurs ?",
+"choices": [
+{ "id": "A", "label": "Entrée lors du PA pour fusion des vésicules" },
+{ "id": "B", "label": "Sortie pour repolarisation" },
+{ "id": "C", "label": "Stockage dans l'axone" },
+{ "id": "D", "label": "Dégradation des récepteurs" }
+],
+"answer": "A",
+"rationale": "L'arrivée du PA cause une entrée de Ca2+ pour fusion des vésicules.",
+"difficulty": 2,
+"tags": ["calcium", "libération"]
+},
+{
+"id": "neuro_q028",
+"type": "mcq",
+"prompt": "Qu'est-ce qu'un PPSE ?",
+"choices": [
+{ "id": "A", "label": "Potentiel PostSynaptique Excitateur" },
+{ "id": "B", "label": "Potentiel PostSynaptique Inhibiteur" },
+{ "id": "C", "label": "Potentiel de Repos" },
+{ "id": "D", "label": "Potentiel d'Action" }
+],
+"answer": "A",
+"rationale": "PPSE est le potentiel postsynaptique excitateur causant une dépolarisation.",
+"difficulty": 2,
+"tags": ["PPSE", "postsynaptique"]
+}
+]
+}

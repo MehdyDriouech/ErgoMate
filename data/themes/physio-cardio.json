@@ -1,0 +1,48 @@
+{
+  "id": "physio-cardio",
+  "title": "Physiologie - Cardio",
+  "locale": "fr-FR",
+  "meta": { "author": "Programme S1", "source": "Notes de cours", "updatedAt": "2025-10-07" },
+  "settings": { "shuffleQuestions": true, "shuffleChoices": true },
+  "questions": [
+    {
+      "id": "phy_cardio_q001",
+      "type": "mcq",
+      "prompt": "Quel est le rôle principal du nœud sino-auriculaire ?",
+      "choices": [
+        { "id": "A", "label": "Conduction ventriculaire" },
+        { "id": "B", "label": "Pacemaker physiologique du cœur" },
+        { "id": "C", "label": "Fermer les valvules auriculo-ventriculaires" },
+        { "id": "D", "label": "Augmenter la pression artérielle" }
+      ],
+      "answer": "B",
+      "rationale": "Le nœud SA initie le potentiel d’action cardiaque et rythme la fréquence.",
+      "difficulty": 2,
+      "tags": ["électrophysiologie", "rythme"]
+    },
+    {
+      "id": "phy_cardio_q002",
+      "type": "true_false",
+      "prompt": "Le débit cardiaque est le produit de la fréquence cardiaque par le volume d'éjection systolique.",
+      "answer": true,
+      "rationale": "DC = FC × VES.",
+      "difficulty": 1,
+      "tags": ["débit", "formules"]
+    },
+    {
+  "id": "phy_cardio_q003",
+  "type": "mcq",
+  "prompt": "Quels éléments participent à la régulation de la pression artérielle ?",
+  "choices": [
+    {"id":"A","label":"Barorécepteurs"},
+    {"id":"B","label":"Chémorécepteurs"},
+    {"id":"C","label":"Disques intervertébraux"},
+    {"id":"D","label":"Système rénine-angiotensine-aldostérone"}
+  ],
+  "answer": ["A","B","D"],
+  "rationale": "Baro/chémo + SRAA participent ; les disques intervertébraux non.",
+  "difficulty": 2,
+  "tags": ["physiologie","PA"]
+}
+  ]
+}

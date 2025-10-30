@@ -1,0 +1,163 @@
+{
+  "id": "anthropologie",
+  "title": "Anthropologie et culture en ergothérapie",
+  "locale": "fr-FR",
+  "meta": {
+    "author": "Programme S1",
+    "source": "QCM Anthropologie.docx",
+    "updatedAt": "2025-10-29"
+  },
+  "settings": { "shuffleQuestions": true, "shuffleChoices": true },
+  "questions": [
+    {
+      "id": "anthro_q001",
+      "type": "mcq",
+      "prompt": "Quelle est la définition principale de l’anthropologie ?",
+      "choices": [
+        { "id": "A", "label": "Science des lois et coutumes d’un peuple" },
+        { "id": "B", "label": "Science qui étudie l’espèce humaine dans sa totalité et ses différences" },
+        { "id": "C", "label": "Science qui étudie uniquement les langues anciennes" },
+        { "id": "D", "label": "Science qui s’intéresse aux échanges économiques entre groupes" }
+      ],
+      "answer": "B",
+      "rationale": "L’anthropologie vise à comprendre les invariants et les différences entre les sociétés humaines dans leur globalité.",
+      "difficulty": 2,
+      "tags": ["définitions", "fondamentaux"]
+    },
+    {
+      "id": "anthro_q002",
+      "type": "true_false",
+      "prompt": "L’ethnocentrisme consiste à juger les autres cultures à travers sa propre culture.",
+      "answer": true,
+      "rationale": "L’ethnocentrisme est le fait d’interpréter les autres cultures à partir de ses propres valeurs et symboles.",
+      "difficulty": 2,
+      "tags": ["ethnocentrisme", "valeurs"]
+    },
+    {
+      "id": "anthro_q003",
+      "type": "mcq",
+      "prompt": "Quelle est la différence entre synchronie et diachronie ?",
+      "choices": [
+        { "id": "A", "label": "La synchronie étudie les sociétés dans le temps, la diachronie à un moment donné" },
+        { "id": "B", "label": "La synchronie étudie les sociétés à un moment donné, la diachronie à travers le temps" },
+        { "id": "C", "label": "Les deux signifient la même chose" },
+        { "id": "D", "label": "La diachronie se limite à l’étude du langage" }
+      ],
+      "answer": "B",
+      "rationale": "La synchronie s’intéresse à un état de la société à un moment précis, la diachronie observe son évolution dans le temps.",
+      "difficulty": 2,
+      "tags": ["méthodes", "anthropologie"]
+    },
+    {
+      "id": "anthro_q004",
+      "type": "fill_in",
+      "prompt": "L’ethnographie est la science qui ________ les populations et leurs coutumes.",
+      "answer": ["décrit", "observe et décrit"],
+      "rationale": "L’ethnographie correspond à la phase descriptive de l’étude des sociétés humaines.",
+      "difficulty": 1,
+      "tags": ["ethnographie", "définition"]
+    },
+    {
+      "id": "anthro_q005",
+      "type": "mcq",
+      "prompt": "La diversité humaine résulte principalement de :",
+      "choices": [
+        { "id": "A", "label": "L’adaptation au milieu et la sélection naturelle" },
+        { "id": "B", "label": "La volonté des peuples de changer" },
+        { "id": "C", "label": "Des traditions religieuses" },
+        { "id": "D", "label": "L’immigration récente" }
+      ],
+      "answer": "A",
+      "rationale": "La diversité humaine découle de l’adaptation au milieu et du brassage génétique au fil du temps.",
+      "difficulty": 2,
+      "tags": ["diversité", "biologie", "anthropologie"]
+    },
+    {
+      "id": "anthro_q006",
+      "type": "true_false",
+      "prompt": "La monographie est un ouvrage qui présente plusieurs peuples différents.",
+      "answer": false,
+      "rationale": "Une monographie décrit un seul groupe ou une communauté de manière approfondie.",
+      "difficulty": 1,
+      "tags": ["méthodologie", "recherche"]
+    },
+    {
+      "id": "anthro_q007",
+      "type": "mcq",
+      "prompt": "Quelle affirmation décrit le mieux la culture selon l’anthropologie ?",
+      "choices": [
+        { "id": "A", "label": "Un ensemble de comportements et de croyances partagés" },
+        { "id": "B", "label": "Un simple mode de vie individuel" },
+        { "id": "C", "label": "Une science naturelle" },
+        { "id": "D", "label": "Un héritage biologique" }
+      ],
+      "answer": "A",
+      "rationale": "La culture regroupe les valeurs, croyances, arts, et coutumes propres à un groupe humain.",
+      "difficulty": 2,
+      "tags": ["culture", "société"]
+    },
+    {
+      "id": "anthro_q008",
+      "type": "mcq",
+      "prompt": "Quelles sont les principales étapes de l’approche communautaire en ergothérapie ?",
+      "choices": [
+        { "id": "A", "label": "Observation, discussion, évaluation" },
+        { "id": "B", "label": "Identification, diagnostic, planification, réalisation, évaluation" },
+        { "id": "C", "label": "Préparation, communication, conclusion" },
+        { "id": "D", "label": "Recrutement, test, suivi" }
+      ],
+      "answer": "B",
+      "rationale": "L’approche communautaire comprend cinq étapes clés : identifier, diagnostiquer, planifier, réaliser et évaluer.",
+      "difficulty": 3,
+      "tags": ["ergothérapie", "méthodologie"]
+    },
+    {
+      "id": "anthro_q009",
+      "type": "fill_in",
+      "prompt": "La parenté désigne les liens entre individus unis par le ________ ou par alliance.",
+      "answer": ["sang", "sang ou alliance"],
+      "rationale": "La parenté regroupe les relations familiales par filiation ou mariage.",
+      "difficulty": 1,
+      "tags": ["société", "famille"]
+    },
+    {
+      "id": "anthro_q010",
+      "type": "mcq",
+      "prompt": "Pourquoi l’ergothérapeute doit-il tenir compte de la culture du patient ?",
+      "choices": [
+        { "id": "A", "label": "Pour imposer ses propres valeurs" },
+        { "id": "B", "label": "Parce que la culture influence la perception de la santé, de la maladie et du soin" },
+        { "id": "C", "label": "Pour uniformiser les pratiques" },
+        { "id": "D", "label": "Ce n’est pas nécessaire" }
+      ],
+      "answer": "B",
+      "rationale": "La culture influence la manière dont une personne comprend la maladie, le handicap et la rééducation, ce qui oriente la prise en charge.",
+      "difficulty": 3,
+      "tags": ["ergothérapie", "culture", "soin"]
+    },
+    {
+      "id": "anthro_q011",
+      "type": "true_false",
+      "prompt": "La filiation est un lien réversible entre deux personnes d’une même famille.",
+      "answer": false,
+      "rationale": "La filiation est un lien irrévocable : elle suit l’individu toute sa vie.",
+      "difficulty": 1,
+      "tags": ["famille", "sociologie"]
+    },
+    {
+      "id": "anthro_q012",
+      "type": "mcq",
+      "prompt": "Quelle compétence transculturelle est essentielle pour les soignants ?",
+      "choices": [
+        { "id": "A", "label": "L’écoute et l’ouverture d’esprit" },
+        { "id": "B", "label": "L’autorité" },
+        { "id": "C", "label": "La rapidité d’exécution" },
+        { "id": "D", "label": "La neutralité émotionnelle" }
+      ],
+      "answer": "A",
+      "rationale": "L’écoute et l’ouverture permettent de comprendre les valeurs et croyances du patient sans jugement.",
+      "difficulty": 2,
+      "tags": ["transculturalité", "compétences", "communication"]
+    }
+  ]
+}

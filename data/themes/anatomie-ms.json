@@ -1,0 +1,42 @@
+{
+  "id": "anatomie-ms",
+  "title": "Anatomie - Membres supérieurs",
+  "locale": "fr-FR",
+  "meta": { "author": "Programme S1", "source": "Notes de cours", "updatedAt": "2025-10-07" },
+  "settings": { "shuffleQuestions": true, "shuffleChoices": true },
+  "questions": [
+    {
+      "id": "anat_ms_q001",
+      "type": "mcq",
+      "prompt": "Quel os s'articule avec la scapula pour former l'articulation gléno-humérale ?",
+      "choices": [
+        { "id": "A", "label": "Ulna" },
+        { "id": "B", "label": "Humérus" },
+        { "id": "C", "label": "Radius" },
+        { "id": "D", "label": "Clavicule" }
+      ],
+      "answer": "B",
+      "rationale": "La tête de l'humérus s'articule avec la cavité glénoïde de la scapula.",
+      "difficulty": 2,
+      "tags": ["articulations", "épaule"]
+    },
+    {
+      "id": "anat_ms_q002",
+      "type": "true_false",
+      "prompt": "Le nerf médian innerve l'éminence thénar.",
+      "answer": true,
+      "rationale": "Le nerf médian innerve la plupart des muscles thénariens.",
+      "difficulty": 2,
+      "tags": ["nerfs", "main"]
+    },
+    {
+      "id": "anat_ms_q003",
+      "type": "fill_in",
+      "prompt": "Nommer le muscle principal de l'abduction de l'épaule : ________",
+      "answer": ["deltoïde", "muscle deltoïde"],
+      "rationale": "Le deltoïde domine l'abduction après l'initiation par le supra-épineux.",
+      "difficulty": 3,
+      "tags": ["muscles", "épaule"]
+    }
+  ]
+}
