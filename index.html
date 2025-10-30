@@ -33,6 +33,11 @@
 
   <header class="app-header" role="banner">
     <h1 id="app-title">🎓 Ergo Mate</h1>
+    <button id="burger-menu" class="burger-menu" aria-label="Menu" aria-expanded="false">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+  </button>
     <nav aria-label="Navigation principale">
       <button id="btn-home" class="btn ghost" aria-label="Retour aux thèmes" title="Thèmes">
         🏠 Accueil
@@ -440,5 +445,42 @@
       updateOnlineStatus();
     });
   </script>
+  
+  <script>
+  // Gestion du burger menu mobile
+  (function() {
+    const burgerMenu = document.getElementById('burger-menu');
+    const nav = document.querySelector('.app-header nav');
+    
+    if (!burgerMenu || !nav) return;
+    
+    burgerMenu.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('mobile-open');
+      burgerMenu.classList.toggle('open');
+      burgerMenu.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    
+    // Fermer le menu quand on clique sur un lien
+    nav.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        nav.classList.remove('mobile-open');
+        burgerMenu.classList.remove('open');
+        burgerMenu.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Fermer le menu si on clique en dehors
+    document.addEventListener('click', (e) => {
+      if (!burgerMenu.contains(e.target) && !nav.contains(e.target) && nav.classList.contains('mobile-open')) {
+        nav.classList.remove('mobile-open');
+        burgerMenu.classList.remove('open');
+        burgerMenu.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
