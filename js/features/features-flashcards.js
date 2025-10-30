@@ -81,16 +81,19 @@ async function startFlashcards(themeId) {
   state.sessionStartTime = Date.now(); // US 3.3
   state.questionTimes = []; // US 3.3
 
-  const questions = await loadThemeQuestions(theme);
+  let questions = await loadThemeQuestions(theme);  // ⚠️ Changer "const" en "let"
   if (!questions.length) {
     alert('Aucune question disponible.');
     return;
   }
 
+  questions = shuffle(questions);  // ✨ AJOUTER CETTE LIGNE ICI
+
   state.questions = questions;
   renderFlashcardHeader();
   showView('flashcards');
   renderFlashcard();
+
 }
 
 function flashShowAnswer() {
