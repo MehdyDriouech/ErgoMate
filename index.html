@@ -109,6 +109,24 @@
         </div>
       </div>
 
+      <!-- Barre de recherche -->
+      <div class="search-container" style="margin-bottom: 24px;">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="search" 
+            id="search-themes" 
+            class="search-input" 
+            placeholder="Rechercher par titre ou tag..."
+            aria-label="Rechercher un thème"
+          />
+          <button id="btn-clear-search" class="clear-search" aria-label="Effacer la recherche" hidden>
+            ✕
+          </button>
+        </div>
+        <div id="search-results-count" class="search-results-count muted" hidden></div>
+      </div>
+
       <div id="themes-list" class="card-list" role="list"></div>
       
     </section>
@@ -157,6 +175,7 @@
         </div>
         <div class="quiz-meta">
           <span id="quiz-progress" class="muted"></span>
+          <div id="exam-timer" class="exam-timer" hidden></div>
         </div>
       </div>
 
