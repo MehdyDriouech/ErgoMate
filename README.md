@@ -21,6 +21,7 @@
 
 ### 🎨 Thèmes personnalisés
 - **Import de thèmes JSON** : Ajoutez vos propres questions
+- **Import de thèmes PDF via claudeAI** : nécéssite une clef d'api + backend pour bien faire les choses
 - **Validation automatique** : Vérification de la structure des fichiers
 - **Gestion centralisée** : Thèmes officiels + thèmes personnalisés
 
