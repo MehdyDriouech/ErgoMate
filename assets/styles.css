@@ -1047,8 +1047,14 @@ strong {
 }
 
 .drop-zone-content {
-  pointer-events: none;
   width: 100%;
+}
+
+/* Désactiver les événements uniquement sur les éléments décoratifs */
+.drop-zone-content .drop-icon,
+.drop-zone-content .drop-text,
+.drop-zone-content .muted {
+  pointer-events: none;
 }
 
 .drop-icon {
