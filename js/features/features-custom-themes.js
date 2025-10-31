@@ -125,9 +125,14 @@ function renderCustomThemesList() {
         <p class="muted" style="margin: 0 0 24px 0;">
           Commencez par importer un thème au format JSON
         </p>
-        <button class="btn primary" onclick="showThemeImportView()">
-          ➕ Importer un thème
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn primary" onclick="showPdfImportView()">
+          📄 Créer depuis PDF
         </button>
+        <button class="btn ghost" onclick="showThemeImportView()">
+           📥 Importer JSON
+        </button>
+      </div>
       </div>
     `;
     return;
