@@ -1,4 +1,4 @@
-// js/app.js — Ergo Quiz Enhanced v2 (+ Dashboard & Analytics)
+// js/app.js — Ergo Mate Enhanced v2 (+ Dashboard & Analytics)
 // ✨ NOUVELLES FONCTIONNALITÉS EPIC 3 :
 // - Tableau de bord avec graphiques de progression
 // - Historique détaillé avec statistiques
@@ -161,7 +161,9 @@ const els = {
     history: document.getElementById('view-history'),
     dashboard: document.getElementById('view-dashboard'),
     importTheme: document.getElementById('view-import-theme'),
-    customThemes: document.getElementById('view-custom-themes')
+    customThemes: document.getElementById('view-custom-themes'),
+    pdfImport: document.getElementById('view-pdf-import'),
+    revision: document.getElementById('view-revision')
   },
   btnHome: document.getElementById('btn-home'),
   btnHistory: document.getElementById('btn-history'),
@@ -199,7 +201,17 @@ const els = {
   searchInput: document.getElementById('search-themes'),
   btnClearSearch: document.getElementById('btn-clear-search'),
   searchResultsCount: document.getElementById('search-results-count'),
-  examTimer: document.getElementById('exam-timer')
+  examTimer: document.getElementById('exam-timer'),
+  pdfImport: document.getElementById('view-pdf-import'),
+  revisionTitle: document.getElementById('revision-title'),
+  revisionThemeTitle: document.getElementById('revision-theme-title'),
+  revisionProgress: document.getElementById('revision-progress'),
+  revisionCard: document.getElementById('revision-card'),
+  btnRevisionPrev: document.getElementById('btn-revision-prev'),
+  btnRevisionNext: document.getElementById('btn-revision-next'),
+  btnRevisionUnderstood: document.getElementById('btn-revision-understood'),
+  btnRevisionToReview: document.getElementById('btn-revision-to-review'),
+  btnRevisionBack: document.getElementById('btn-revision-back')
 };
 
 /////////////////////
@@ -510,6 +522,9 @@ function renderThemes(searchQuery = '') {
         <button class="btn ghost" data-mode="flashcard" data-id="${theme.id}">
           🎴 Flashcards
         </button>
+        <button class="btn ghost" data-mode="revision" data-id="${theme.id}">
+          📖 Fiches
+        </button>
       </div>
     `;
 
@@ -519,6 +534,8 @@ function renderThemes(searchQuery = '') {
         const themeId = e.currentTarget.getAttribute('data-id');
         if (mode === 'flashcard') {
           startFlashcards(themeId);
+        } else if (mode === 'revision') {
+          startRevision(themeId);
         } else {
           startTheme(themeId, mode);
         }
@@ -675,6 +692,8 @@ function bindEvents() {
       els.searchInput?.focus();
     }
   });
+
+  bindRevisionEvents();
 }
 
 async function registerSW() {
@@ -700,6 +719,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Initialiser l'interface d'import de thèmes
     initThemeImport();
+    // intialiser pdf import
+    initPdfImport();
     
     // Charger les compteurs pour les thèmes personnalisés
     const customThemes = loadCustomThemes();
