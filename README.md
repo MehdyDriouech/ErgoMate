@@ -12,6 +12,7 @@
 - **Mode Examen** : Simulation d'examen avec notation finale
 - **Révision d'erreurs** : Système intelligent qui cible vos points faibles
 - **Flashcards** : Apprentissage par répétition espacée
+- **Fiches de révisions** : Apprentissage des notions élementaires avec un suivi de compréhension
 
 ### 📊 Suivi et analytics
 - **Dashboard interactif** avec graphiques de progression
