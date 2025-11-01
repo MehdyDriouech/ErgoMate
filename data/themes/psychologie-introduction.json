@@ -1,0 +1,771 @@
+{
+  "id": "psychologie-introduction",
+  "title": "Introduction à la Psychologie",
+  "locale": "fr-FR",
+  "meta": {
+    "author": "M. LUCAS",
+    "source": "UE 1.3 S1",
+    "updatedAt": "2025-11-01"
+  },
+  "settings": {
+    "shuffleQuestions": true,
+    "shuffleChoices": true
+  },
+  "questions": [
+    {
+      "id": "psy_q001",
+      "type": "mcq",
+      "prompt": "Quelle est la définition de la psychologie ?",
+      "choices": [
+        { "id": "A", "label": "Étude de l'âme uniquement" },
+        { "id": "B", "label": "Étude des comportements et des processus mentaux" },
+        { "id": "C", "label": "Étude du cerveau uniquement" },
+        { "id": "D", "label": "Étude des maladies mentales" }
+      ],
+      "answer": "B",
+      "rationale": "La psychologie est définie comme l'étude des comportements et des processus mentaux.",
+      "difficulty": 1,
+      "tags": ["définition", "base"]
+    },
+    {
+      "id": "psy_q002",
+      "type": "mcq",
+      "prompt": "Qui a créé le premier laboratoire de psychologie scientifique ?",
+      "choices": [
+        { "id": "A", "label": "Sigmund Freud" },
+        { "id": "B", "label": "Wilhelm Wundt" },
+        { "id": "C", "label": "John Watson" },
+        { "id": "D", "label": "Carl Rogers" }
+      ],
+      "answer": "B",
+      "rationale": "Wilhelm Wundt a créé le premier laboratoire de psychologie scientifique à Leipzig en 1879.",
+      "difficulty": 2,
+      "tags": ["histoire", "scientifique"]
+    },
+    {
+      "id": "psy_q003",
+      "type": "true_false",
+      "prompt": "Le terme psychologie vient du grec psyché (âme) et logos (science).",
+      "answer": true,
+      "rationale": "Le terme psychologie dérive bien du grec psyché (âme) et logos (discours, science).",
+      "difficulty": 1,
+      "tags": ["étymologie", "base"]
+    },
+    {
+      "id": "psy_q004",
+      "type": "mcq",
+      "prompt": "Quelle psychologie étudie les phénomènes liés à la pensée, mémoire et langage ?",
+      "choices": [
+        { "id": "A", "label": "Psychologie sociale" },
+        { "id": "B", "label": "Psychologie cognitive" },
+        { "id": "C", "label": "Psychologie différentielle" },
+        { "id": "D", "label": "Psychologie clinique" }
+      ],
+      "answer": "B",
+      "rationale": "La psychologie cognitive étudie les phénomènes liés à la cognition (pensée, mémoire, raisonnement, langage).",
+      "difficulty": 1,
+      "tags": ["domaines", "cognitif"]
+    },
+    {
+      "id": "psy_q005",
+      "type": "mcq",
+      "prompt": "Quels sont les trois principes de la psychologie clinique ?",
+      "choices": [
+        { "id": "A", "label": "Objectivité, neutralité, distance" },
+        { "id": "B", "label": "Totalité, singularité, subjectivité" },
+        { "id": "C", "label": "Analyse, synthèse, conclusion" },
+        { "id": "D", "label": "Observation, mesure, expérimentation" }
+      ],
+      "answer": "B",
+      "rationale": "La psychologie clinique considère le sujet selon sa totalité, sa singularité et sa subjectivité.",
+      "difficulty": 2,
+      "tags": ["clinique", "principes"]
+    },
+    {
+      "id": "psy_q006",
+      "type": "mcq",
+      "prompt": "Qui a fondé la psychanalyse ?",
+      "choices": [
+        { "id": "A", "label": "Carl Jung" },
+        { "id": "B", "label": "Sigmund Freud" },
+        { "id": "C", "label": "Jacques Lacan" },
+        { "id": "D", "label": "Alfred Adler" }
+      ],
+      "answer": "B",
+      "rationale": "Sigmund Freud (1856-1939) est le créateur de la psychanalyse.",
+      "difficulty": 1,
+      "tags": ["psychanalyse", "histoire"]
+    },
+    {
+      "id": "psy_q007",
+      "type": "mcq",
+      "prompt": "Quelle est la seconde topique freudienne ?",
+      "choices": [
+        { "id": "A", "label": "Conscient / Préconscient / Inconscient" },
+        { "id": "B", "label": "Ça / Moi / Surmoi" },
+        { "id": "C", "label": "Corps / Âme / Esprit" },
+        { "id": "D", "label": "Stimulus / Réponse / Renforcement" }
+      ],
+      "answer": "B",
+      "rationale": "La seconde topique freudienne distingue le ça, le moi et le surmoi.",
+      "difficulty": 2,
+      "tags": ["psychanalyse", "théorie"]
+    },
+    {
+      "id": "psy_q008",
+      "type": "true_false",
+      "prompt": "Les TCC (Thérapies Cognitives et Comportementales) se basent sur le behaviorisme.",
+      "answer": true,
+      "rationale": "Les TCC ont été développées dans les années 1970 en se basant sur le behaviorisme.",
+      "difficulty": 1,
+      "tags": ["TCC", "courants"]
+    },
+    {
+      "id": "psy_q009",
+      "type": "mcq",
+      "prompt": "Qui a fondé le behaviorisme ?",
+      "choices": [
+        { "id": "A", "label": "Ivan Pavlov" },
+        { "id": "B", "label": "John Broadus Watson" },
+        { "id": "C", "label": "B.F. Skinner" },
+        { "id": "D", "label": "Albert Bandura" }
+      ],
+      "answer": "B",
+      "rationale": "Le behaviorisme a été fondé par John Broadus Watson aux États-Unis en 1913.",
+      "difficulty": 2,
+      "tags": ["behaviorisme", "histoire"]
+    },
+    {
+      "id": "psy_q010",
+      "type": "mcq",
+      "prompt": "Quels sont les concepts clés du courant humaniste ?",
+      "choices": [
+        { "id": "A", "label": "Inconscient, transfert, cathartique" },
+        { "id": "B", "label": "Stimulus, réponse, conditionnement" },
+        { "id": "C", "label": "Congruence, respect inconditionnel, empathie" },
+        { "id": "D", "label": "Système, homéostasie, feedback" }
+      ],
+      "answer": "C",
+      "rationale": "Le courant humaniste se base sur la congruence, le respect inconditionnel et la compréhension empathique.",
+      "difficulty": 2,
+      "tags": ["humaniste", "concepts"]
+    },
+    {
+      "id": "psy_q011",
+      "type": "true_false",
+      "prompt": "Le courant systémique considère l'individu comme partie d'un système (famille, couple).",
+      "answer": true,
+      "rationale": "Le courant systémique considère effectivement l'individu comme partie d'un système et interprète ses problèmes dans ce contexte.",
+      "difficulty": 1,
+      "tags": ["systémique", "concepts"]
+    },
+    {
+      "id": "psy_q012",
+      "type": "mcq",
+      "prompt": "Quelle est la différence principale entre un psychologue et un psychiatre ?",
+      "choices": [
+        { "id": "A", "label": "Le psychiatre peut prescrire des médicaments" },
+        { "id": "B", "label": "Le psychologue peut prescrire des médicaments" },
+        { "id": "C", "label": "Ils ont la même formation" },
+        { "id": "D", "label": "Le psychiatre ne peut pas faire de psychothérapie" }
+      ],
+      "answer": "A",
+      "rationale": "Le psychiatre est un médecin spécialisé qui peut prescrire des médicaments, contrairement au psychologue.",
+      "difficulty": 1,
+      "tags": ["professionnels", "psychiatre"]
+    },
+    {
+      "id": "psy_q013",
+      "type": "true_false",
+      "prompt": "Le titre de psychologue est protégé en France depuis 1985.",
+      "answer": true,
+      "rationale": "Le titre de psychologue est effectivement protégé depuis 1985 et soumis à un code de déontologie.",
+      "difficulty": 1,
+      "tags": ["professionnels", "psychologue"]
+    },
+    {
+      "id": "psy_q014",
+      "type": "mcq",
+      "prompt": "Quelle formation est nécessaire pour devenir psychologue ?",
+      "choices": [
+        { "id": "A", "label": "Licence uniquement" },
+        { "id": "B", "label": "Licence et Master en psychologie" },
+        { "id": "C", "label": "Doctorat en médecine" },
+        { "id": "D", "label": "Formation courte de 6 mois" }
+      ],
+      "answer": "B",
+      "rationale": "Pour devenir psychologue, il faut une Licence et un Master en psychologie.",
+      "difficulty": 1,
+      "tags": ["professionnels", "formation"]
+    },
+    {
+      "id": "psy_q015",
+      "type": "true_false",
+      "prompt": "Les consultations chez le psychologue sont remboursées par la sécurité sociale.",
+      "answer": false,
+      "rationale": "Les consultations chez le psychologue ne sont pas remboursées par la sécurité sociale, contrairement au psychiatre.",
+      "difficulty": 1,
+      "tags": ["professionnels", "remboursement"]
+    }
+  ],
+  "revision": {
+    "metadata": {
+      "totalSections": 6,
+      "estimatedStudyTime": "60min",
+      "difficulty": "beginner",
+      "lastUpdated": "2025-11-01"
+    },
+    "sections": [
+      {
+        "id": "section_01",
+        "title": "Définition et origine de la psychologie",
+        "order": 1,
+        "cards": [
+          {
+            "id": "rev_001",
+            "type": "definition",
+            "title": "Qu'est-ce que la psychologie ?",
+            "content": "La psychologie est l'étude des comportements et des processus mentaux. C'est une science qui observe, analyse et tente de comprendre comment les individus pensent, ressentent et agissent.",
+            "keyPoints": [
+              "Étude des comportements observables",
+              "Étude des processus mentaux (pensée, émotion)",
+              "Approche scientifique et méthodologique"
+            ],
+            "tags": ["définition", "base"],
+            "relatedQuestions": ["psy_q001"]
+          },
+          {
+            "id": "rev_002",
+            "type": "etymology",
+            "title": "Étymologie du terme psychologie",
+            "content": "Le terme psychologie vient du latin psychologia, apparu au 16ème siècle, lui-même dérivé du grec.",
+            "breakdown": [
+              {
+                "term": "Psyché (ψυχή)",
+                "meaning": "Âme, esprit, souffle de vie"
+              },
+              {
+                "term": "Logos (λόγος)",
+                "meaning": "Discours, science, étude"
+              }
+            ],
+            "tags": ["étymologie", "histoire"],
+            "relatedQuestions": ["psy_q003"]
+          },
+          {
+            "id": "rev_003",
+            "type": "timeline",
+            "title": "Brève histoire de la psychologie",
+            "events": [
+              {
+                "period": "460-370 av. J.-C.",
+                "actors": "Platon et Aristote",
+                "event": "Premiers philosophes grecs s'intéressant à l'âme humaine"
+              },
+              {
+                "period": "Antiquité",
+                "actors": "Hippocrate",
+                "event": "Classification des troubles mentaux liée à la théorie des humeurs (bile jaune, bile noire, sang, lymphe)"
+              },
+              {
+                "period": "17ème siècle",
+                "actors": "Galilée",
+                "event": "Pose les bases de la démarche scientifique qui influencera la psychologie moderne"
+              },
+              {
+                "period": "17ème siècle",
+                "actors": "Descartes",
+                "event": "Dualité âme-corps : l'âme comme source de pensée et raison"
+              },
+              {
+                "period": "18ème siècle",
+                "actors": "Locke et Hume",
+                "event": "Philosophie associationniste : importance des expériences extérieures"
+              },
+              {
+                "period": "1879",
+                "actors": "Wilhelm Wundt",
+                "event": "Création du premier laboratoire de psychologie scientifique à Leipzig - Naissance de la psychologie scientifique"
+              }
+            ],
+            "keyTakeaway": "1879 marque la naissance officielle de la psychologie comme science, avec Wilhelm Wundt.",
+            "tags": ["histoire", "chronologie"],
+            "relatedQuestions": ["psy_q002"]
+          }
+        ]
+      },
+      {
+        "id": "section_02",
+        "title": "Les différents domaines de la psychologie",
+        "order": 2,
+        "cards": [
+          {
+            "id": "rev_004",
+            "type": "summary",
+            "title": "Vue d'ensemble des domaines de la psychologie",
+            "content": "La psychologie se divise en plusieurs domaines spécialisés, chacun étudiant un aspect particulier du comportement humain ou des processus mentaux.",
+            "domains": [
+              {
+                "name": "Psychologie cognitive",
+                "focus": "Phénomènes liés à la cognition",
+                "details": "Pensée, mémoire, raisonnement, langage"
+              },
+              {
+                "name": "Psychologie différentielle",
+                "focus": "Différences entre individus",
+                "details": "Capacités intellectuelles, personnalité"
+              },
+              {
+                "name": "Psychologie du développement",
+                "focus": "Changements au cours de la vie",
+                "details": "Développement de l'enfant, évolution avec l'âge, vieillissement"
+              },
+              {
+                "name": "Psychologie animale (éthologie)",
+                "focus": "Comportement des animaux",
+                "details": "Étude dans l'environnement naturel ou proche"
+              },
+              {
+                "name": "Psychologie pathologique",
+                "focus": "Maladies et troubles psychologiques",
+                "details": "Névroses, addictions, troubles mentaux"
+              },
+              {
+                "name": "Psychologie sociale",
+                "focus": "Interactions en groupe et société",
+                "details": "Impact de la société sur l'individu, rôles, normes, représentations sociales"
+              },
+              {
+                "name": "Psychologie du travail",
+                "focus": "Relations dans l'environnement professionnel",
+                "details": "Adaptation des conditions de travail"
+              },
+              {
+                "name": "Psychologie de la santé",
+                "focus": "Aspects psychologiques de la santé",
+                "details": "Stress, compréhension de la santé et de la maladie"
+              },
+              {
+                "name": "Psychologie de l'éducation",
+                "focus": "Environnement scolaire",
+                "details": "Lecture, langage, mémoire, évaluation, nouvelles technologies"
+              }
+            ],
+            "tags": ["domaines", "vue d'ensemble"],
+            "relatedQuestions": ["psy_q004"]
+          },
+          {
+            "id": "rev_005",
+            "type": "focus",
+            "title": "La psychologie clinique - Approche particulière",
+            "content": "La psychologie clinique se distingue par une approche centrée sur trois principes fondamentaux qui guident la compréhension du patient.",
+            "principles": [
+              {
+                "concept": "Totalité",
+                "explanation": "Ne jamais isoler la personne, elle fait partie d'un environnement global",
+                "example": "Considérer le contexte familial, social, professionnel"
+              },
+              {
+                "concept": "Singularité",
+                "explanation": "Chaque individu est unique, s'intéresser aux différences individuelles",
+                "example": "Adapter l'approche à chaque personne"
+              },
+              {
+                "concept": "Subjectivité",
+                "explanation": "Vécu propre de la personne, comment elle raconte son expérience",
+                "example": "Écouter la narration personnelle de l'événement"
+              }
+            ],
+            "keyTakeaway": "La psychologie clinique adopte une vision holistique, individualisée et subjective de la personne.",
+            "tags": ["clinique", "principes", "approche"],
+            "relatedQuestions": ["psy_q005"]
+          }
+        ]
+      },
+      {
+        "id": "section_03",
+        "title": "Les neurosciences",
+        "order": 3,
+        "cards": [
+          {
+            "id": "rev_006",
+            "type": "summary",
+            "title": "Les neurosciences en psychologie",
+            "content": "Les neurosciences étudient les bases biologiques et neurologiques du comportement et des processus mentaux.",
+            "disciplines": [
+              {
+                "name": "Psychobiologie",
+                "definition": "Compréhension des besoins et comportements humains en se référant à la biologie et à la neurobiologie"
+              },
+              {
+                "name": "Neuropsychologie",
+                "definition": "Relation entre les fonctions mentales supérieures et le fonctionnement cérébral",
+                "focus": "Lésions cérébrales (accidentelles ou congénitales) et leurs effets sur les fonctions cognitives"
+              },
+              {
+                "name": "Psychopharmacologie",
+                "definition": "Étude des agents chimiques agissant sur le psychisme, l'humeur ou le comportement",
+                "focus": "Effets des drogues et médicaments sur le cerveau et le comportement"
+              },
+              {
+                "name": "Psychiatrie",
+                "definition": "Explication biologique de la maladie mentale",
+                "focus": "Traitements médicamenteux des troubles psychiatriques"
+              }
+            ],
+            "tags": ["neurosciences", "biologie"]
+          }
+        ]
+      },
+      {
+        "id": "section_04",
+        "title": "Les courants psychothérapeutiques",
+        "order": 4,
+        "cards": [
+          {
+            "id": "rev_007",
+            "type": "detailed_summary",
+            "title": "Le courant psychanalytique",
+            "subtitle": "Explorer l'inconscient et les conflits internes",
+            "creator": {
+              "name": "Sigmund Freud",
+              "dates": "1856-1939"
+            },
+            "theory": {
+              "topique1": {
+                "name": "Première topique",
+                "elements": ["Conscient", "Préconscient", "Inconscient"]
+              },
+              "topique2": {
+                "name": "Seconde topique",
+                "elements": ["Le Ça", "Le Moi", "Le Surmoi"]
+              }
+            },
+            "keyConcepts": [
+              {
+                "term": "Inconscient",
+                "definition": "Partie de la psyché échappant à la conscience"
+              },
+              {
+                "term": "Transfert",
+                "definition": "Déplacement des sentiments du passé vers le présent (relation avec le thérapeute)"
+              },
+              {
+                "term": "Méthode cathartique",
+                "definition": "Libération émotionnelle par la parole"
+              }
+            ],
+            "therapeuticDevice": {
+              "setting": "Cure type : patient sur un divan, analyste hors de vue",
+              "objective": "Comprendre la dynamique psychique et lever les symptômes"
+            },
+            "tags": ["psychanalyse", "freud", "courants"],
+            "relatedQuestions": ["psy_q006", "psy_q007"]
+          },
+          {
+            "id": "rev_008",
+            "type": "detailed_summary",
+            "title": "Le courant cognitif et comportemental (TCC)",
+            "subtitle": "Modifier les pensées et comportements dysfonctionnels",
+            "origin": {
+              "period": "Années 1970",
+              "basis": "Behaviorisme"
+            },
+            "keyConcepts": [
+              {
+                "term": "Conditionnement",
+                "definition": "Apprentissage par association Stimulus → Interprétation → Réponse (S → I → R)"
+              },
+              {
+                "term": "Apprentissage vicariant",
+                "definition": "Apprentissage par observation des autres"
+              },
+              {
+                "term": "Distorsions cognitives",
+                "definition": "Pensées dysfonctionnelles influençant le comportement"
+              },
+              {
+                "term": "Comportements inadaptés",
+                "definition": "Proviennent de croyances inadaptées"
+              }
+            ],
+            "method": {
+              "approach": [
+                "Remise en question des schémas de pensée",
+                "Modification des comportements via stratégies comportementales",
+                "Utilisation des 4R : Répéter, Recontextualiser, Résumer, Reformuler"
+              ]
+            },
+            "therapeuticDevice": {
+              "contract": "Contrat entre patient et praticien",
+              "objectives": "Objectifs clairs et mesurables",
+              "techniques": ["Exposition", "Affirmation de soi", "Restructuration cognitive"]
+            },
+            "tags": ["TCC", "comportemental", "cognitif", "courants"],
+            "relatedQuestions": ["psy_q008"]
+          },
+          {
+            "id": "rev_009",
+            "type": "detailed_summary",
+            "title": "Le Béhaviorisme",
+            "subtitle": "Étude scientifique du comportement observable",
+            "founder": {
+              "name": "John Broadus Watson",
+              "country": "États-Unis",
+              "year": "1913"
+            },
+            "principle": "Écarter tout recours explicatif à la vie intérieure, à la conscience, aux prédispositions pour étudier scientifiquement le comportement des organismes vivants et leur relation avec l'environnement.",
+            "keyConcept": "Tout comportement est le résultat d'un apprentissage",
+            "focus": "Étude du Stimulus / Réponse",
+            "majorWork": {
+              "scientist": "Ivan Pavlov",
+              "dates": "1849-1936",
+              "profession": "Médecin et physiologiste russe",
+              "contribution": "Étude des comportements observables, conditionnement et renforcement"
+            },
+            "tags": ["behaviorisme", "watson", "pavlov", "courants"],
+            "relatedQuestions": ["psy_q009"]
+          },
+          {
+            "id": "rev_010",
+            "type": "detailed_summary",
+            "title": "Le courant humaniste",
+            "subtitle": "Centré sur l'individu et son potentiel de croissance",
+            "philosophy": "Inspiré de l'existentialisme, centré sur l'individu",
+            "keyConcepts": [
+              {
+                "term": "Congruence",
+                "definition": "Authenticité du thérapeute, être en accord avec soi-même"
+              },
+              {
+                "term": "Respect inconditionnel",
+                "definition": "Acceptation totale du patient sans jugement"
+              },
+              {
+                "term": "Compréhension empathique",
+                "definition": "Se mettre à la place du patient, comprendre son vécu"
+              }
+            ],
+            "approach": "Non-directive, favorise l'introspection et la croissance personnelle",
+            "keyPrinciple": "Le patient possède en lui les ressources nécessaires pour se développer",
+            "tags": ["humaniste", "rogers", "courants"],
+            "relatedQuestions": ["psy_q010"]
+          },
+          {
+            "id": "rev_011",
+            "type": "detailed_summary",
+            "title": "Le courant systémique",
+            "subtitle": "L'individu dans son système relationnel",
+            "origin": "Influencé par l'école de Palo Alto",
+            "keyConcepts": [
+              {
+                "term": "Systèmes",
+                "definition": "L'individu comme partie d'un système (famille, couple)",
+                "detail": "Système = ensemble des relations et interactions avec les autres"
+              },
+              {
+                "term": "Contexte",
+                "definition": "Tous les problèmes du patient doivent être interprétés dans SON système et SON contexte"
+              },
+              {
+                "term": "Homéostasie",
+                "definition": "Équilibre du système à maintenir"
+              }
+            ],
+            "therapeuticDevice": {
+              "participants": "Thérapie de groupe avec des personnes clés de l'entourage",
+              "objective": "Changement des relations pour modifier le comportement",
+              "techniques": ["Jeux de rôles", "Prescription de symptômes"],
+              "constraint": "Implique l'entourage du patient (contrainte ++)"
+            },
+            "tags": ["systémique", "palo alto", "courants"],
+            "relatedQuestions": ["psy_q011"]
+          }
+        ]
+      },
+      {
+        "id": "section_05",
+        "title": "Les différents professionnels en santé mentale",
+        "order": 5,
+        "cards": [
+          {
+            "id": "rev_012",
+            "type": "comparison",
+            "title": "Les professionnels 'psy' - Vue d'ensemble",
+            "content": "Il existe plusieurs types de professionnels dans le domaine de la santé mentale, chacun avec une formation et des compétences spécifiques.",
+            "professionals": [
+              {
+                "title": "Psychologue",
+                "formation": "Licence + Master en psychologie",
+                "status": "Titre protégé depuis 1985",
+                "canPrescribe": false,
+                "reimbursement": false,
+                "specificities": [
+                  "Soumis à un Code de déontologie",
+                  "Psychologue clinicien : spécialisé en psychopathologie, milieu hospitalier"
+                ]
+              },
+              {
+                "title": "Psychiatre",
+                "formation": "Études en médecine + spécialisation psychiatrie (4 ans)",
+                "status": "Médecin spécialisé",
+                "canPrescribe": true,
+                "reimbursement": true,
+                "specificities": [
+                  "Pour personnes souffrant de troubles psy ou psychopathologiques",
+                  "Prescription médicaments, ordonnances, certificats",
+                  "Pédopsychiatre : spécialisation enfants et adolescents"
+                ]
+              },
+              {
+                "title": "Psychothérapeute",
+                "formation": "Variable (médecins, psychologues ou autres après formation certifiée)",
+                "status": "Titre protégé depuis 2012, agrément ARS requis",
+                "canPrescribe": false,
+                "reimbursement": false,
+                "specificities": [
+                  "Orientations diverses : humaniste, psychanalytique, comportementale, etc."
+                ]
+              },
+              {
+                "title": "Psychanalyste",
+                "formation": "Psychanalyse personnelle + lectures + séminaires + supervision",
+                "status": "Titre non protégé par la loi",
+                "canPrescribe": false,
+                "reimbursement": false,
+                "specificities": [
+                  "Formation variable selon les écoles",
+                  "Influence importante sur la psychologie clinique en France"
+                ]
+              }
+            ],
+            "keyDifference": "Le psychiatre est le seul à pouvoir prescrire des médicaments et être remboursé par la sécurité sociale.",
+            "tags": ["professionnels", "comparaison"],
+            "relatedQuestions": ["psy_q012", "psy_q013", "psy_q014", "psy_q015"]
+          },
+          {
+            "id": "rev_013",
+            "type": "focus",
+            "title": "Psychomotricien",
+            "content": "Professionnel de santé paramédical travaillant sur le lien entre psychisme et motricité.",
+            "intervention": "Travaille avec tous les âges, sur des troubles développementaux, somatiques ou psychiques",
+            "objective": "Aider à l'adaptation au cadre de vie, réduire les troubles psychomoteurs",
+            "formation": "Diplôme d'État de psychomotricité, réglementée depuis 1974",
+            "examples": [
+              "Troubles du développement chez l'enfant",
+              "Rééducation après AVC",
+              "Troubles de l'équilibre chez la personne âgée"
+            ],
+            "tags": ["professionnels", "psychomotricien"]
+          },
+          {
+            "id": "rev_014",
+            "type": "focus",
+            "title": "Ergothérapeute",
+            "content": "Profession paramédicale centrée sur la rééducation, réadaptation et prévention.",
+            "objectives": "Maintien ou accession à l'autonomie individuelle, sociale ou professionnelle",
+            "intervention": [
+              "Rééducation fonctionnelle",
+              "Réadaptation au handicap",
+              "Conseils aux individus et à leur entourage",
+              "Adaptation de l'environnement"
+            ],
+            "population": "Tous âges, tous types de handicap ou limitation",
+            "tags": ["professionnels", "ergothérapeute"]
+          }
+        ]
+      },
+      {
+        "id": "section_06",
+        "title": "Points clés et synthèse",
+        "order": 6,
+        "cards": [
+          {
+            "id": "rev_015",
+            "type": "key_takeaways",
+            "title": "Points essentiels à retenir",
+            "takeaways": [
+              {
+                "topic": "Définition",
+                "point": "La psychologie est l'étude des comportements et des processus mentaux"
+              },
+              {
+                "topic": "Naissance",
+                "point": "1879 : Wilhelm Wundt crée le premier laboratoire de psychologie scientifique à Leipzig"
+              },
+              {
+                "topic": "Domaines",
+                "point": "Nombreux domaines : cognitive, clinique, sociale, développement, santé, travail, etc."
+              },
+              {
+                "topic": "Psychologie clinique",
+                "point": "3 principes : Totalité, Singularité, Subjectivité"
+              },
+              {
+                "topic": "Courants majeurs",
+                "point": "Psychanalytique (Freud), TCC (behaviorisme), Humaniste, Systémique"
+              },
+              {
+                "topic": "Psychanalyse",
+                "point": "Freud : 2 topiques (Conscient/Préconscient/Inconscient puis Ça/Moi/Surmoi)"
+              },
+              {
+                "topic": "Différence clé",
+                "point": "Psychiatre = médecin (prescrit médicaments, remboursé) / Psychologue = non-médecin (pas de prescription, pas de remboursement)"
+              },
+              {
+                "topic": "Titres protégés",
+                "point": "Psychologue (1985) et Psychothérapeute (2012) sont des titres protégés"
+              }
+            ],
+            "tags": ["synthèse", "révision"]
+          },
+          {
+            "id": "rev_016",
+            "type": "mnemonic",
+            "title": "Moyens mnémotechniques",
+            "mnemonics": [
+              {
+                "concept": "Les 3 principes de la psychologie clinique",
+                "technique": "T.S.S.",
+                "breakdown": [
+                  "T = Totalité (environnement complet)",
+                  "S = Singularité (individu unique)",
+                  "S = Subjectivité (vécu personnel)"
+                ]
+              },
+              {
+                "concept": "Seconde topique de Freud",
+                "technique": "ÇA MOI SUR-moi",
+                "breakdown": [
+                  "ÇA = pulsions, désirs inconscients",
+                  "MOI = conscience, réalité",
+                  "SUR-moi = morale, interdits"
+                ]
+              },
+              {
+                "concept": "Les 4R des TCC",
+                "technique": "4R",
+                "breakdown": [
+                  "Répéter",
+                  "Recontextualiser",
+                  "Résumer",
+                  "Reformuler"
+                ]
+              },
+              {
+                "concept": "Psychologie étymologie",
+                "technique": "Psyché Logos",
+                "breakdown": [
+                  "Psyché = âme",
+                  "Logos = science"
+                ]
+              }
+            ],
+            "tags": ["mnémotechnique", "mémorisation"]
+          }
+        ]
+      }
+    ]
+  }
+}
