@@ -47,15 +47,24 @@ async function generateQuestionsFromText(text, config) {
       })
     });
     
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(
-        errorData.error || 
-        `Erreur API: ${response.status} ${response.statusText}`
-      );
+    // Parser la réponse JSON (qu'elle soit OK ou erreur)
+    let data;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      console.error('❌ Erreur de parsing JSON:', parseError);
+      throw new Error('Réponse du serveur invalide (pas du JSON)');
     }
     
-    const data = await response.json();
+    // Vérifier si la requête a échoué
+    if (!response.ok) {
+      console.error('❌ Erreur HTTP:', response.status, data);
+      throw new Error(
+        data.error || 
+        data.details || 
+        `Erreur serveur: ${response.status} ${response.statusText}`
+      );
+    }
     
     console.log('✅ Réponse reçue de l\'API:', data);
     
