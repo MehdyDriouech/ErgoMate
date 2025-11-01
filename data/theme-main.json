@@ -1,7 +1,7 @@
 {
   "version": 1,
   "app": {
-    "title": "Ergo Quiz",
+    "title": "Ergo Mate",
     "defaultLocale": "fr-FR",
     "modes": {
       "enabled": ["practice", "mcq_only", "exam", "error_review"],
@@ -23,6 +23,13 @@
       "title": "Anatomie - Membres supérieurs",
       "file": "themes/anatomie-ms.json",
       "tags": ["S1", "anatomie", "membre_sup"],
+      "locale": "fr-FR"
+    },
+    {
+      "id": "psychologie-intro",
+      "title": "psychologie-introduction",
+      "file": "psychologie-introduction.json",
+      "tags": ["S1", "psychologie", "introduction"],
       "locale": "fr-FR"
     },
     {
@@ -63,4 +70,3 @@
     
   ]
 }
-
