@@ -278,6 +278,49 @@
       
     </section>
 
+     <!-- ========================================
+         VUE : FICHES DE RÉVISION
+         ======================================== -->
+    <section id="view-revision" class="view" aria-labelledby="revision-title" hidden>
+      
+      <div class="quiz-header">
+        <div>
+          <h2 id="revision-title" style="margin: 0;">📖 Fiches de révision</h2>
+          <p id="revision-theme-title" class="muted" style="margin: 4px 0 0 0;"></p>
+        </div>
+        <div id="revision-progress" style="text-align: right; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end;"></div>
+      </div>
+
+      <div class="card" style="min-height: 400px; margin-bottom: 20px;">
+        <div id="revision-card"></div>
+      </div>
+
+      <div class="quiz-actions">
+        <button id="btn-revision-back" class="btn ghost">
+          ↩️ Retour
+        </button>
+        
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button id="btn-revision-understood" class="btn success">
+            ✓ J'ai compris
+          </button>
+          <button id="btn-revision-to-review" class="btn warning">
+            ⟳ À revoir
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 12px;">
+          <button id="btn-revision-prev" class="btn">
+            ← Précédent
+          </button>
+          <button id="btn-revision-next" class="btn primary">
+            Suivant →
+          </button>
+        </div>
+      </div>
+      
+    </section>
+
     <!-- ========================================
          VUE : HISTORIQUE - US 3.2
          ======================================== -->
@@ -602,6 +645,7 @@ Les questions produites vous appartiennent intégralement.
   <script src="js/app.js"></script>
   <script src="js/features/features-quiz.js"></script>
   <script src="js/features/features-flashcards.js"></script>
+  <script src="js/features/features-fichederevision.js"></script>
   <script src="js/features/features-dashboard.js"></script>
   <script src="js/features/features-export.js"></script>
   <script src="js/features/features-theme-validator.js"></script>
