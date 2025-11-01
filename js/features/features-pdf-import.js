@@ -355,7 +355,7 @@ async function handleGenerateQuestions() {
   
   // Passer à l'étape de génération
   showPdfStep(3);
-  showPdfLoader('🤖 Génération des questions par Claude AI...<br><small>Cela peut prendre 10-30 secondes</small>');
+  showPdfLoader('🤖 Génération des questions par Qwen AI...<br><small>Cela peut prendre plusieurs minutes</small>');
   
   // Appeler la fonction de génération (dans features-pdf-generator.js)
   try {
