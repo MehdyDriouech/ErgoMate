@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API OpenRouter - Ergo Mate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-section h2 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .result {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #e9ecef;
+        }
+        
+        .result pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .status {
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #667eea;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test API OpenRouter/Qwen3</h1>
+        <p class="subtitle">Vérifiez que votre backend PHP est correctement configuré</p>
+        
+        <!-- Test 1: Status du serveur -->
+        <div class="test-section">
+            <h2>1️⃣ Test du status du serveur</h2>
+            <p style="margin-bottom: 15px; color: #666;">Vérifie que l'API PHP est accessible et opérationnelle</p>
+            <button onclick="testServerStatus()">🚀 Tester le serveur</button>
+            <div id="status-result"></div>
+        </div>
+        
+        <!-- Test 2: Génération de questions -->
+        <div class="test-section">
+            <h2>2️⃣ Test de génération de questions</h2>
+            <p style="margin-bottom: 15px; color: #666;">Génère 5 questions à partir d'un texte de test (peut prendre 10-30 secondes)</p>
+            <button onclick="testGenerateQuestions()">🤖 Générer des questions</button>
+            <div id="generate-result"></div>
+        </div>
+        
+        <!-- Informations -->
+        <div class="test-section" style="background: #e3f2fd;">
+            <h2>ℹ️ Informations</h2>
+            <p style="line-height: 1.8; color: #555;">
+                <strong>URL du backend :</strong> 
+                <code style="background: white; padding: 4px 8px; border-radius: 4px;">https://ergo-mate.mehdydriouech.fr/backend-php/api.php</code>
+                <br><br>
+                <strong>Modèle utilisé :</strong> 
+                <span class="badge">Qwen3 via OpenRouter</span>
+                <br><br>
+                <strong>En cas d'erreur :</strong>
+                <br>• Vérifiez que le fichier <code>config.php</code> existe
+                <br>• Vérifiez que la clé API OpenRouter est configurée
+                <br>• Consultez la console du navigateur (F12) pour plus de détails
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://ergo-mate.mehdydriouech.fr/backend-php/api.php';
+        
+        /**
+         * Test 1: Status du serveur
+         */
+        async function testServerStatus() {
+            const resultDiv = document.getElementById('status-result');
+            resultDiv.innerHTML = '<div class="status loading"><span class="spinner"></span>Test en cours...</div>';
+            
+            try {
+                console.log('🚀 Test du serveur...');
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                console.log('✅ Réponse:', data);
+                
+                if (response.ok && data.status === 'ok') {
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ Serveur opérationnel !</div>
+                        <div class="result">
+                            <strong>Détails du serveur :</strong><br>
+                            📍 <strong>Status:</strong> ${data.status}<br>
+                            💬 <strong>Message:</strong> ${data.message}<br>
+                            🔢 <strong>Version:</strong> ${data.version}<br>
+                            🤖 <strong>Modèle:</strong> ${data.model}<br>
+                            ⏰ <strong>Timestamp:</strong> ${new Date(data.timestamp).toLocaleString('fr-FR')}
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Réponse inattendue du serveur');
+                }
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ Échec de la connexion</div>
+                    <div class="result">
+                        <strong>Erreur:</strong> ${error.message}
+                        <br><br>
+                        <strong>Vérifications à faire :</strong><br>
+                        • Le serveur est-il accessible ?<br>
+                        • Les CORS sont-ils bien configurés ?<br>
+                        • Le fichier api.php existe-t-il ?
+                    </div>
+                `;
+            }
+        }
+        
+        /**
+         * Test 2: Génération de questions
+         */
+        async function testGenerateQuestions() {
+            const resultDiv = document.getElementById('generate-result');
+            resultDiv.innerHTML = '<div class="status loading"><span class="spinner"></span>Génération en cours... (10-30 secondes)</div>';
+            
+            const testData = {
+                text: `La photosynthèse est un processus biologique crucial utilisé par les plantes, les algues et certaines bactéries pour convertir l'énergie lumineuse en énergie chimique. 
+
+Ce processus se déroule principalement dans les chloroplastes, des organites présents dans les cellules végétales. Les chloroplastes contiennent un pigment vert appelé chlorophylle qui capture l'énergie lumineuse.
+
+La photosynthèse se déroule en deux grandes phases :
+
+1. Les réactions photochimiques (phase claire) : Ces réactions se produisent dans les thylakoïdes et nécessitent de la lumière. L'eau est décomposée, libérant de l'oxygène, et l'énergie lumineuse est convertie en ATP et NADPH.
+
+2. Le cycle de Calvin (phase sombre) : Ces réactions se produisent dans le stroma et n'ont pas besoin de lumière directe. Le CO2 est fixé et converti en glucose grâce à l'ATP et au NADPH produits lors de la phase claire.
+
+L'équation globale de la photosynthèse est : 6 CO2 + 6 H2O + lumière → C6H12O6 (glucose) + 6 O2
+
+La photosynthèse est essentielle pour la vie sur Terre car elle produit l'oxygène que nous respirons et constitue la base de la plupart des chaînes alimentaires.`,
+                config: {
+                    questionCount: 5,
+                    types: ['mcq', 'true_false'],
+                    difficulty: 'moyen'
+                }
+            };
+            
+            try {
+                console.log('🚀 Envoi de la requête de génération...');
+                const response = await fetch(API_URL + '/generate-questions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const data = await response.json();
+                console.log('✅ Réponse reçue:', data);
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Erreur API');
+                }
+                
+                // Parser le contenu de la réponse
+                const responseText = data.content[0].text;
+                console.log('📝 Texte brut:', responseText);
+                
+                // Nettoyer et parser le JSON
+                let cleaned = responseText.trim()
+                    .replace(/```json\s*/gi, '')
+                    .replace(/```\s*/g, '')
+                    .trim();
+                
+                const firstBrace = cleaned.indexOf('{');
+                const lastBrace = cleaned.lastIndexOf('}');
+                if (firstBrace !== -1 && lastBrace !== -1) {
+                    cleaned = cleaned.substring(firstBrace, lastBrace + 1);
+                }
+                
+                const theme = JSON.parse(cleaned);
+                console.log('🎯 Thème parsé:', theme);
+                
+                // Afficher le résultat
+                resultDiv.innerHTML = `
+                    <div class="status success">✅ Questions générées avec succès !</div>
+                    <div class="result">
+                        <strong>📚 Thème généré :</strong> ${theme.title}<br>
+                        <strong>📝 Description :</strong> ${theme.description}<br>
+                        <strong>❓ Nombre de questions :</strong> ${theme.questions.length}<br>
+                        <strong>🏷️ Tags :</strong> ${(theme.tags || []).join(', ') || 'Aucun'}<br>
+                        <br>
+                        <strong>📋 Questions :</strong>
+                        <pre>${JSON.stringify(theme.questions, null, 2)}</pre>
+                        <br>
+                        <strong>📊 Utilisation de l'API :</strong><br>
+                        ${data.usage ? `
+                            • Tokens utilisés : ${data.usage.total_tokens || 'N/A'}<br>
+                            • Prompt tokens : ${data.usage.prompt_tokens || 'N/A'}<br>
+                            • Completion tokens : ${data.usage.completion_tokens || 'N/A'}
+                        ` : 'Informations non disponibles'}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ Échec de la génération</div>
+                    <div class="result">
+                        <strong>Erreur:</strong> ${error.message}
+                        <br><br>
+                        <strong>Causes possibles :</strong><br>
+                        • Clé API OpenRouter invalide ou manquante<br>
+                        • Crédit insuffisant sur OpenRouter<br>
+                        • Problème de connexion au serveur<br>
+                        • Format de réponse invalide<br>
+                        <br>
+                        <strong>Consultez la console (F12) pour plus de détails.</strong>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
