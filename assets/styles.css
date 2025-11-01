@@ -1526,3 +1526,224 @@ html[data-theme="dark"] .search-highlight {
     padding: 6px 12px;
   }
 }
+
+/* ============================================ */
+/* FICHES DE RÉVISION */
+/* ============================================ */
+
+.revision-card-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--card-border);
+}
+
+.revision-card-header h3 {
+  margin: 8px 0 0 0;
+  font-size: 1.5rem;
+  color: var(--fg);
+}
+
+.revision-card-body {
+  line-height: 1.7;
+}
+
+.card-content {
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--card-hover);
+  border-radius: var(--radius-md);
+}
+
+.key-points, .etymology-breakdown, .timeline, .summary-list, 
+.comparison-grid, .takeaways-list, .mnemonics-list {
+  margin-top: 20px;
+}
+
+.key-points h4, .examples h4 {
+  margin: 0 0 12px 0;
+  color: var(--accent);
+}
+
+.key-points-list, .key-points ul {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.key-points-list li, .key-points ul li {
+  margin-bottom: 8px;
+}
+
+.etymology-item {
+  padding: 12px;
+  margin-bottom: 8px;
+  background: var(--card-hover);
+  border-radius: var(--radius-sm);
+}
+
+.timeline-event {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--card-hover);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--accent);
+}
+
+.timeline-period {
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 150px;
+  flex-shrink: 0;
+}
+
+.timeline-content strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--fg);
+}
+
+.timeline-content p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.summary-item, .focus-principle, .comparison-item, .mnemonic-item {
+  padding: 16px;
+  margin-bottom: 16px;
+  background: var(--card-hover);
+  border-radius: var(--radius-md);
+}
+
+.summary-item h4, .focus-principle h4, .comparison-item h4, .mnemonic-item h4 {
+  margin: 0 0 8px 0;
+  color: var(--accent);
+}
+
+.comparison-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.specificities {
+  margin-top: 12px;
+  padding-left: 20px;
+  font-size: 0.95rem;
+}
+
+.specificities li {
+  margin-bottom: 4px;
+}
+
+.therapeutic-device {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--card);
+  border-radius: var(--radius-sm);
+}
+
+.takeaway-item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 16px;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: var(--card-hover);
+  border-radius: var(--radius-sm);
+  align-items: start;
+}
+
+.takeaway-topic {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.takeaway-point {
+  color: var(--fg);
+}
+
+.mnemonic-technique {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 12px;
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  margin: 12px 0;
+}
+
+.mnemonic-breakdown {
+  margin: 12px 0 0 0;
+  padding-left: 24px;
+}
+
+.mnemonic-breakdown li {
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.key-takeaway {
+  margin-top: 24px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+.examples {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--card-hover);
+  border-radius: var(--radius-md);
+}
+
+.examples ul {
+  margin: 8px 0 0 0;
+  padding-left: 24px;
+}
+
+.to-review-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--card-hover);
+  border-radius: var(--radius-md);
+}
+
+.to-review-section h3 {
+  margin: 0 0 12px 0;
+  color: var(--warning);
+}
+
+.to-review-section ul {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.to-review-section li {
+  margin-bottom: 8px;
+}
+
+/* Boutons actifs pour fiches de révision */
+.btn.active {
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+/* Responsive pour fiches de révision */
+@media (max-width: 768px) {
+  .takeaway-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .timeline-event {
+    flex-direction: column;
+  }
+  
+  .timeline-period {
+    min-width: auto;
+  }
+}
