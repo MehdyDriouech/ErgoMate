@@ -21,7 +21,7 @@
 
 ### 🎨 Thèmes personnalisés
 - **Import de thèmes JSON** : Ajoutez vos propres questions
-- **Import de thèmes PDF via claudeAI** : nécéssite une clef d'api + backend pour bien faire les choses
+- **Import de thèmes PDF via open-router / qwen** : nécéssite une clef d'api
 - **Validation automatique** : Vérification de la structure des fichiers
 - **Gestion centralisée** : Thèmes officiels + thèmes personnalisés
 
@@ -56,14 +56,14 @@ ergo-mate/
 ├── assets/
 │   └── styles.css                  # Styles globaux et thèmes
 │
+├── backend-php/       # api génération question via pdf
+│       ├── api.php  # api
+│       ├── config.php  # Secrets
+│       ├── test.php  # test reponse api
+│       └── test-api.php # test feature pdf import
+│
 ├── js/
 │   ├── app.js                      # Point d'entrée principal
-│   │
-│   ├── modules/                    # Modules utilitaires
-│   │   ├── render.js               # Rendu des vues
-│   │   ├── storage.js              # Gestion localStorage
-│   │   ├── timer.js                # Tracking du temps
-│   │   └── utils.js                # Fonctions helper
 │   │
 │   └── features/                   # Fonctionnalités métier
 │       ├── features-quiz.js        # Logique des quiz
@@ -93,6 +93,7 @@ ergo-mate/
 | Catégorie | Stack |
 |-----------|-------|
 | **Frontend** | HTML5, CSS3 (custom), JavaScript ES6 (modules) |
+| **backend** | PHP |
 | **PWA** | Service Worker, Cache API, Web App Manifest |
 | **Accessibilité** | WAI-ARIA, roles, aria-live, navigation clavier |
 | **Stockage** | LocalStorage (historique, stats, erreurs) |
