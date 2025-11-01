@@ -27,8 +27,10 @@ async function generateQuestionsFromText(text, config) {
   
   try {
     // URL de votre backend PHP
-    const BACKEND_URL = 'https://ergo-mate.mehdydriouech.fr/backend-php/api.php/generate-questions';
-    
+    //const BACKEND_URL = 'https://ergo-mate.mehdydriouech.fr/backend-php/api.php/generate-questions';
+    const BACKEND_URL = 'https://ergo-mate.mehdydriouech.fr/backend-php/api.php/generate-complete-theme';
+
+
     console.log('🚀 Envoi de la requête à l\'API...', {
       textLength: text.length,
       config: config
@@ -40,11 +42,15 @@ async function generateQuestionsFromText(text, config) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        text: text,      // Le texte extrait du PDF
-        config: config   // La configuration (questionCount, types, difficulty)
-        // Le prompt sera construit automatiquement par le PHP
-      })
+     body: JSON.stringify({
+       text: text,
+       config: config,
+       metadata: {
+         fileName: pdfImportState.metadata?.fileName || 'document.pdf',
+          author: pdfImportState.metadata?.author || null,
+          numPages: pdfImportState.metadata?.numPages || null
+        }
+     })
     });
     
     // Parser la réponse JSON (qu'elle soit OK ou erreur)

@@ -199,7 +199,8 @@ async function handlePdfUpload(file) {
   try {
     // Extraire le texte du PDF
     const result = await extractTextFromPdf(file);
-    
+    //const result = await extractTextFromPdfWithoutMetadata(file);
+
     if (!result.text || result.text.trim().length === 0) {
       hidePdfLoader();
       showPdfError('❌ Aucun texte trouvé dans le PDF. Assurez-vous qu\'il ne s\'agit pas d\'un PDF scanné ou composé uniquement d\'images.');
@@ -231,7 +232,7 @@ async function handlePdfUpload(file) {
 /**
  * Extrait le texte d'un fichier PDF avec PDF.js
  */
-async function extractTextFromPdf(file) {
+async function extractTextFromPdfWithoutMetadata(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     
@@ -247,6 +248,60 @@ async function extractTextFromPdf(file) {
           numPages: pdf.numPages,
           fileName: file.name,
           fileSize: file.size
+        };
+        
+        // Extraire le texte de chaque page
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map(item => item.str).join(' ');
+          fullText += pageText + '\n\n';
+        }
+        
+        resolve({
+          text: fullText.trim(),
+          metadata
+        });
+        
+      } catch (error) {
+        reject(error);
+      }
+    };
+    
+    reader.onerror = () => {
+      reject(new Error('Erreur lors de la lecture du fichier'));
+    };
+    
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+async function extractTextFromPdf(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    
+    reader.onload = async function(e) {
+      try {
+        const typedArray = new Uint8Array(e.target.result);
+        
+        // Charger le document PDF
+        const pdf = await pdfjsLib.getDocument({ data: typedArray }).promise;
+        
+        // Extraire les métadonnées du PDF (NOUVEAU)
+        let pdfAuthor = null;
+        try {
+          const metadata = await pdf.getMetadata();
+          pdfAuthor = metadata?.info?.Author || null;
+        } catch (metaError) {
+          console.warn('Impossible d\'extraire les métadonnées du PDF:', metaError);
+        }
+        
+        let fullText = '';
+        const metadata = {
+          numPages: pdf.numPages,
+          fileName: file.name,
+          fileSize: file.size,
+          author: pdfAuthor  // NOUVEAU
         };
         
         // Extraire le texte de chaque page
