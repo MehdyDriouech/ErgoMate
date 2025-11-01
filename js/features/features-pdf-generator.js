@@ -1,5 +1,5 @@
 // js/features/features-pdf-generator.js
-// Génération de questions via Claude API à partir du texte PDF
+// Génération de questions via OpenRouter API (Qwen3) à partir du texte PDF
 
 ///////////////////////////
 // ÉTAT DE LA GÉNÉRATION //
@@ -11,7 +11,7 @@ const generatorState = {
 };
 
 ///////////////////////////
-// GÉNÉRATION CLAUDE API //
+// GÉNÉRATION VIA API PHP //
 ///////////////////////////
 
 /**
@@ -26,36 +26,48 @@ async function generateQuestionsFromText(text, config) {
   generatorState.isGenerating = true;
   
   try {
-    // Construire le prompt pour Claude
-    const prompt = buildGenerationPrompt(text, config);
+    // URL de votre backend PHP
+    const BACKEND_URL = 'https://ergo-mate.mehdydriouech.fr/backend-php/api.php/generate-questions';
     
-    // Appeler l'API Claude
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    console.log('🚀 Envoi de la requête à l\'API...', {
+      textLength: text.length,
+      config: config
+    });
+    
+    // Appeler l'API PHP qui utilise OpenRouter/Qwen3
+    const response = await fetch(BACKEND_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 4000,
-        messages: [{
-          role: 'user',
-          content: prompt
-        }]
+        text: text,      // Le texte extrait du PDF
+        config: config   // La configuration (questionCount, types, difficulty)
+        // Le prompt sera construit automatiquement par le PHP
       })
     });
     
     if (!response.ok) {
-      throw new Error(`Erreur API Claude: ${response.status} ${response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.error || 
+        `Erreur API: ${response.status} ${response.statusText}`
+      );
     }
     
     const data = await response.json();
     
-    // Extraire le texte de la réponse
+    console.log('✅ Réponse reçue de l\'API:', data);
+    
+    // Extraire le texte de la réponse (format Anthropic compatible)
     const responseText = data.content[0].text;
     
+    console.log('📝 Texte extrait:', responseText.substring(0, 200) + '...');
+    
     // Parser la réponse JSON
-    const theme = parseClaudeResponse(responseText);
+    const theme = parseApiResponse(responseText);
+    
+    console.log('🎯 Thème parsé:', theme);
     
     // Valider le thème
     const validation = validateTheme(theme);
@@ -72,145 +84,120 @@ async function generateQuestionsFromText(text, config) {
     showGeneratedPreview(validation.theme);
     
   } catch (error) {
-    console.error('Erreur de génération:', error);
+    console.error('❌ Erreur de génération:', error);
     hidePdfLoader();
-    showPdfError(`❌ Erreur lors de la génération: ${error.message}<br><br>💡 Essayez de réduire le nombre de questions ou vérifiez votre connexion.`);
+    showPdfError(
+      `❌ Erreur lors de la génération: ${error.message}<br><br>` +
+      `💡 Suggestions :<br>` +
+      `• Vérifiez votre connexion internet<br>` +
+      `• Réduisez le nombre de questions demandées<br>` +
+      `• Assurez-vous que le PDF contient suffisamment de texte<br>` +
+      `• Vérifiez que le backend PHP est bien configuré`
+    );
   } finally {
     generatorState.isGenerating = false;
   }
 }
 
 /**
- * Construit le prompt pour Claude
+ * Parse la réponse de l'API en JSON
+ * Compatible avec Qwen3 qui peut ajouter du markdown
  */
-function buildGenerationPrompt(text, config) {
-  const typeLabels = {
-    mcq: 'QCM (Questions à Choix Multiples)',
-    true_false: 'Vrai/Faux',
-    fill_in: 'Questions à compléter'
-  };
-  
-  const typesText = config.types.map(t => typeLabels[t]).join(', ');
-  
-  const difficultyInstructions = {
-    facile: 'Questions simples, concepts de base, définitions directes',
-    moyen: 'Questions de compréhension, application des concepts',
-    difficile: 'Questions complexes, analyse, synthèse, cas pratiques'
-  };
-  
-  // Limiter le texte si trop long (pour éviter de dépasser les limites de tokens)
-  const maxChars = 15000;
-  const truncatedText = text.length > maxChars ? text.substring(0, maxChars) + '\n\n[...texte tronqué...]' : text;
-  
-  return `Tu es un expert pédagogique spécialisé dans la création de contenus de révision pour étudiants.
-
-À partir du texte de cours suivant, génère un thème de révision complet au format JSON.
-
-═══════════════════════════════════════
-TEXTE DU COURS :
-═══════════════════════════════════════
-
-${truncatedText}
-
-═══════════════════════════════════════
-CONSIGNES DE GÉNÉRATION :
-═══════════════════════════════════════
-
-📊 QUANTITÉ :
-- Génère exactement ${config.questionCount} questions
-- Répartis-les équitablement entre les types demandés
-
-🎯 TYPES DE QUESTIONS :
-${config.types.map(t => `- ${typeLabels[t]}`).join('\n')}
-
-📈 NIVEAU DE DIFFICULTÉ :
-- ${config.difficulty.toUpperCase()} : ${difficultyInstructions[config.difficulty]}
-
-✅ RÈGLES DE QUALITÉ :
-- Chaque question doit tester une connaissance clé du cours
-- Les réponses doivent être claires et non ambiguës
-- Pour les QCM : 4 choix de réponse, une seule bonne réponse
-- Pour les Vrai/Faux : énoncés clairs et vérifiables
-- Fournis TOUJOURS une explication dans "rationale"
-- Assure-toi que les questions couvrent différentes parties du cours
-- Évite les questions pièges ou trop spécifiques
-
-═══════════════════════════════════════
-FORMAT DE RÉPONSE :
-═══════════════════════════════════════
-
-Réponds UNIQUEMENT avec un objet JSON valide, SANS markdown, SANS balises de code.
-
-Structure exacte à respecter :
-
-{
-  "title": "Titre du thème (basé sur le contenu)",
-  "description": "Description courte du thème (1-2 phrases)",
-  "tags": ["tag1", "tag2", "tag3"],
-  "questions": [
-    {
-      "id": "q1",
-      "type": "mcq",
-      "prompt": "Quelle est la question ?",
-      "choices": [
-        {"id": "a", "label": "Première réponse"},
-        {"id": "b", "label": "Deuxième réponse"},
-        {"id": "c", "label": "Troisième réponse"},
-        {"id": "d", "label": "Quatrième réponse"}
-      ],
-      "answer": "a",
-      "rationale": "Explication claire de pourquoi c'est la bonne réponse"
-    },
-    {
-      "id": "q2",
-      "type": "true_false",
-      "prompt": "Affirmation à évaluer",
-      "answer": true,
-      "rationale": "Explication"
-    },
-    {
-      "id": "q3",
-      "type": "fill_in",
-      "prompt": "Question à compléter ___",
-      "answer": "réponse attendue",
-      "rationale": "Explication"
-    }
-  ]
-}
-
-═══════════════════════════════════════
-
-IMPORTANT : 
-- Réponds UNIQUEMENT avec le JSON
-- PAS de texte avant ou après
-- PAS de balises \`\`\`json
-- PAS de commentaires
-- Juste le JSON pur
-
-Commence maintenant :`;
-}
-
-/**
- * Parse la réponse de Claude en JSON
- */
-function parseClaudeResponse(responseText) {
+function parseApiResponse(responseText) {
   // Nettoyer la réponse (enlever les éventuels markdown)
   let cleaned = responseText.trim();
   
+  console.log('🧹 Nettoyage de la réponse...');
+  
   // Enlever les balises markdown si présentes
-  cleaned = cleaned.replace(/```json\n?/g, '');
-  cleaned = cleaned.replace(/```\n?/g, '');
+  cleaned = cleaned.replace(/```json\s*/gi, '');
+  cleaned = cleaned.replace(/```\s*/g, '');
   cleaned = cleaned.trim();
+  
+  // Qwen3 peut parfois ajouter du texte avant le JSON
+  // On cherche le premier { et le dernier }
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+  
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    cleaned = cleaned.substring(firstBrace, lastBrace + 1);
+    console.log('✂️ JSON extrait des accolades');
+  }
   
   // Parser le JSON
   try {
     const parsed = JSON.parse(cleaned);
+    console.log('✅ JSON parsé avec succès');
     return parsed;
   } catch (error) {
-    console.error('Erreur de parsing JSON:', error);
-    console.log('Réponse brute:', responseText);
-    throw new Error('La réponse de Claude n\'est pas un JSON valide');
+    console.error('❌ Erreur de parsing JSON:', error);
+    console.error('📄 Réponse brute (premiers 500 caractères):', responseText.substring(0, 500));
+    console.error('🧹 Réponse nettoyée (premiers 500 caractères):', cleaned.substring(0, 500));
+    throw new Error('La réponse de l\'API n\'est pas un JSON valide. Vérifiez les logs de la console.');
   }
+}
+
+///////////////////////////
+// VALIDATION DU THÈME   //
+///////////////////////////
+
+/**
+ * Valide la structure du thème généré
+ */
+function validateTheme(theme) {
+  const errors = [];
+  
+  // Vérifier les champs obligatoires
+  if (!theme.title || typeof theme.title !== 'string') {
+    errors.push('Le champ "title" est manquant ou invalide');
+  }
+  
+  if (!theme.description || typeof theme.description !== 'string') {
+    errors.push('Le champ "description" est manquant ou invalide');
+  }
+  
+  if (!Array.isArray(theme.questions) || theme.questions.length === 0) {
+    errors.push('Le champ "questions" est manquant ou vide');
+  }
+  
+  // Vérifier les questions
+  if (theme.questions) {
+    theme.questions.forEach((q, idx) => {
+      if (!q.id) errors.push(`Question ${idx + 1}: "id" manquant`);
+      if (!q.type) errors.push(`Question ${idx + 1}: "type" manquant`);
+      if (!q.prompt) errors.push(`Question ${idx + 1}: "prompt" manquant`);
+      if (!q.rationale) errors.push(`Question ${idx + 1}: "rationale" manquant`);
+      
+      // Validation spécifique par type
+      if (q.type === 'mcq') {
+        if (!Array.isArray(q.choices) || q.choices.length !== 4) {
+          errors.push(`Question ${idx + 1}: les QCM doivent avoir exactement 4 choix`);
+        }
+        if (!q.answer) {
+          errors.push(`Question ${idx + 1}: "answer" manquant pour le QCM`);
+        }
+      } else if (q.type === 'true_false') {
+        if (typeof q.answer !== 'boolean') {
+          errors.push(`Question ${idx + 1}: "answer" doit être un boolean pour Vrai/Faux`);
+        }
+      } else if (q.type === 'fill_in') {
+        if (!q.answer || typeof q.answer !== 'string') {
+          errors.push(`Question ${idx + 1}: "answer" manquant ou invalide pour la complétion`);
+        }
+      }
+    });
+  }
+  
+  // Si pas de tags, en créer des vides
+  if (!theme.tags) {
+    theme.tags = [];
+  }
+  
+  return {
+    valid: errors.length === 0,
+    errors: errors,
+    theme: theme
+  };
 }
 
 ///////////////////////////

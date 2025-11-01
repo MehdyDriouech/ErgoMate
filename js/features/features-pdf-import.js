@@ -149,7 +149,7 @@ function showPdfStep(stepNumber) {
   
   // Mettre à jour le titre
   const titles = {
-    1: '📄 Étape 1 : Importer votre PDF - pour demo / non fonctionnel sans API',
+    1: '📄 Étape 1 : Importer votre PDF',
     2: '⚙️ Étape 2 : Configuration',
     3: '🎯 Étape 3 : Prévisualisation'
   };
