@@ -238,15 +238,17 @@ Engineering Manager & Formateur
 
 Le code source de **Ergo Mate** est distribué sous licence **Creative Commons Attribution - NonCommercial 4.0 International (CC BY-NC 4.0)**.
 
-### Vous êtes libre de :
-- ✅ **Partager** : copier, redistribuer le matériel
-- ✅ **Adapter** : transformer et construire à partir du matériel
+Cela signifie que :
 
-### Sous les conditions suivantes :
-- 📛 **Attribution** : Créditez l'auteur (Mehdy Driouech) avec un lien vers [www.mehdydriouech.fr](https://www.mehdydriouech.fr)
-- 🚫 **Pas d'utilisation commerciale** : Usage non-commercial uniquement
+- ✅ **Vous pouvez** utiliser, partager, adapter et redistribuer le code, **à condition** de mentionner clairement l’auteur.  
+- 🚫 **Vous ne pouvez pas** utiliser ce code à des fins **commerciales** sans autorisation préalable écrite.  
+- ⚙️ **Les utilisations commerciales** (vente, intégration dans un produit payant, prestation facturée, etc.) sont **réservées à l’auteur**.
 
-### Pour la mise à disposition par des écoles, me contacter
+L’auteur reste pleinement propriétaire du code et se réserve le droit de proposer des **licences commerciales séparées** pour des usages professionnels.
+
+👉 Pour toute demande de licence commerciale ou de partenariat, contactez :  
+**✉️ contact@mehdydriouech.fr**  
+🌐 [www.mehdydriouech.fr](https://www.mehdydriouech.fr)
 
 📜 **Texte complet** : [creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
