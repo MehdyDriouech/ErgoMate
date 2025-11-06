@@ -98,6 +98,23 @@ const STORAGE_KEYS = {
   CUSTOM_THEMES: 'ergoquiz_custom_themes' // Thèmes personnalisés
 };
 
+/**
+ * Normalise un thème personnalisé pour s'assurer qu'il a tous les champs requis
+ * Cette fonction est accessible globalement pour les fichiers features
+ */
+function normalizeCustomTheme(theme) {
+  return {
+    ...theme,
+    isCustom: true, // Force toujours à true
+    questions: theme.questions || [],
+    tags: theme.tags || [],
+    meta: theme.meta || {}
+  };
+}
+
+// Rendre accessible globalement
+window.normalizeCustomTheme = normalizeCustomTheme;
+
 ///////////////////////////
 // GESTION HISTORIQUE    //
 ///////////////////////////
@@ -163,7 +180,8 @@ const els = {
     importTheme: document.getElementById('view-import-theme'),
     customThemes: document.getElementById('view-custom-themes'),
     pdfImport: document.getElementById('view-pdf-import'),
-    revision: document.getElementById('view-revision')
+    revision: document.getElementById('view-revision'),
+    about: document.getElementById('view-about')
   },
   btnHome: document.getElementById('btn-home'),
   btnHistory: document.getElementById('btn-history'),
@@ -171,6 +189,8 @@ const els = {
   btnTheme: document.getElementById('btn-theme'),
   btnAddTheme: document.getElementById('btn-add-theme'),
   btnManageThemes: document.getElementById('btn-manage-themes'),
+  btnAbout: document.getElementById('btn-about'),
+  btnAboutBack: document.getElementById('btn-about-back'),
   themesList: document.getElementById('themes-list'),
   quizTitle: document.getElementById('quiz-title'),
   quizThemeTitle: document.getElementById('quiz-theme-title'),
@@ -213,6 +233,63 @@ const els = {
   btnRevisionToReview: document.getElementById('btn-revision-to-review'),
   btnRevisionBack: document.getElementById('btn-revision-back')
 };
+
+// Fonction pour mettre à jour els après le chargement des composants Web Components
+function updateElementReferences() {
+  // Quiz
+  els.quizTitle = els.views.quiz?.querySelector('#quiz-title');
+  els.quizThemeTitle = els.views.quiz?.querySelector('#quiz-theme-title');
+  els.quizProgress = els.views.quiz?.querySelector('#quiz-progress');
+  els.questionContainer = els.views.quiz?.querySelector('#question-container');
+  els.btnSubmit = els.views.quiz?.querySelector('#btn-submit');
+  els.btnNext = els.views.quiz?.querySelector('#btn-next');
+  els.btnQuit = els.views.quiz?.querySelector('#btn-quit');
+  els.examTimer = els.views.quiz?.querySelector('#exam-timer');
+  
+  // Results
+  els.resultsSummary = els.views.results?.querySelector('#results-summary');
+  els.resultsDetails = els.views.results?.querySelector('#results-details');
+  els.btnRetry = els.views.results?.querySelector('#btn-retry');
+  els.btnBackThemes = els.views.results?.querySelector('#btn-back-themes');
+  
+  // Flashcards
+  els.flashcardsTitle = els.views.flashcards?.querySelector('#flashcards-title');
+  els.flashcardsThemeTitle = els.views.flashcards?.querySelector('#flashcards-theme-title');
+  els.flashcardsProgress = els.views.flashcards?.querySelector('#flashcards-progress');
+  els.flashcard = els.views.flashcards?.querySelector('#flashcard');
+  els.btnShowAnswer = els.views.flashcards?.querySelector('#btn-show-answer');
+  els.btnKnow = els.views.flashcards?.querySelector('#btn-know');
+  els.btnDontKnow = els.views.flashcards?.querySelector('#btn-dont-know');
+  els.btnFcPrev = els.views.flashcards?.querySelector('#btn-fc-prev');
+  els.btnFcNext = els.views.flashcards?.querySelector('#btn-fc-next');
+  els.btnFcBack = els.views.flashcards?.querySelector('#btn-fc-back');
+  
+  // Revision
+  els.revisionTitle = els.views.revision?.querySelector('#revision-title');
+  els.revisionThemeTitle = els.views.revision?.querySelector('#revision-theme-title');
+  els.revisionProgress = els.views.revision?.querySelector('#revision-progress');
+  els.revisionCard = els.views.revision?.querySelector('#revision-card');
+  els.btnRevisionPrev = els.views.revision?.querySelector('#btn-revision-prev');
+  els.btnRevisionNext = els.views.revision?.querySelector('#btn-revision-next');
+  els.btnRevisionUnderstood = els.views.revision?.querySelector('#btn-revision-understood');
+  els.btnRevisionToReview = els.views.revision?.querySelector('#btn-revision-to-review');
+  els.btnRevisionBack = els.views.revision?.querySelector('#btn-revision-back');
+  
+  // Dashboard
+  els.dashboardContent = els.views.dashboard?.querySelector('#dashboard-content');
+  els.btnExport = els.views.dashboard?.querySelector('#btn-export');
+  els.btnImport = els.views.dashboard?.querySelector('#btn-import');
+  els.fileImport = els.views.dashboard?.querySelector('#file-import');
+  
+  // History
+  els.historyList = els.views.history?.querySelector('#history-list');
+  
+  // Themes
+  els.themesList = els.views.themes?.querySelector('#themes-list');
+  els.searchInput = els.views.themes?.querySelector('#search-themes');
+  els.btnClearSearch = els.views.themes?.querySelector('#btn-clear-search');
+  els.searchResultsCount = els.views.themes?.querySelector('#search-results-count');
+}
 
 /////////////////////
 // OUTILS GÉNÉRAUX //
@@ -339,7 +416,61 @@ async function loadMainConfig() {
     errorReview: app.errorReview || defaults.errorReview
   };
 
-  state.themes = Array.isArray(cfg.themes) ? cfg.themes.slice() : [];
+  // ✅ CORRECTION : Charger les thèmes officiels
+  const officialThemes = Array.isArray(cfg.themes) ? cfg.themes.slice() : [];
+  
+  // ✅ CORRECTION : Charger les thèmes personnalisés depuis localStorage
+  const customThemes = loadCustomThemes();
+  const customThemesArray = Object.values(customThemes).map(theme => normalizeCustomTheme(theme));
+  
+  // ✅ CORRECTION : Récupérer les IDs des thèmes personnalisés
+  const customThemeIds = new Set(customThemesArray.map(t => t.id));
+  
+  // ✅ CORRECTION : Filtrer les thèmes officiels pour éviter les doublons
+  const filteredOfficialThemes = officialThemes.filter(t => !customThemeIds.has(t.id));
+  
+  // ✅ CORRECTION : Combiner les deux (personnalisés en premier pour priorité)
+  state.themes = [...customThemesArray, ...filteredOfficialThemes];
+  
+  console.log('✅ Thèmes chargés:', {
+    officiels: filteredOfficialThemes.length,
+    personnalisés: customThemesArray.length,
+    total: state.themes.length,
+    customIds: Array.from(customThemeIds)
+  });
+}
+
+/**
+ * Recharge state.themes pour inclure les thèmes personnalisés mis à jour
+ */
+function refreshThemesState() {
+  // Récupérer les thèmes officiels (ceux qui ne sont pas custom)
+  const officialThemes = state.themes.filter(t => !t.isCustom);
+  
+  // Charger les thèmes personnalisés depuis localStorage
+  const customThemes = loadCustomThemes();
+  const customThemesArray = Object.values(customThemes).map(theme => normalizeCustomTheme(theme));
+  
+  // ✅ CORRECTION : Récupérer les IDs des thèmes personnalisés
+  const customThemeIds = new Set(customThemesArray.map(t => t.id));
+  
+  // ✅ CORRECTION : Filtrer les thèmes officiels pour éviter les doublons
+  const filteredOfficialThemes = officialThemes.filter(t => !customThemeIds.has(t.id));
+  
+  // ✅ CORRECTION : Recombiner (personnalisés en premier)
+  state.themes = [...customThemesArray, ...filteredOfficialThemes];
+  
+  // Mettre à jour les compteurs
+  customThemesArray.forEach(theme => {
+    state.themeCounts[theme.id] = theme.questions?.length || 0;
+  });
+  
+  console.log('🔄 state.themes actualisé:', {
+    officiels: filteredOfficialThemes.length,
+    personnalisés: customThemesArray.length,
+    total: state.themes.length,
+    customIds: Array.from(customThemeIds)
+  });
 }
 
 async function loadThemeQuestions(theme) {
@@ -566,6 +697,24 @@ function bindEvents() {
   els.btnAddTheme?.addEventListener('click', showThemeImportView);
   els.btnManageThemes?.addEventListener('click', showCustomThemesView);
 
+  els.btnAbout?.addEventListener('click', () => {
+    showView('about');
+  });
+
+  els.btnAboutBack?.addEventListener('click', () => {
+    showView('themes');
+  });
+  
+  // Au cas où le bouton est dans le composant, on l'ajoute aussi après le chargement
+  setTimeout(() => {
+    const aboutBackBtn = els.views.about?.querySelector('#btn-about-back');
+    if (aboutBackBtn && !aboutBackBtn.onclick) {
+      aboutBackBtn.addEventListener('click', () => {
+        showView('themes');
+      });
+    }
+  }, 100);
+
   els.btnTheme?.addEventListener('click', () => {
     const current = getSavedTheme();
     let next;
@@ -714,6 +863,25 @@ async function registerSW() {
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     initTheme();
+    
+    // Attendre que les Web Components soient chargés
+    await Promise.all([
+      customElements.whenDefined('view-themes'),
+      customElements.whenDefined('view-dashboard'),
+      customElements.whenDefined('view-quiz'),
+      customElements.whenDefined('view-results'),
+      customElements.whenDefined('view-flashcards'),
+      customElements.whenDefined('view-revision'),
+      customElements.whenDefined('view-history'),
+      customElements.whenDefined('view-import-theme'),
+      customElements.whenDefined('view-custom-themes'),
+      customElements.whenDefined('view-pdf-import'),
+      customElements.whenDefined('view-about')
+    ]);
+    
+    // Mettre à jour les références aux éléments DOM des composants
+    updateElementReferences();
+    
     await loadMainConfig();
     await preloadThemeCounts();
     
@@ -721,6 +889,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     initThemeImport();
     // intialiser pdf import
     initPdfImport();
+    // ✅ AJOUTER CETTE LIGNE
+    initCustomThemes();
     
     // Charger les compteurs pour les thèmes personnalisés
     const customThemes = loadCustomThemes();
