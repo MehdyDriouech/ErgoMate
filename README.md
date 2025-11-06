@@ -8,7 +8,6 @@
 
 ### 🎯 Modes d'apprentissage variés
 - **Entraînement** : Pratique libre avec feedback immédiat
-- **QCM uniquement** : Focus sur les questions à choix multiples
 - **Mode Examen** : Simulation d'examen avec notation finale
 - **Révision d'erreurs** : Système intelligent qui cible vos points faibles
 - **Flashcards** : Apprentissage par répétition espacée
