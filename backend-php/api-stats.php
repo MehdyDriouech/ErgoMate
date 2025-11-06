@@ -42,15 +42,43 @@ function requireAuth() {
     $validUser = DASHBOARD_LOGIN;
     $validPass = DASHBOARD_PASSWORD;
     
-    // Vérifier les credentials
-    $user = $_SERVER['PHP_AUTH_USER'] ?? '';
-    $pass = $_SERVER['PHP_AUTH_PW'] ?? '';
+    // ✅ CORRECTION : Parser manuellement le header Authorization
+    $user = '';
+    $pass = '';
     
+    // Méthode 1 : Variables PHP standard (Apache avec mod_php)
+    if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+        $user = $_SERVER['PHP_AUTH_USER'];
+        $pass = $_SERVER['PHP_AUTH_PW'];
+    }
+    // Méthode 2 : Header Authorization (CGI/FastCGI/Nginx)
+    elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $auth = $_SERVER['HTTP_AUTHORIZATION'];
+        if (strpos($auth, 'Basic ') === 0) {
+            $credentials = base64_decode(substr($auth, 6));
+            list($user, $pass) = explode(':', $credentials, 2);
+        }
+    }
+    // Méthode 3 : Header Authorization alternatif
+    elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $auth = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+        if (strpos($auth, 'Basic ') === 0) {
+            $credentials = base64_decode(substr($auth, 6));
+            list($user, $pass) = explode(':', $credentials, 2);
+        }
+    }
+    
+    // Vérifier les credentials
     if ($user !== $validUser || $pass !== $validPass) {
         header('WWW-Authenticate: Basic realm="ErgoMate Dashboard"');
         http_response_code(401);
         echo json_encode([
-            'error' => 'Authentification requise'
+            'error' => 'Authentification requise',
+            'debug' => [
+                'received_user' => $user ? '[HIDDEN]' : 'empty',
+                'expected_user' => $validUser,
+                'auth_method' => isset($_SERVER['PHP_AUTH_USER']) ? 'PHP_AUTH' : (isset($_SERVER['HTTP_AUTHORIZATION']) ? 'HTTP_AUTHORIZATION' : 'NONE')
+            ]
         ]);
         exit();
     }
