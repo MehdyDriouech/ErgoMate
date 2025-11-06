@@ -1,6 +1,6 @@
 /* sw.js – Ergo Quiz PWA (offline-first) */
 
-const VERSION = 'v1.0.3'; // 👈 Version incrémentée
+const VERSION = 'v1.5.0'; // 👈 Version incrémentée
 const PRECACHE = `ergo-precache-${VERSION}`;
 const RUNTIME  = `ergo-runtime-${VERSION}`;
 
@@ -9,10 +9,17 @@ const CORE_ASSETS = [
   '/index.html',
   '/assets/styles.css',
   '/js/app.js',
-  '/js/modules/render.js',
-  '/js/modules/storage.js',
-  '/js/modules/timer.js',
-  '/js/modules/utils.js',
+  '/js/features-view/view-themes.js',
+  '/js/features-view/view-dashboard.js',
+  '/js/features-view/view-quiz.js',
+  '/js/features-view/view-results.js',
+  '/js/features-view/view-flashcards.js',
+  '/js/features-view/view-revision.js',
+  '/js/features-view/view-history.js',
+  '/js/features-view/view-import-theme.js',
+  '/js/features-view/view-custom-themes.js',
+  '/js/features-view/view-pdf-import.js',
+  '/js/features-view/view-about.js',
   '/js/features/features-custom-themes.js',
   '/js/features/features-dashboard.js',
   '/js/features/features-export.js',
@@ -21,8 +28,8 @@ const CORE_ASSETS = [
   '/js/features/features-theme-import.js',
   '/js/features/features-theme-validator.js',
   '/data/theme-main.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
+  '/assets/icons/icon-192.png',
+  '/assets/icons/icon-512.png',
   '/manifest.webmanifest'
 ];
 
