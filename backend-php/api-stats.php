@@ -42,30 +42,36 @@ function requireAuth() {
     $validUser = DASHBOARD_LOGIN;
     $validPass = DASHBOARD_PASSWORD;
     
-    // ✅ CORRECTION : Parser manuellement le header Authorization
+    // ✅ SOLUTION : Utiliser getallheaders() pour récupérer Authorization
     $user = '';
     $pass = '';
+    $authFound = false;
     
-    // Méthode 1 : Variables PHP standard (Apache avec mod_php)
-    if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-        $user = $_SERVER['PHP_AUTH_USER'];
-        $pass = $_SERVER['PHP_AUTH_PW'];
-    }
-    // Méthode 2 : Header Authorization (CGI/FastCGI/Nginx)
-    elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
-        $auth = $_SERVER['HTTP_AUTHORIZATION'];
-        if (strpos($auth, 'Basic ') === 0) {
-            $credentials = base64_decode(substr($auth, 6));
-            list($user, $pass) = explode(':', $credentials, 2);
+    $headers = getallheaders();
+    
+    // Chercher le header Authorization (case-insensitive)
+    foreach ($headers as $headerName => $headerValue) {
+        if (strtolower($headerName) === 'authorization') {
+            if (strpos($headerValue, 'Basic ') === 0) {
+                $credentials = base64_decode(substr($headerValue, 6));
+                if ($credentials && strpos($credentials, ':') !== false) {
+                    list($user, $pass) = explode(':', $credentials, 2);
+                    $authFound = true;
+                    break;
+                }
+            }
         }
     }
-    // Méthode 3 : Header Authorization alternatif
-    elseif (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
-        $auth = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
-        if (strpos($auth, 'Basic ') === 0) {
-            $credentials = base64_decode(substr($auth, 6));
-            list($user, $pass) = explode(':', $credentials, 2);
-        }
+    
+    // Si pas d'auth trouvée, demander les credentials
+    if (!$authFound) {
+        header('WWW-Authenticate: Basic realm="ErgoMate Dashboard"');
+        http_response_code(401);
+        echo json_encode([
+            'error' => 'Authentification requise',
+            'message' => 'Veuillez fournir vos identifiants'
+        ]);
+        exit();
     }
     
     // Vérifier les credentials
@@ -73,12 +79,8 @@ function requireAuth() {
         header('WWW-Authenticate: Basic realm="ErgoMate Dashboard"');
         http_response_code(401);
         echo json_encode([
-            'error' => 'Authentification requise',
-            'debug' => [
-                'received_user' => $user ? '[HIDDEN]' : 'empty',
-                'expected_user' => $validUser,
-                'auth_method' => isset($_SERVER['PHP_AUTH_USER']) ? 'PHP_AUTH' : (isset($_SERVER['HTTP_AUTHORIZATION']) ? 'HTTP_AUTHORIZATION' : 'NONE')
-            ]
+            'error' => 'Identifiants invalides',
+            'message' => 'Login ou mot de passe incorrect'
         ]);
         exit();
     }
