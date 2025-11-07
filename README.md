@@ -11,7 +11,7 @@
 - **Mode Examen** : Simulation d'examen avec notation finale
 - **Révision d'erreurs** : Système intelligent qui cible vos points faibles
 - **Flashcards** : Apprentissage par répétition espacée
-- **Fiches de révisions** : Apprentissage des notions élementaires avec un suivi de compréhension
+- **Fiches de révisions** : Apprentissage des notions élementaires avec un suivi de compréhension + diagrammes avec mermaid.js
 
 ### 📊 Suivi et analytics
 - **Dashboard interactif** avec graphiques de progression
@@ -43,6 +43,18 @@
 - **Animations subtiles** : transitions et micro-interactions
 - **Accessibilité** soignée (ARIA, navigation clavier, contrastes)
 
+### 🔧 Backend
+- **Architecture modulaire** : séparation claire des responsabilités (API, auth, AI)
+- **Mistral AI** : migration depuis OpenRouter pour un meilleur support français
+- **BYOK (Bring Your Own Key)** : les utilisateurs peuvent utiliser leur propre clé API
+- **Logging complet** : suivi des métriques d'utilisation et des erreurs
+- **Dashboard analytics** : visualisation des statistiques d'API et de performance
+- **Support des diagrammes** : génération Mermaid.js pour l'apprentissage visuel
+- **Gestion des PDFs** : extraction et traitement de contenu pour quiz/flashcards
+- **Authentification sécurisée** : TBD
+- **Cache intelligent** : optimisation des appels API et des performances
+- **Offline-first** : synchronisation et fonctionnement hors ligne (PWA)
+
 ---
 
 ## 🏗️ Structure du projet
@@ -54,11 +66,18 @@ ergo-mate/
 ├── sw.js                           # Service Worker (cache offline)
 │
 ├── assets/
-│   └── styles.css                  # Styles globaux et thèmes
+│   ├── libjs/                     # LibrariesJS
+│   │   ├── mermaid.esm.min.mjs    # MermaidJS pour les diagrames
+│   ├── icons/                     # icones PWA
+│   │   ├── icon-192.png
+│   │   ├── icon-512.png   
+│   └── styles.css                 # Styles globaux et thèmes
 │
-├── backend-php/       # api génération question via pdf
-│       ├── api.php  # api
-│       ├── config.php  # Secrets
+├── backend-php/                   # api génération question via pdf
+│       ├── api.php                # api
+│       ├── api-stats.php          # stats
+│       ├── config.php             # fichier de config
+│       └── dashboard.html         # Dashboard API
 │
 ├── js/
 │   ├── app.js                      # Point d'entrée principal
