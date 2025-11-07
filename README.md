@@ -172,24 +172,46 @@ open http://localhost:8000
 ### Format JSON
 
 ```json
+Theme structure with mermaid · JSON
+Copier
+
 {
   "title": "Titre du thème (basé sur le contenu)",
   "description": "Description concise du thème (1-2 phrases)",
-  "tags": ["tag1", "tag2", "tag3"],
+  "tags": [
+    "tag1",
+    "tag2",
+    "tag3"
+  ],
   "questions": [
     {
       "id": "q001",
       "type": "mcq",
       "prompt": "Question claire et précise ?",
       "choices": [
-        { "id": "a", "label": "Première option" },
-        { "id": "b", "label": "Deuxième option" },
-        { "id": "c", "label": "Troisième option" },
-        { "id": "d", "label": "Quatrième option" }
+        {
+          "id": "a",
+          "label": "Première option"
+        },
+        {
+          "id": "b",
+          "label": "Deuxième option"
+        },
+        {
+          "id": "c",
+          "label": "Troisième option"
+        },
+        {
+          "id": "d",
+          "label": "Quatrième option"
+        }
       ],
       "answer": "a",
       "rationale": "Explication pédagogique détaillée de la bonne réponse",
-      "tags": ["concept", "catégorie"]
+      "tags": [
+        "concept",
+        "catégorie"
+      ]
     },
     {
       "id": "q002",
@@ -197,7 +219,10 @@ open http://localhost:8000
       "prompt": "Affirmation à évaluer",
       "answer": true,
       "rationale": "Explication de pourquoi c'est vrai ou faux",
-      "tags": ["fait", "théorie"]
+      "tags": [
+        "fait",
+        "théorie"
+      ]
     },
     {
       "id": "q003",
@@ -205,121 +230,360 @@ open http://localhost:8000
       "prompt": "Question avec un ___ à compléter",
       "answer": "réponse courte",
       "rationale": "Explication de la réponse attendue",
-      "tags": ["définition"]
-    }
-  ],
-  "revisionCards": [
-    {
-      "sectionTitle": "",
-      "cards": [
-        {
-          "id": "",
-          "type": "summary",
-          "layout": "bullet_points",
-          "title": "",
-          "content": "",
-          "items": [],
-          "keyPoints": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "timeline",
-          "title": "",
-          "timeline": [],
-          "summary": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "definition",
-          "title": "",
-          "definition": "",
-          "examples": [],
-          "synonyms": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "comparison",
-          "title": "",
-          "columns": [],
-          "rows": [],
-          "keyDifference": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "qna",
-          "title": "",
-          "qaPairs": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "mnemonic",
-          "title": "",
-          "mnemonics": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "diagram_textual",
-          "title": "",
-          "nodes": [],
-          "note": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "focus",
-          "title": "",
-          "content": "",
-          "objective": "",
-          "examples": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "key_takeaways",
-          "title": "",
-          "takeaways": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "case_study",
-          "title": "",
-          "context": "",
-          "problem": "",
-          "intervention": "",
-          "outcome": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "exercise",
-          "title": "",
-          "prompt": "",
-          "expectedAnswer": "",
-          "rationale": "",
-          "tags": [],
-          "relatedQuestions": []
-        }
+      "tags": [
+        "définition"
       ]
     }
-  ]
-} 
+  ],
+  "revision": {
+    "sections": [
+      {
+        "id": "section_001",
+        "title": "Titre de la section",
+        "order": 1,
+        "cards": [
+          {
+            "id": "rev_summary_001",
+            "type": "summary",
+            "title": "Titre du résumé",
+            "content": "Contenu principal du résumé",
+            "items": [
+              {
+                "title": "Élément 1",
+                "content": "Description de l'élément 1"
+              },
+              {
+                "title": "Élément 2",
+                "content": "Description de l'élément 2"
+              }
+            ],
+            "keyPoints": [
+              "Point clé 1",
+              "Point clé 2",
+              "Point clé 3"
+            ],
+            "tags": [
+              "synthèse",
+              "vue d'ensemble"
+            ],
+            "relatedQuestions": [
+              "q001",
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_timeline_001",
+            "type": "timeline",
+            "title": "Titre de la chronologie",
+            "timeline": [
+              {
+                "period": "1900-1920",
+                "date": "1917",
+                "actors": "Acteur principal",
+                "event": "Description de l'événement",
+                "description": "Détails supplémentaires"
+              },
+              {
+                "period": "1920-1940",
+                "event": "Deuxième événement important"
+              }
+            ],
+            "summary": "Conclusion ou synthèse de la chronologie",
+            "tags": [
+              "histoire",
+              "évolution"
+            ],
+            "relatedQuestions": [
+              "q003"
+            ]
+          },
+          {
+            "id": "rev_definition_001",
+            "type": "definition",
+            "title": "Terme à définir",
+            "definition": "Définition claire et précise du terme",
+            "examples": [
+              "Exemple concret 1",
+              "Exemple concret 2"
+            ],
+            "synonyms": [
+              "synonyme1",
+              "synonyme2"
+            ],
+            "keyPoints": [
+              "Point important 1",
+              "Point important 2"
+            ],
+            "tags": [
+              "vocabulaire",
+              "concept"
+            ],
+            "relatedQuestions": [
+              "q001"
+            ]
+          },
+          {
+            "id": "rev_comparison_001",
+            "type": "comparison",
+            "title": "Comparaison entre X et Y",
+            "columns": [
+              "Critère",
+              "Option A",
+              "Option B"
+            ],
+            "rows": [
+              {
+                "label": "Formation",
+                "values": [
+                  "3 ans",
+                  "5 ans"
+                ]
+              },
+              {
+                "label": "Compétences",
+                "values": [
+                  "Compétence A",
+                  "Compétence B"
+                ]
+              },
+              {
+                "label": "Domaines",
+                "values": [
+                  "Domaine 1",
+                  "Domaine 2"
+                ]
+              }
+            ],
+            "keyDifference": "La différence principale entre A et B est...",
+            "tags": [
+              "comparaison",
+              "différences"
+            ],
+            "relatedQuestions": [
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_qna_001",
+            "type": "qna",
+            "title": "Questions fréquentes sur X",
+            "qaPairs": [
+              {
+                "question": "Question courante 1 ?",
+                "answer": "Réponse détaillée à la question 1"
+              },
+              {
+                "question": "Question courante 2 ?",
+                "answer": "Réponse détaillée à la question 2"
+              },
+              {
+                "question": "Question courante 3 ?",
+                "answer": "Réponse détaillée à la question 3"
+              }
+            ],
+            "tags": [
+              "faq",
+              "clarification"
+            ],
+            "relatedQuestions": [
+              "q001",
+              "q003"
+            ]
+          },
+          {
+            "id": "rev_mnemonic_001",
+            "type": "mnemonic",
+            "title": "Moyens mnémotechniques",
+            "mnemonics": [
+              {
+                "concept": "Concept à retenir",
+                "technique": "ACRONYME ou phrase mnémotechnique",
+                "breakdown": [
+                  "A = Premier élément",
+                  "C = Deuxième élément",
+                  "R = Troisième élément"
+                ]
+              }
+            ],
+            "tags": [
+              "mémoire",
+              "astuce"
+            ],
+            "relatedQuestions": [
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_mermaid_001",
+            "type": "diagram_mermaid",
+            "title": "Titre du diagramme",
+            "mermaid": "flowchart TD\n    A[Début] --> B{Décision}\n    B -->|Oui| C[Action 1]\n    B -->|Non| D[Action 2]\n    C --> E[Fin]\n    D --> E",
+            "note": "Note explicative optionnelle sur le diagramme",
+            "tags": [
+              "processus",
+              "schéma",
+              "visuel"
+            ],
+            "relatedQuestions": [
+              "q001",
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_mermaid_002",
+            "type": "diagram_mermaid",
+            "title": "Carte mentale des concepts",
+            "mermaid": "mindmap\n  root((Concept principal))\n    Sous-concept 1\n      Détail 1.1\n      Détail 1.2\n    Sous-concept 2\n      Détail 2.1\n      Détail 2.2\n    Sous-concept 3",
+            "note": "Organisation hiérarchique des concepts clés",
+            "tags": [
+              "organisation",
+              "concepts"
+            ],
+            "relatedQuestions": [
+              "q003"
+            ]
+          },
+          {
+            "id": "rev_mermaid_003",
+            "type": "diagram_mermaid",
+            "title": "Chronologie visuelle",
+            "mermaid": "timeline\n    title Évolution historique\n    1900 : Événement 1\n    1950 : Événement 2\n    1980 : Événement 3\n    2000 : Événement 4\n    2020 : Événement actuel",
+            "tags": [
+              "histoire",
+              "chronologie"
+            ],
+            "relatedQuestions": [
+              "q003"
+            ]
+          },
+          {
+            "id": "rev_mermaid_004",
+            "type": "diagram_mermaid",
+            "title": "Diagramme de séquence",
+            "mermaid": "sequenceDiagram\n    participant P as Patient\n    participant E as Ergothérapeute\n    participant M as Médecin\n    P->>E: Demande d'intervention\n    E->>P: Évaluation initiale\n    E->>M: Rapport d'évaluation\n    M->>E: Prescription\n    E->>P: Plan d'intervention",
+            "note": "Interactions typiques dans un parcours de soins",
+            "tags": [
+              "processus",
+              "interactions"
+            ],
+            "relatedQuestions": [
+              "q001"
+            ]
+          },
+          {
+            "id": "rev_diagram_textual_001",
+            "type": "diagram_textual",
+            "title": "Schéma conceptuel (texte)",
+            "nodes": [
+              {
+                "label": "Élément 1",
+                "description": "Description de l'élément 1"
+              },
+              {
+                "label": "Élément 2",
+                "description": "Description de l'élément 2"
+              },
+              {
+                "label": "Élément 3",
+                "description": "Description de l'élément 3"
+              }
+            ],
+            "note": "Relations entre les différents éléments",
+            "tags": [
+              "schéma",
+              "structure"
+            ],
+            "relatedQuestions": [
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_focus_001",
+            "type": "focus",
+            "title": "Focus sur un concept important",
+            "content": "Explication détaillée du concept principal",
+            "objective": "Objectif d'apprentissage de cette fiche",
+            "examples": [
+              "Exemple pratique 1",
+              "Exemple pratique 2",
+              "Exemple pratique 3"
+            ],
+            "keyPoints": [
+              "Point essentiel 1",
+              "Point essentiel 2"
+            ],
+            "tags": [
+              "approfondissement",
+              "clé"
+            ],
+            "relatedQuestions": [
+              "q001",
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_key_takeaways_001",
+            "type": "key_takeaways",
+            "title": "Points essentiels à retenir",
+            "takeaways": [
+              {
+                "point": "Premier point clé",
+                "details": "Explication complémentaire du premier point"
+              },
+              {
+                "point": "Deuxième point clé",
+                "details": "Explication complémentaire du deuxième point"
+              },
+              "Troisième point clé (format simple)"
+            ],
+            "tags": [
+              "synthèse",
+              "essentiel"
+            ],
+            "relatedQuestions": [
+              "q001",
+              "q002",
+              "q003"
+            ]
+          },
+          {
+            "id": "rev_case_study_001",
+            "type": "case_study",
+            "title": "Cas clinique : [Nom du cas]",
+            "context": "Présentation du patient et de sa situation (âge, diagnostic, contexte de vie)",
+            "problem": "Problématique ergothérapique identifiée",
+            "intervention": "Description de l'intervention mise en place",
+            "outcome": "Résultats obtenus et analyse",
+            "tags": [
+              "pratique",
+              "clinique",
+              "cas"
+            ],
+            "relatedQuestions": [
+              "q001",
+              "q002"
+            ]
+          },
+          {
+            "id": "rev_exercise_001",
+            "type": "exercise",
+            "title": "Exercice d'application",
+            "prompt": "Consigne claire de l'exercice à réaliser",
+            "expectedAnswer": "Réponse attendue détaillée",
+            "rationale": "Explication pédagogique de la réponse et des concepts sous-jacents",
+            "tags": [
+              "pratique",
+              "application"
+            ],
+            "relatedQuestions": [
+              "q003"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 ### Types de questions supportés
