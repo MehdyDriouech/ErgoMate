@@ -202,17 +202,21 @@
     })();
   </script>
 
-  <script type="module">
+<script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  
   mermaid.initialize({ 
-    startOnLoad: true,
+    startOnLoad: false,
     theme: 'default',
     themeVariables: {
       fontSize: '14px',
-      fontFamily: 'system-ui'
-    }
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    },
+    securityLevel: 'strict'
   });
+  
   window.mermaid = mermaid;
+  console.log('✅ Mermaid.js chargé et prêt');
 </script>
   
 </body>
