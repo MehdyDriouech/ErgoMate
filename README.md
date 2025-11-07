@@ -319,7 +319,8 @@ open http://localhost:8000
       ]
     }
   ]
-}```
+} 
+```
 
 ### Types de questions supportés
 - **`mcq`** : Questions à choix multiple (simple ou multiple)
