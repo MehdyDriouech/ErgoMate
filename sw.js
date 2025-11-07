@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   '/',
   '/index.html',
   '/assets/styles.css',
+  '/assets/libjs/mermaid.esm.min.mjs',
   '/js/app.js',
   '/js/features-view/view-themes.js',
   '/js/features-view/view-dashboard.js',
