@@ -536,8 +536,10 @@ function callMistralAPI($prompt, $apiKey, $model) {
     ];
 }
 
+
 /**
- * Construit le prompt complet optimisé pour Mistral AI
+ * Construit le prompt complet (questions + fiches de révision) optimisé pour Mistral
+ * VERSION 2 : Avec support Mermaid et structure revision.sections
  */
 function buildCompleteThemePrompt($text, $config, $fileName, $pdfAuthor) {
     $typeLabels = [
@@ -574,7 +576,7 @@ Tu es un expert pédagogique spécialisé dans la création de contenus éducati
 
 Ta mission : Analyser le contenu ci-dessous et générer un thème de révision complet au format JSON STRICT comprenant :
 1. Des questions de révision variées et pertinentes
-2. Des fiches de révision structurées et complètes
+2. Des fiches de révision structurées et complètes avec support des diagrammes Mermaid
 
 ═══════════════════════════════════════════════════════════════════
 📚 DOCUMENT SOURCE :
@@ -641,117 +643,170 @@ $typesString
       "tags": ["définition"]
     }
   ],
-  "revisionCards": [
-    {
-      "sectionTitle": "",
-      "cards": [
-        {
-          "id": "",
-          "type": "summary",
-          "layout": "bullet_points",
-          "title": "",
-          "content": "",
-          "items": [],
-          "keyPoints": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "timeline",
-          "title": "",
-          "timeline": [],
-          "summary": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "definition",
-          "title": "",
-          "definition": "",
-          "examples": [],
-          "synonyms": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "comparison",
-          "title": "",
-          "columns": [],
-          "rows": [],
-          "keyDifference": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "qna",
-          "title": "",
-          "qaPairs": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "mnemonic",
-          "title": "",
-          "mnemonics": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "diagram_textual",
-          "title": "",
-          "nodes": [],
-          "note": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "focus",
-          "title": "",
-          "content": "",
-          "objective": "",
-          "examples": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "key_takeaways",
-          "title": "",
-          "takeaways": [],
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "case_study",
-          "title": "",
-          "context": "",
-          "problem": "",
-          "intervention": "",
-          "outcome": "",
-          "tags": [],
-          "relatedQuestions": []
-        },
-        {
-          "id": "",
-          "type": "exercise",
-          "title": "",
-          "prompt": "",
-          "expectedAnswer": "",
-          "rationale": "",
-          "tags": [],
-          "relatedQuestions": []
-        }
-      ]
-    }
-  ]
+  "revision": {
+    "sections": [
+      {
+        "id": "section_001",
+        "title": "Titre de la section",
+        "order": 1,
+        "cards": [
+          {
+            "id": "rev_summary_001",
+            "type": "summary",
+            "title": "Titre du résumé",
+            "content": "Contenu principal du résumé",
+            "items": [
+              {
+                "title": "Élément 1",
+                "content": "Description de l'élément 1"
+              }
+            ],
+            "keyPoints": ["Point clé 1", "Point clé 2"],
+            "tags": ["synthèse"],
+            "relatedQuestions": ["q001", "q002"]
+          },
+          {
+            "id": "rev_definition_001",
+            "type": "definition",
+            "title": "Terme à définir",
+            "definition": "Définition claire et précise",
+            "examples": ["Exemple 1", "Exemple 2"],
+            "synonyms": ["synonyme1"],
+            "keyPoints": ["Point important"],
+            "tags": ["vocabulaire"],
+            "relatedQuestions": ["q001"]
+          },
+          {
+            "id": "rev_timeline_001",
+            "type": "timeline",
+            "title": "Titre de la chronologie",
+            "timeline": [
+              {
+                "period": "1900-1920",
+                "date": "1917",
+                "actors": "Acteur principal",
+                "event": "Description de l'événement",
+                "description": "Détails supplémentaires"
+              }
+            ],
+            "summary": "Conclusion de la chronologie",
+            "tags": ["histoire"],
+            "relatedQuestions": ["q003"]
+          },
+          {
+            "id": "rev_comparison_001",
+            "type": "comparison",
+            "title": "Comparaison entre X et Y",
+            "columns": ["Critère", "Option A", "Option B"],
+            "rows": [
+              {
+                "label": "Formation",
+                "values": ["3 ans", "5 ans"]
+              }
+            ],
+            "keyDifference": "La différence principale est...",
+            "tags": ["comparaison"],
+            "relatedQuestions": ["q002"]
+          },
+          {
+            "id": "rev_qna_001",
+            "type": "qna",
+            "title": "Questions fréquentes",
+            "qaPairs": [
+              {
+                "question": "Question 1 ?",
+                "answer": "Réponse détaillée"
+              }
+            ],
+            "tags": ["faq"],
+            "relatedQuestions": ["q001"]
+          },
+          {
+            "id": "rev_mnemonic_001",
+            "type": "mnemonic",
+            "title": "Moyens mnémotechniques",
+            "mnemonics": [
+              {
+                "concept": "Concept à retenir",
+                "technique": "ACRONYME",
+                "breakdown": ["A = Premier élément", "C = Deuxième élément"]
+              }
+            ],
+            "tags": ["mémoire"],
+            "relatedQuestions": ["q002"]
+          },
+          {
+            "id": "rev_mermaid_001",
+            "type": "diagram_mermaid",
+            "title": "Titre du diagramme",
+            "mermaid": "flowchart TD\\n    A[Début] --> B{Décision}\\n    B -->|Oui| C[Action 1]\\n    B -->|Non| D[Action 2]\\n    C --> E[Fin]\\n    D --> E",
+            "note": "Note explicative sur le diagramme",
+            "tags": ["processus", "visuel"],
+            "relatedQuestions": ["q001"]
+          },
+          {
+            "id": "rev_diagram_textual_001",
+            "type": "diagram_textual",
+            "title": "Schéma conceptuel",
+            "nodes": [
+              {
+                "label": "Élément 1",
+                "description": "Description"
+              }
+            ],
+            "note": "Relations entre les éléments",
+            "tags": ["schéma"],
+            "relatedQuestions": ["q002"]
+          },
+          {
+            "id": "rev_focus_001",
+            "type": "focus",
+            "title": "Focus sur un concept",
+            "content": "Explication détaillée",
+            "objective": "Objectif d'apprentissage",
+            "examples": ["Exemple pratique"],
+            "keyPoints": ["Point essentiel"],
+            "tags": ["approfondissement"],
+            "relatedQuestions": ["q001"]
+          },
+          {
+            "id": "rev_key_takeaways_001",
+            "type": "key_takeaways",
+            "title": "Points essentiels",
+            "takeaways": [
+              {
+                "point": "Premier point clé",
+                "details": "Explication"
+              }
+            ],
+            "tags": ["synthèse"],
+            "relatedQuestions": ["q001", "q002"]
+          },
+          {
+            "id": "rev_case_study_001",
+            "type": "case_study",
+            "title": "Cas clinique",
+            "context": "Présentation du cas",
+            "problem": "Problématique identifiée",
+            "intervention": "Intervention mise en place",
+            "outcome": "Résultats obtenus",
+            "tags": ["pratique"],
+            "relatedQuestions": ["q001"]
+          },
+          {
+            "id": "rev_exercise_001",
+            "type": "exercise",
+            "title": "Exercice d'application",
+            "prompt": "Consigne de l'exercice",
+            "expectedAnswer": "Réponse attendue",
+            "rationale": "Explication pédagogique",
+            "tags": ["pratique"],
+            "relatedQuestions": ["q003"]
+          }
+        ]
+      }
+    ]
+  }
 }
 
 ═══════════════════════════════════════════════════════════════════
@@ -766,26 +821,57 @@ $typesString
    ☑ Les tags sont pertinents et descriptifs
    ☑ Les questions couvrent l'ensemble du document
 
-2. FICHES DE RÉVISION :
+2. STRUCTURE REVISION :
+   ☑ Utiliser "revision" avec "sections" (PAS "revisionCards")
    ☑ Créer 2-6 sections thématiques selon le contenu
-   ☑ Chaque section contient 2-5 cartes minimum
-   ☑ Utiliser TOUS les types de cartes disponibles
-   ☑ Les cartes sont riches et complètes
-   ☑ Les relatedQuestions font référence aux IDs existants
+   ☑ Chaque section a un ID, title, et order séquentiel (1, 2, 3...)
+   ☑ Chaque section contient 3-8 cartes variées
 
-3. QUALITÉ DU CONTENU :
+3. FICHES DE RÉVISION (CARDS) :
+   ☑ Utiliser TOUS les types de cartes disponibles
+   ☑ IDs des cartes format : rev_[type]_[numéro] (ex: rev_summary_001)
+   ☑ Les cartes sont riches et complètes
+   ☑ Les relatedQuestions font référence aux IDs de questions existants
+   ☑ Privilégier 2-3 cartes diagram_mermaid par thème pour la visualisation
+
+4. DIAGRAMMES MERMAID :
+   ☑ Types supportés : flowchart, mindmap, timeline, sequenceDiagram, classDiagram
+   ☑ Syntaxe Mermaid STRICTEMENT VALIDE (vérifier la syntaxe)
+   ☑ Utiliser \\n pour les retours à la ligne dans le champ "mermaid"
+   ☑ Adapter le type de diagramme au contenu (processus, concepts, chronologie)
+   ☑ Exemples valides :
+     - Processus : "flowchart TD\\n    A[Étape 1] --> B[Étape 2]"
+     - Concepts : "mindmap\\n  root((Concept))\\n    Sous-concept 1\\n    Sous-concept 2"
+     - Timeline : "timeline\\n    title Évolution\\n    1900 : Événement 1\\n    1950 : Événement 2"
+     - Séquence : "sequenceDiagram\\n    participant A\\n    participant B\\n    A->>B: Message"
+
+5. QUALITÉ DU CONTENU :
    ☑ Français correct et professionnel
    ☑ Contenu précis et factuel
    ☑ Explications claires et pédagogiques
    ☑ Vocabulaire adapté au niveau
 
-4. FORMAT TECHNIQUE :
+6. FORMAT TECHNIQUE :
    ☑ JSON valide et strictement conforme
    ☑ Commence par { et finit par }
    ☑ AUCUN texte avant ou après le JSON
    ☑ PAS de balises markdown (```json)
    ☑ Tous les champs obligatoires présents
    ☑ Encodage UTF-8 correct
+   ☑ Échapper correctement les caractères spéciaux dans les strings JSON
+
+═══════════════════════════════════════════════════════════════════
+🎨 EXEMPLES DE DIAGRAMMES MERMAID VALIDES :
+═══════════════════════════════════════════════════════════════════
+
+Processus de soin :
+"flowchart TD\\n    A[Évaluation initiale] --> B{Capacités préservées?}\\n    B -->|Oui| C[Maintien autonomie]\\n    B -->|Non| D[Rééducation]\\n    C --> E[Suivi]\\n    D --> E"
+
+Carte mentale :
+"mindmap\\n  root((Ergothérapie))\\n    Évaluation\\n      Tests standardisés\\n      Observation\\n    Intervention\\n      Rééducation\\n      Adaptation\\n    Suivi"
+
+Chronologie :
+"timeline\\n    title Évolution de la profession\\n    1917 : Naissance de l'ergothérapie\\n    1954 : Première école en France\\n    2010 : Grade master"
 
 ═══════════════════════════════════════════════════════════════════
 🚀 GÉNÉRATION :
@@ -797,10 +883,6 @@ Aucun texte explicatif, aucune balise markdown.
 
 EOT;
 }
-
-/**
- * Construit le prompt simple (legacy) optimisé pour Mistral
- */
 function buildPrompt($text, $config) {
     $typeLabels = [
         'mcq' => 'QCM (Questions à Choix Multiples)',
