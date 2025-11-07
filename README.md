@@ -21,7 +21,7 @@
 
 ### 🎨 Thèmes personnalisés
 - **Import de thèmes JSON** : Ajoutez vos propres questions
-- **Import de thèmes PDF via open-router / qwen** : nécéssite une clef d'api
+- **Import de thèmes PDF via MistralAI** : Bring Your Own Key possible
 - **Validation automatique** : Vérification de la structure des fichiers
 - **Gestion centralisée** : Thèmes officiels + thèmes personnalisés
 
@@ -59,20 +59,31 @@ ergo-mate/
 ├── backend-php/       # api génération question via pdf
 │       ├── api.php  # api
 │       ├── config.php  # Secrets
-│       ├── test.php  # test reponse api
-│       └── test-api.php # test feature pdf import
 │
 ├── js/
 │   ├── app.js                      # Point d'entrée principal
 │   │
+│   ├── features-views/             # Vues / écrans de l'application
+│   │   ├── view-about.js           # Page "À propos"
+│   │   ├── view-custom-themes.js   # Gestion des thèmes personnalisés
+│   │   ├── view-dashboard.js       # Dashboard & statistiques
+│   │   ├── view-flashcards.js      # Vue des flashcards
+│   │   ├── view-history.js         # Historique des sessions
+│   │   ├── view-import-theme.js    # Importation de thèmes
+│   │   ├── view-pdf-import.js      # Importation depuis un PDF
+│   │   ├── view-quiz.js            # Interface des quiz
+│   │   ├── view-results.js         # Résultats & score final
+│   │   ├── view-revision.js        # Mode révision ciblée
+│   │   └── view-themes.js          # Liste & gestion des thèmes
+│   │
 │   └── features/                   # Fonctionnalités métier
-│       ├── features-quiz.js        # Logique des quiz
-│       ├── features-flashcards.js  # Système de flashcards
-│       ├── features-dashboard.js   # Dashboard & analytics
-│       ├── features-export.js      # Export/Import données
-│       ├── features-theme-import.js # Import thèmes perso
-│       ├── features-theme-validator.js # Validation JSON
-│       └── features-custom-themes.js # Gestion thèmes perso
+│       ├── features-quiz.js              # Logique des quiz
+│       ├── features-flashcards.js        # Système de flashcards
+│       ├── features-dashboard.js         # Dashboard & analytics
+│       ├── features-export.js            # Export/Import données
+│       ├── features-theme-import.js      # Import thèmes perso
+│       ├── features-theme-validator.js   # Validation JSON
+│       └── features-custom-themes.js     # Gestion thèmes perso
 │
 ├── data/
 │   ├── theme-main.json             # Index des thèmes officiels
