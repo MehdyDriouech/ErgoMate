@@ -615,10 +615,10 @@ $typesString
       "type": "mcq",
       "prompt": "Question claire et précise ?",
       "choices": [
-        {"id": "a", "label": "Première option"},
-        {"id": "b", "label": "Deuxième option"},
-        {"id": "c", "label": "Troisième option"},
-        {"id": "d", "label": "Quatrième option"}
+        { "id": "a", "label": "Première option" },
+        { "id": "b", "label": "Deuxième option" },
+        { "id": "c", "label": "Troisième option" },
+        { "id": "d", "label": "Quatrième option" }
       ],
       "answer": "a",
       "rationale": "Explication pédagogique détaillée de la bonne réponse",
@@ -643,96 +643,111 @@ $typesString
   ],
   "revisionCards": [
     {
-      "sectionTitle": "Section thématique 1",
+      "sectionTitle": "",
       "cards": [
         {
-          "id": "rev_001",
-          "type": "introduction",
-          "title": "Titre de la carte",
-          "content": "Contenu synthétique de la carte",
-          "keyPoints": ["Point clé 1", "Point clé 2"],
-          "tags": ["introduction"],
-          "relatedQuestions": ["q001"]
+          "id": "",
+          "type": "summary",
+          "layout": "bullet_points",
+          "title": "",
+          "content": "",
+          "items": [],
+          "keyPoints": [],
+          "tags": [],
+          "relatedQuestions": []
         },
         {
-          "id": "rev_002",
-          "type": "detailed_concept",
-          "title": "Concept détaillé",
-          "content": "Description du concept",
-          "historicalContext": {
-            "author": "Auteur",
-            "period": "Période",
-            "location": "Lieu"
-          },
-          "keyConcepts": [
-            {
-              "name": "Concept 1",
-              "definition": "Définition"
-            }
-          ],
-          "therapeuticDevice": {
-            "participants": "Description",
-            "objective": "Objectif",
-            "techniques": ["Technique 1"],
-            "constraint": "Contraintes"
-          },
-          "tags": ["concept"],
-          "relatedQuestions": ["q002"]
+          "id": "",
+          "type": "timeline",
+          "title": "",
+          "timeline": [],
+          "summary": "",
+          "tags": [],
+          "relatedQuestions": []
         },
         {
-          "id": "rev_003",
+          "id": "",
+          "type": "definition",
+          "title": "",
+          "definition": "",
+          "examples": [],
+          "synonyms": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
           "type": "comparison",
-          "title": "Comparaison d'éléments",
-          "content": "Introduction",
-          "professionals": [
-            {
-              "title": "Élément A",
-              "formation": "Caractéristique",
-              "status": "Statut",
-              "canPrescribe": false,
-              "reimbursement": false,
-              "specificities": ["Spécificité 1"]
-            }
-          ],
-          "keyDifference": "Différence principale",
-          "tags": ["comparaison"],
-          "relatedQuestions": ["q003"]
+          "title": "",
+          "columns": [],
+          "rows": [],
+          "keyDifference": "",
+          "tags": [],
+          "relatedQuestions": []
         },
         {
-          "id": "rev_004",
-          "type": "focus",
-          "title": "Focus sur un aspect",
-          "content": "Description",
-          "intervention": "Type",
-          "objective": "Objectif",
-          "formation": "Formation",
-          "examples": ["Exemple 1"],
-          "tags": ["focus"]
+          "id": "",
+          "type": "qna",
+          "title": "",
+          "qaPairs": [],
+          "tags": [],
+          "relatedQuestions": []
         },
         {
-          "id": "rev_005",
-          "type": "key_takeaways",
-          "title": "Points essentiels",
-          "takeaways": [
-            {
-              "topic": "Sujet 1",
-              "point": "Point essentiel"
-            }
-          ],
-          "tags": ["synthèse"]
-        },
-        {
-          "id": "rev_006",
+          "id": "",
           "type": "mnemonic",
-          "title": "Moyens mnémotechniques",
-          "mnemonics": [
-            {
-              "concept": "Concept",
-              "technique": "Acronyme",
-              "breakdown": ["Élément 1"]
-            }
-          ],
-          "tags": ["mnémotechnique"]
+          "title": "",
+          "mnemonics": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "diagram_textual",
+          "title": "",
+          "nodes": [],
+          "note": "",
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "focus",
+          "title": "",
+          "content": "",
+          "objective": "",
+          "examples": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "key_takeaways",
+          "title": "",
+          "takeaways": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "case_study",
+          "title": "",
+          "context": "",
+          "problem": "",
+          "intervention": "",
+          "outcome": "",
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "exercise",
+          "title": "",
+          "prompt": "",
+          "expectedAnswer": "",
+          "rationale": "",
+          "tags": [],
+          "relatedQuestions": []
         }
       ]
     }
