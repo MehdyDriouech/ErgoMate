@@ -173,36 +173,153 @@ open http://localhost:8000
 
 ```json
 {
-  "id": "mon-theme",
-  "title": "Mon Thème Personnalisé",
-  "locale": "fr-FR",
-  "meta": {
-    "author": "Votre Nom",
-    "source": "Description",
-    "updatedAt": "2025-10-30"
-  },
-  "settings": {
-    "shuffleQuestions": true,
-    "shuffleChoices": true
-  },
+  "title": "Titre du thème (basé sur le contenu)",
+  "description": "Description concise du thème (1-2 phrases)",
+  "tags": ["tag1", "tag2", "tag3"],
   "questions": [
     {
       "id": "q001",
       "type": "mcq",
-      "prompt": "Votre question ?",
+      "prompt": "Question claire et précise ?",
       "choices": [
-        { "id": "A", "label": "Réponse A" },
-        { "id": "B", "label": "Réponse B" },
-        { "id": "C", "label": "Réponse C" }
+        { "id": "a", "label": "Première option" },
+        { "id": "b", "label": "Deuxième option" },
+        { "id": "c", "label": "Troisième option" },
+        { "id": "d", "label": "Quatrième option" }
       ],
-      "answer": "B",
-      "rationale": "Explication de la réponse",
-      "difficulty": 2,
-      "tags": ["anatomie", "membre-superieur"]
+      "answer": "a",
+      "rationale": "Explication pédagogique détaillée de la bonne réponse",
+      "tags": ["concept", "catégorie"]
+    },
+    {
+      "id": "q002",
+      "type": "true_false",
+      "prompt": "Affirmation à évaluer",
+      "answer": true,
+      "rationale": "Explication de pourquoi c'est vrai ou faux",
+      "tags": ["fait", "théorie"]
+    },
+    {
+      "id": "q003",
+      "type": "fill_in",
+      "prompt": "Question avec un ___ à compléter",
+      "answer": "réponse courte",
+      "rationale": "Explication de la réponse attendue",
+      "tags": ["définition"]
+    }
+  ],
+  "revisionCards": [
+    {
+      "sectionTitle": "",
+      "cards": [
+        {
+          "id": "",
+          "type": "summary",
+          "layout": "bullet_points",
+          "title": "",
+          "content": "",
+          "items": [],
+          "keyPoints": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "timeline",
+          "title": "",
+          "timeline": [],
+          "summary": "",
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "definition",
+          "title": "",
+          "definition": "",
+          "examples": [],
+          "synonyms": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "comparison",
+          "title": "",
+          "columns": [],
+          "rows": [],
+          "keyDifference": "",
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "qna",
+          "title": "",
+          "qaPairs": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "mnemonic",
+          "title": "",
+          "mnemonics": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "diagram_textual",
+          "title": "",
+          "nodes": [],
+          "note": "",
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "focus",
+          "title": "",
+          "content": "",
+          "objective": "",
+          "examples": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "key_takeaways",
+          "title": "",
+          "takeaways": [],
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "case_study",
+          "title": "",
+          "context": "",
+          "problem": "",
+          "intervention": "",
+          "outcome": "",
+          "tags": [],
+          "relatedQuestions": []
+        },
+        {
+          "id": "",
+          "type": "exercise",
+          "title": "",
+          "prompt": "",
+          "expectedAnswer": "",
+          "rationale": "",
+          "tags": [],
+          "relatedQuestions": []
+        }
+      ]
     }
   ]
-}
-```
+}```
 
 ### Types de questions supportés
 - **`mcq`** : Questions à choix multiple (simple ou multiple)
@@ -211,7 +328,7 @@ open http://localhost:8000
 
 ### Import dans l'application
 1. Cliquez sur **"➕ Ajouter un thème"**
-2. Sélectionnez votre fichier JSON
+2. Sélectionnez votre fichier JSON ou votre PDF de cours (pas dispo en offline pour la partie PDF)
 3. Validation automatique
 4. Le thème apparaît dans votre liste
 
