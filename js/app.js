@@ -857,6 +857,41 @@ async function registerSW() {
   }
 }
 
+////////////////////
+// ONBOARDING      //
+/////////////////////
+function initOnboarding() {
+  const onboardingView = document.getElementById('view-onboarding');
+  
+  if (!onboardingView) {
+    console.warn('⚠️ view-onboarding non trouvé dans le DOM');
+    return;
+  }
+
+  // Vérifier si c'est la première visite
+  if (!localStorage.getItem('ergomate_onboarding_seen')) {
+    onboardingView.hidden = false;
+    
+    // Focus pour l'accessibilité
+    setTimeout(() => {
+      const modal = onboardingView.querySelector('.onboarding-modal');
+      if (modal) {
+        modal.focus();
+      }
+    }, 100);
+    
+    console.log('👋 Affichage de l\'onboarding (première visite)');
+  } else {
+    onboardingView.hidden = true;
+  }
+}
+
+// FONCTION UTILITAIRE (debug)
+window.resetOnboarding = function() {
+  localStorage.removeItem('ergomate_onboarding_seen');
+  console.log('✅ Onboarding réinitialisé. Rechargez la page.');
+};
+
 /////////////////////
 // DÉMARRAGE APP   //
 /////////////////////
@@ -876,7 +911,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       customElements.whenDefined('view-import-theme'),
       customElements.whenDefined('view-custom-themes'),
       customElements.whenDefined('view-pdf-import'),
-      customElements.whenDefined('view-about')
+      customElements.whenDefined('view-about'),
+      customElements.whenDefined('view-onboarding')
     ]);
     
     // Mettre à jour les références aux éléments DOM des composants
@@ -906,6 +942,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderThemes();
   renderHistory();
   showView('themes');
+  initOnboarding();
   registerSW();
 });
 
