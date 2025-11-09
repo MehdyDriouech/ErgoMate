@@ -572,14 +572,12 @@ function buildCompleteThemePrompt($text, $config, $fileName, $pdfAuthor) {
     $authorInfo = $pdfAuthor ? "\n📝 Auteur du document : $pdfAuthor" : "";
     
     return <<<EOT
-Tu es un expert pédagogique spécialisé dans la création de contenus éducatifs de haute qualité.
+u es un expert pédagogique spécialisé dans la création de contenus éducatifs de haute qualité.
 
-Ta mission : Analyser le contenu ci-dessous et générer un thème de révision complet au format JSON STRICT comprenant :
-1. Des questions de révision variées et pertinentes
-2. Des fiches de révision structurées et complètes avec support des diagrammes Mermaid
+Ta mission : Analyser le contenu ci-dessous et générer un thème de révision complet au format JSON STRICT comprenant des questions de révision variées et des fiches de révision structurées avec support des diagrammes Mermaid.js.
 
 ═══════════════════════════════════════════════════════════════════
-📚 DOCUMENT SOURCE :
+📚 DOCUMENT SOURCE
 ═══════════════════════════════════════════════════════════════════
 
 📄 Nom du fichier : $fileName$authorInfo
@@ -590,218 +588,358 @@ $truncatedText
 ---
 
 ═══════════════════════════════════════════════════════════════════
-⚙️ PARAMÈTRES DE GÉNÉRATION :
+⚙️ PARAMÈTRES
 ═══════════════════════════════════════════════════════════════════
 
-📊 QUANTITÉ EXACTE REQUISE :
-→ Tu DOIS générer EXACTEMENT $questionCount questions (ni plus, ni moins)
-→ Répartis-les équitablement entre les types demandés
-
-🎯 TYPES DE QUESTIONS À GÉNÉRER :
-$typesString
-
-📈 NIVEAU DE DIFFICULTÉ : $difficulty
-→ $difficultyText
+→ EXACTEMENT $questionCount questions (ni plus, ni moins)
+→ Types : $typesString
+→ Niveau : $difficulty ($difficultyText)
 
 ═══════════════════════════════════════════════════════════════════
-📋 FORMAT JSON EXACT À RESPECTER :
+⚠️⚠️⚠️ ATTENTION MISTRAL - RÈGLE CRITIQUE N°1 ⚠️⚠️⚠️
+═══════════════════════════════════════════════════════════════════
+
+🚨 DOUBLE BACKSLASH OBLIGATOIRE POUR LES RETOURS À LA LIGNE 🚨
+
+Dans les chaînes JSON, pour les retours à la ligne tu DOIS utiliser :
+→ DEUX backslashes suivis de n : \\n
+→ PAS un seul backslash : \n
+
+RÉPÈTE MENTALEMENT : "double backslash n" = \\n
+
+❌ FAUX (ne fonctionne PAS) :
+"mermaid": "flowchart TD\n    A --> B"
+           ↑ UN SEUL backslash = ERREUR
+
+✅ JUSTE (ce que tu DOIS écrire) :
+"mermaid": "flowchart TD\\n    A --> B"
+           ↑↑ DEUX backslashes = CORRECT
+
+VÉRIFIE SYSTÉMATIQUEMENT : Est-ce que j'ai mis DEUX backslashes (\\n) ?
+
+═══════════════════════════════════════════════════════════════════
+✅ RÈGLES ABSOLUES
+═══════════════════════════════════════════════════════════════════
+
+QUESTIONS :
+☑ Exactement $questionCount questions avec IDs séquentiels (q001, q002...)
+☑ Chaque question a un "rationale" détaillé et pédagogique
+☑ QCM = 4 choix (a, b, c, d)
+☑ Tags pertinents et descriptifs
+
+STRUCTURE REVISION :
+☑ Utiliser "revision" avec "sections" (PAS "revisionCards")
+☑ 2-6 sections avec order séquentiel (1, 2, 3...)
+☑ 3-8 cartes variées par section
+☑ IDs format : rev_[type]_[numéro]
+☑ 2-4 cartes diagram_mermaid par thème pour visualisation
+
+FORMAT TECHNIQUE :
+☑ JSON valide : commence par { finit par }
+☑ AUCUN texte avant/après le JSON
+☑ PAS de balises markdown (```json)
+☑ Encodage UTF-8, caractères spéciaux échappés
+☑ DOUBLE BACKSLASH pour \n dans les diagrammes : \\n
+
+═══════════════════════════════════════════════════════════════════
+📊 DIAGRAMMES MERMAID - FORMAT JSON CRITIQUE
+═══════════════════════════════════════════════════════════════════
+
+RÈGLE ABSOLUE :
+Dans une chaîne JSON, un retour à la ligne s'écrit avec DEUX backslashes :
+
+Exemple concret dans ton JSON :
+{
+  "mermaid": "flowchart TD\\n    A[Début]"
+}
+
+Ce que le système verra après parsing JSON :
+flowchart TD
+    A[Début]
+
+TYPES DISPONIBLES (tous supportés) :
+• mindmap → Hiérarchie de concepts, taxonomie
+• flowchart TD/LR/BT/RL → Processus, décisions, workflows  
+• graph LR/TD → Relations simples entre éléments
+• sequenceDiagram → Interactions temporelles
+• pie → Proportions, statistiques
+• stateDiagram-v2 → États, transitions, cycles
+• classDiagram → Structures, classifications
+
+RÈGLE TECHNIQUE RÉPÉTÉE :
+☑ Toujours \\n (deux backslashes + n)
+☑ JAMAIS de vraies nouvelles lignes dans la valeur "mermaid"
+☑ Code complet dans UNE chaîne de caractères
+☑ Indentation cohérente : 2 ou 4 espaces (pas de mélange)
+
+═══════════════════════════════════════════════════════════════════
+🧠 TYPE 1 : MINDMAP - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Chaque nœud sur UNE SEULE ligne (séparer avec \\n)
+☑ Un seul root : root((Texte))
+☑ Labels multi-mots : Noeud (Label avec espaces)
+☑ Indentation : 2 ou 4 espaces par niveau, COHÉRENT
+
+❌ FAUX - Deux niveaux pour un concept :
+{
+  "mermaid": "mindmap\\n  root((Psychologie))\\n    TCC\\n      Thérapies cognitivo-comportementales"
+}
+
+✅ JUSTE - Tout sur une ligne :
+{
+  "mermaid": "mindmap\\n  root((Psychologie))\\n    TCC (Thérapies Cognitivo-Comportementales)"
+}
+
+EXEMPLE COMPLET VALIDE (à copier ce pattern) :
+{
+  "id": "rev_mermaid_001",
+  "type": "diagram_mermaid",
+  "title": "Carte Mentale des Concepts",
+  "mermaid": "mindmap\\n  root((Concept Central))\\n    Branche A\\n      Sous-concept 1\\n      Sous-concept 2\\n    Branche B\\n      Sous-concept 3\\n    Branche C (Label multi-mots)",
+  "note": "Description du diagramme",
+  "tags": ["mindmap", "concepts"],
+  "relatedQuestions": ["q001"]
+}
+
+RAPPEL : \\n = DEUX backslashes + n
+
+═══════════════════════════════════════════════════════════════════
+📈 TYPE 2 : FLOWCHART - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Déclarer type : flowchart TD (ou LR, BT, RL)
+  • TD = haut vers bas (Top-Down)
+  • LR = gauche vers droite (Left-Right)
+  • BT = bas vers haut (Bottom-Top)
+  • RL = droite vers gauche (Right-Left)
+
+☑ IDs courts : A, B, C, D, E...
+
+☑ Formes de nœuds :
+  • [Texte] = Rectangle
+  • (Texte) = Rectangle arrondi
+  • {Texte} = Losange (pour décisions)
+  • ((Texte)) = Cercle
+
+☑ Types de flèches :
+  • --> = Flèche normale
+  • ==> = Flèche épaisse
+  • -.-> = Flèche pointillée
+  • -->|Label| = Flèche avec texte
+
+EXEMPLE COMPLET VALIDE (à copier ce pattern) :
+{
+  "id": "rev_mermaid_002",
+  "type": "diagram_mermaid",
+  "title": "Processus de Décision",
+  "mermaid": "flowchart TD\\n    A[Étape initiale] --> B{Question décisive?}\\n    B -->|Oui| C[Action positive]\\n    B -->|Non| D[Action alternative]\\n    C --> E[Résultat final]\\n    D --> E",
+  "note": "Description du processus",
+  "tags": ["flowchart", "processus"],
+  "relatedQuestions": ["q002"]
+}
+
+RAPPEL : \\n = DEUX backslashes + n (pas un seul)
+
+═══════════════════════════════════════════════════════════════════
+🔗 TYPE 3 : GRAPH - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Syntaxe : graph LR (ou TD, BT, RL)
+☑ Pour montrer relations simples entre éléments
+☑ Même syntaxe nœuds/flèches que flowchart
+
+EXEMPLE COMPLET VALIDE :
+{
+  "id": "rev_mermaid_003",
+  "type": "diagram_mermaid",
+  "title": "Relations entre Concepts",
+  "mermaid": "graph LR\\n    A[Concept A] --> B[Concept B]\\n    A --> C[Concept C]\\n    B --> D[Résultat]\\n    C --> D",
+  "note": "Relations et dépendances",
+  "tags": ["graph", "relations"],
+  "relatedQuestions": ["q003"]
+}
+
+RAPPEL : Vérifie que tu as bien écrit \\n (deux backslashes)
+
+═══════════════════════════════════════════════════════════════════
+⏱️ TYPE 4 : SEQUENCE DIAGRAM - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Syntaxe : sequenceDiagram
+☑ Déclarer participants : participant X as Nom Complet
+☑ Messages : A->>B: Texte du message
+☑ Retours : B-->>A: Réponse
+☑ Notes : Note right of A: Texte
+
+EXEMPLE COMPLET VALIDE :
+{
+  "id": "rev_mermaid_004",
+  "type": "diagram_mermaid",
+  "title": "Séquence d'Interaction",
+  "mermaid": "sequenceDiagram\\n    participant U as Utilisateur\\n    participant S as Système\\n    participant D as Base de données\\n    U->>S: Demande\\n    S->>D: Requête\\n    D-->>S: Données\\n    S-->>U: Réponse\\n    Note right of U: Processus terminé",
+  "note": "Déroulement des interactions",
+  "tags": ["sequence", "interaction"],
+  "relatedQuestions": ["q004"]
+}
+
+RAPPEL IMPORTANT : \\n signifie DEUX backslashes suivis de n
+
+═══════════════════════════════════════════════════════════════════
+🥧 TYPE 5 : PIE - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Syntaxe : pie title Titre du diagramme
+☑ Format : "Label" : valeur_numérique
+☑ ATTENTION : Échapper les guillemets avec backslash : \\"Label\\"
+
+EXEMPLE COMPLET VALIDE :
+{
+  "id": "rev_mermaid_005",
+  "type": "diagram_mermaid",
+  "title": "Répartition Statistique",
+  "mermaid": "pie title Distribution des catégories\\n    \\"Catégorie A\\" : 40\\n    \\"Catégorie B\\" : 30\\n    \\"Catégorie C\\" : 20\\n    \\"Autres\\" : 10",
+  "note": "Proportions en pourcentage",
+  "tags": ["pie", "statistiques"],
+  "relatedQuestions": ["q005"]
+}
+
+DEUX RAPPELS :
+1. \\n = deux backslashes + n (pour les retours à la ligne)
+2. \\" = backslash + guillemet (pour les labels dans pie)
+
+═══════════════════════════════════════════════════════════════════
+🔄 TYPE 6 : STATE DIAGRAM - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Syntaxe : stateDiagram-v2 (noter le -v2)
+☑ États début/fin : [*]
+☑ Transitions : État1 --> État2 : Label de transition
+☑ Pour montrer cycles et évolutions
+
+EXEMPLE COMPLET VALIDE :
+{
+  "id": "rev_mermaid_006",
+  "type": "diagram_mermaid",
+  "title": "Cycle d'États",
+  "mermaid": "stateDiagram-v2\\n    [*] --> ÉtatInitial\\n    ÉtatInitial --> ÉtatIntermédiaire : Transition 1\\n    ÉtatIntermédiaire --> ÉtatFinal : Transition 2\\n    ÉtatIntermédiaire --> ÉtatInitial : Retour\\n    ÉtatFinal --> [*]",
+  "note": "Évolution et transitions d'états",
+  "tags": ["state", "transitions"],
+  "relatedQuestions": ["q006"]
+}
+
+RAPPEL : N'oublie pas les DEUX backslashes pour \\n
+
+═══════════════════════════════════════════════════════════════════
+🏗️ TYPE 7 : CLASS DIAGRAM - Règles détaillées
+═══════════════════════════════════════════════════════════════════
+
+☑ Syntaxe : classDiagram
+☑ Définir classes : class NomClasse{ +attributs +méthodes() }
+☑ Relations :
+  • --> = association
+  • --|> = héritage (is-a)
+  • --* = composition (has-a)
+
+EXEMPLE COMPLET VALIDE :
+{
+  "id": "rev_mermaid_007",
+  "type": "diagram_mermaid",
+  "title": "Structure de Classes",
+  "mermaid": "classDiagram\\n    class ClasseParent{\\n        +attribut1\\n        +attribut2\\n        +méthode()\\n    }\\n    class ClasseEnfant1{\\n        +attributSpécifique\\n        +action()\\n    }\\n    class ClasseEnfant2{\\n        +autrAttribut\\n        +fonction()\\n    }\\n    ClasseParent <|-- ClasseEnfant1\\n    ClasseParent <|-- ClasseEnfant2",
+  "note": "Hiérarchie et relations entre classes",
+  "tags": ["class", "structure"],
+  "relatedQuestions": ["q007"]
+}
+
+RAPPEL FINAL : \\n = DEUX backslashes + n (c'est crucial !)
+
+═══════════════════════════════════════════════════════════════════
+❌ PIÈGES SPÉCIFIQUES MISTRAL - À ÉVITER ABSOLUMENT
+═══════════════════════════════════════════════════════════════════
+
+PIÈGE #1 : Un seul backslash
+❌ "mermaid": "flowchart TD\n    A --> B"
+✅ "mermaid": "flowchart TD\\n    A --> B"
+→ TOUJOURS vérifier : ai-je bien DEUX backslashes ?
+
+PIÈGE #2 : Mindmap multi-lignes
+❌ "mindmap\\n  root((R))\\n    Concept\\n      Sa description"
+✅ "mindmap\\n  root((R))\\n    Concept (Sa description)"
+→ UN concept = UNE ligne
+
+PIÈGE #3 : Indentation incohérente
+❌ Mélanger 2 espaces et 4 espaces
+✅ Choisir 2 ou 4 espaces et rester cohérent
+→ Exemple : toujours 2 espaces par niveau
+
+PIÈGE #4 : Guillemets non échappés dans pie
+❌ "pie title T\\n    "Label" : 50"
+✅ "pie title T\\n    \\"Label\\" : 50"
+→ Dans pie, échapper les guillemets : \\"
+
+PIÈGE #5 : Oublier -v2 dans stateDiagram
+❌ "stateDiagram\\n    [*] --> État"
+✅ "stateDiagram-v2\\n    [*] --> État"
+→ La version moderne est stateDiagram-v2
+
+═══════════════════════════════════════════════════════════════════
+📋 STRUCTURE JSON ATTENDUE
 ═══════════════════════════════════════════════════════════════════
 
 {
-  "title": "Titre du thème (basé sur le contenu)",
-  "description": "Description concise du thème (1-2 phrases)",
+  "title": "Titre du thème",
+  "description": "Description concise (1-2 phrases)",
   "tags": ["tag1", "tag2", "tag3"],
   "questions": [
     {
       "id": "q001",
       "type": "mcq",
-      "prompt": "Question claire et précise ?",
+      "prompt": "Question ?",
       "choices": [
-        { "id": "a", "label": "Première option" },
-        { "id": "b", "label": "Deuxième option" },
-        { "id": "c", "label": "Troisième option" },
-        { "id": "d", "label": "Quatrième option" }
+        {"id": "a", "label": "Option A"},
+        {"id": "b", "label": "Option B"},
+        {"id": "c", "label": "Option C"},
+        {"id": "d", "label": "Option D"}
       ],
       "answer": "a",
-      "rationale": "Explication pédagogique détaillée de la bonne réponse",
-      "tags": ["concept", "catégorie"]
+      "rationale": "Explication détaillée",
+      "tags": ["concept"]
     },
     {
       "id": "q002",
       "type": "true_false",
-      "prompt": "Affirmation à évaluer",
+      "prompt": "Affirmation",
       "answer": true,
-      "rationale": "Explication de pourquoi c'est vrai ou faux",
-      "tags": ["fait", "théorie"]
-    },
-    {
-      "id": "q003",
-      "type": "fill_in",
-      "prompt": "Question avec un ___ à compléter",
-      "answer": "réponse courte",
-      "rationale": "Explication de la réponse attendue",
-      "tags": ["définition"]
+      "rationale": "Explication",
+      "tags": ["fait"]
     }
   ],
   "revision": {
     "sections": [
       {
         "id": "section_001",
-        "title": "Titre de la section",
+        "title": "Titre section",
         "order": 1,
         "cards": [
           {
             "id": "rev_summary_001",
             "type": "summary",
-            "title": "Titre du résumé",
-            "content": "Contenu principal du résumé",
-            "items": [
-              {
-                "title": "Élément 1",
-                "content": "Description de l'élément 1"
-              }
-            ],
-            "keyPoints": ["Point clé 1", "Point clé 2"],
+            "title": "Titre résumé",
+            "content": "Contenu",
+            "items": [{"title": "Item", "content": "Description"}],
+            "keyPoints": ["Point 1", "Point 2"],
             "tags": ["synthèse"],
-            "relatedQuestions": ["q001", "q002"]
-          },
-          {
-            "id": "rev_definition_001",
-            "type": "definition",
-            "title": "Terme à définir",
-            "definition": "Définition claire et précise",
-            "examples": ["Exemple 1", "Exemple 2"],
-            "synonyms": ["synonyme1"],
-            "keyPoints": ["Point important"],
-            "tags": ["vocabulaire"],
             "relatedQuestions": ["q001"]
-          },
-          {
-            "id": "rev_timeline_001",
-            "type": "timeline",
-            "title": "Titre de la chronologie",
-            "timeline": [
-              {
-                "period": "1900-1920",
-                "date": "1917",
-                "actors": "Acteur principal",
-                "event": "Description de l'événement",
-                "description": "Détails supplémentaires"
-              }
-            ],
-            "summary": "Conclusion de la chronologie",
-            "tags": ["histoire"],
-            "relatedQuestions": ["q003"]
-          },
-          {
-            "id": "rev_comparison_001",
-            "type": "comparison",
-            "title": "Comparaison entre X et Y",
-            "columns": ["Critère", "Option A", "Option B"],
-            "rows": [
-              {
-                "label": "Formation",
-                "values": ["3 ans", "5 ans"]
-              }
-            ],
-            "keyDifference": "La différence principale est...",
-            "tags": ["comparaison"],
-            "relatedQuestions": ["q002"]
-          },
-          {
-            "id": "rev_qna_001",
-            "type": "qna",
-            "title": "Questions fréquentes",
-            "qaPairs": [
-              {
-                "question": "Question 1 ?",
-                "answer": "Réponse détaillée"
-              }
-            ],
-            "tags": ["faq"],
-            "relatedQuestions": ["q001"]
-          },
-          {
-            "id": "rev_mnemonic_001",
-            "type": "mnemonic",
-            "title": "Moyens mnémotechniques",
-            "mnemonics": [
-              {
-                "concept": "Concept à retenir",
-                "technique": "ACRONYME",
-                "breakdown": ["A = Premier élément", "C = Deuxième élément"]
-              }
-            ],
-            "tags": ["mémoire"],
-            "relatedQuestions": ["q002"]
           },
           {
             "id": "rev_mermaid_001",
             "type": "diagram_mermaid",
-            "title": "Titre du diagramme",
-            "mermaid": "flowchart TD\\n    A[Début] --> B{Décision}\\n    B -->|Oui| C[Action 1]\\n    B -->|Non| D[Action 2]\\n    C --> E[Fin]\\n    D --> E",
-            "note": "Note explicative sur le diagramme",
-            "tags": ["processus", "visuel"],
+            "title": "Titre diagramme",
+            "mermaid": "mindmap\\n  root((Concept))\\n    Branche 1\\n      Sous A\\n    Branche 2",
+            "note": "Explication",
+            "tags": ["visuel"],
             "relatedQuestions": ["q001"]
-          },
-          {
-            "id": "rev_diagram_textual_001",
-            "type": "diagram_textual",
-            "title": "Schéma conceptuel",
-            "nodes": [
-              {
-                "label": "Élément 1",
-                "description": "Description"
-              }
-            ],
-            "note": "Relations entre les éléments",
-            "tags": ["schéma"],
-            "relatedQuestions": ["q002"]
-          },
-          {
-            "id": "rev_focus_001",
-            "type": "focus",
-            "title": "Focus sur un concept",
-            "content": "Explication détaillée",
-            "objective": "Objectif d'apprentissage",
-            "examples": ["Exemple pratique"],
-            "keyPoints": ["Point essentiel"],
-            "tags": ["approfondissement"],
-            "relatedQuestions": ["q001"]
-          },
-          {
-            "id": "rev_key_takeaways_001",
-            "type": "key_takeaways",
-            "title": "Points essentiels",
-            "takeaways": [
-              {
-                "point": "Premier point clé",
-                "details": "Explication"
-              }
-            ],
-            "tags": ["synthèse"],
-            "relatedQuestions": ["q001", "q002"]
-          },
-          {
-            "id": "rev_case_study_001",
-            "type": "case_study",
-            "title": "Cas clinique",
-            "context": "Présentation du cas",
-            "problem": "Problématique identifiée",
-            "intervention": "Intervention mise en place",
-            "outcome": "Résultats obtenus",
-            "tags": ["pratique"],
-            "relatedQuestions": ["q001"]
-          },
-          {
-            "id": "rev_exercise_001",
-            "type": "exercise",
-            "title": "Exercice d'application",
-            "prompt": "Consigne de l'exercice",
-            "expectedAnswer": "Réponse attendue",
-            "rationale": "Explication pédagogique",
-            "tags": ["pratique"],
-            "relatedQuestions": ["q003"]
           }
         ]
       }
@@ -809,78 +947,44 @@ $typesString
   }
 }
 
-═══════════════════════════════════════════════════════════════════
-✅ RÈGLES ABSOLUES :
-═══════════════════════════════════════════════════════════════════
-
-1. QUESTIONS :
-   ☑ Exactement $questionCount questions
-   ☑ Chaque question a un "rationale" détaillé et pédagogique
-   ☑ Les QCM ont 4 choix (A, B, C, D)
-   ☑ Les IDs sont séquentiels (q001, q002, q003...)
-   ☑ Les tags sont pertinents et descriptifs
-   ☑ Les questions couvrent l'ensemble du document
-
-2. STRUCTURE REVISION :
-   ☑ Utiliser "revision" avec "sections" (PAS "revisionCards")
-   ☑ Créer 2-6 sections thématiques selon le contenu
-   ☑ Chaque section a un ID, title, et order séquentiel (1, 2, 3...)
-   ☑ Chaque section contient 3-8 cartes variées
-
-3. FICHES DE RÉVISION (CARDS) :
-   ☑ Utiliser TOUS les types de cartes disponibles
-   ☑ IDs des cartes format : rev_[type]_[numéro] (ex: rev_summary_001)
-   ☑ Les cartes sont riches et complètes
-   ☑ Les relatedQuestions font référence aux IDs de questions existants
-   ☑ Privilégier 2-3 cartes diagram_mermaid par thème pour la visualisation
-
-4. DIAGRAMMES MERMAID :
-   ☑ Types supportés : flowchart, mindmap, timeline, sequenceDiagram, classDiagram
-   ☑ Syntaxe Mermaid STRICTEMENT VALIDE (vérifier la syntaxe)
-   ☑ Utiliser \\n pour les retours à la ligne dans le champ "mermaid"
-   ☑ Adapter le type de diagramme au contenu (processus, concepts, chronologie)
-   ☑ Exemples valides :
-     - Processus : "flowchart TD\\n    A[Étape 1] --> B[Étape 2]"
-     - Concepts : "mindmap\\n  root((Concept))\\n    Sous-concept 1\\n    Sous-concept 2"
-     - Timeline : "timeline\\n    title Évolution\\n    1900 : Événement 1\\n    1950 : Événement 2"
-     - Séquence : "sequenceDiagram\\n    participant A\\n    participant B\\n    A->>B: Message"
-
-5. QUALITÉ DU CONTENU :
-   ☑ Français correct et professionnel
-   ☑ Contenu précis et factuel
-   ☑ Explications claires et pédagogiques
-   ☑ Vocabulaire adapté au niveau
-
-6. FORMAT TECHNIQUE :
-   ☑ JSON valide et strictement conforme
-   ☑ Commence par { et finit par }
-   ☑ AUCUN texte avant ou après le JSON
-   ☑ PAS de balises markdown (```json)
-   ☑ Tous les champs obligatoires présents
-   ☑ Encodage UTF-8 correct
-   ☑ Échapper correctement les caractères spéciaux dans les strings JSON
+TYPES DE CARTES DISPONIBLES :
+summary, definition, timeline, comparison, qna, mnemonic, diagram_mermaid,
+diagram_textual, focus, key_takeaways, case_study, exercise
 
 ═══════════════════════════════════════════════════════════════════
-🎨 EXEMPLES DE DIAGRAMMES MERMAID VALIDES :
+🎯 CHECKLIST FINALE AVANT DE RÉPONDRE
 ═══════════════════════════════════════════════════════════════════
 
-Processus de soin :
-"flowchart TD\\n    A[Évaluation initiale] --> B{Capacités préservées?}\\n    B -->|Oui| C[Maintien autonomie]\\n    B -->|Non| D[Rééducation]\\n    C --> E[Suivi]\\n    D --> E"
+Vérifie IMPÉRATIVEMENT :
 
-Carte mentale :
-"mindmap\\n  root((Ergothérapie))\\n    Évaluation\\n      Tests standardisés\\n      Observation\\n    Intervention\\n      Rééducation\\n      Adaptation\\n    Suivi"
+☑ J'ai généré EXACTEMENT $questionCount questions (pas plus, pas moins)
+☑ Tous les IDs sont séquentiels : q001, q002, q003...
+☑ Dans TOUS mes diagrammes Mermaid, j'ai utilisé \\n (DEUX backslashes)
+☑ Pour mindmap : chaque concept est sur UNE seule ligne
+☑ L'indentation est cohérente (2 ou 4 espaces, pas de mélange)
+☑ Dans les pie charts, les guillemets sont échappés : \\"Label\\"
+☑ J'ai utilisé stateDiagram-v2 (pas stateDiagram)
+☑ Mon JSON est valide et commence par {
+☑ Aucun texte avant { ou après }
+☑ Pas de balises markdown ```json
+☑ Les relatedQuestions référencent des IDs existants
+☑ J'ai inclus 2-4 diagrammes Mermaid dans le thème
 
-Chronologie :
-"timeline\\n    title Évolution de la profession\\n    1917 : Naissance de l'ergothérapie\\n    1954 : Première école en France\\n    2010 : Grade master"
+VÉRIFICATION SPÉCIALE MISTRAL :
+→ Relis tous tes champs "mermaid"
+→ Confirme que CHAQUE retour à la ligne est écrit \\n
+→ Compte les backslashes : dois-je en voir 2 avant chaque n ? OUI !
 
 ═══════════════════════════════════════════════════════════════════
-🚀 GÉNÉRATION :
+🚀 GÉNÉRATION
 ═══════════════════════════════════════════════════════════════════
 
 Réponds UNIQUEMENT avec le JSON complet et valide.
 Commence IMMÉDIATEMENT par le caractère {
-Aucun texte explicatif, aucune balise markdown.
+AUCUN texte explicatif.
+AUCUNE balise markdown.
 
+DERNIÈRE VÉRIFICATION : Ai-je bien utilisé \\n partout ? (DEUX backslashes)
 EOT;
 }
 function buildPrompt($text, $config) {
