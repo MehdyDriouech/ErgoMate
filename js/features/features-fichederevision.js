@@ -689,14 +689,28 @@ async function startRevision(themeId) {
 
   // Charger les données du thème
   let themeData;
+  
   try {
-    const url = theme.path || `./data/${theme.file}`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Erreur de chargement');
-    themeData = await response.json();
+    // ✅ CORRECTION : Gérer les thèmes personnalisés différemment
+    if (theme.isCustom) {
+      // Pour les thèmes personnalisés, les données sont dans l'objet lui-même
+      console.log('📦 Chargement thème personnalisé depuis localStorage');
+      themeData = getCustomTheme(themeId);
+      
+      if (!themeData) {
+        throw new Error('Thème personnalisé introuvable dans localStorage');
+      }
+    } else {
+      // Pour les thèmes officiels, charger depuis un fichier externe
+      console.log('📂 Chargement thème officiel depuis fichier');
+      const url = theme.path || `./data/${theme.file}`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Erreur de chargement du fichier');
+      themeData = await response.json();
+    }
   } catch (error) {
     alert('❌ Erreur lors du chargement des fiches de révision.');
-    console.error(error);
+    console.error('Erreur de chargement:', error);
     return;
   }
 
