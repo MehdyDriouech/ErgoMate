@@ -92,7 +92,18 @@
       <span class="status-text">En ligne</span>
     </div>
   </footer>
-
+    
+<script type="module">
+  // Mermaid est disponible comme variable globale
+  mermaid.initialize({ 
+    startOnLoad: false,
+    theme: 'neutral' 
+  });
+  
+  // Utilise-le normalement
+  await mermaid.run();
+</script>    
+        
   <!-- Web Components - chargés en eager pour offline-first -->
   <script src="js/features-view/view-themes.js"></script>
   <script src="js/features-view/view-dashboard.js"></script>
@@ -108,6 +119,7 @@
 
   <!-- App principal et features -->
   <script src="js/app.js"></script>
+  <script src="/assets/libjs/mermaid.min.js"></script>  <!-- lib diagram -->
   <script src="js/features/features-theme-utils.js"></script>
   <script src="js/features/features-quiz.js"></script>
   <script src="js/features/features-flashcards.js"></script>
@@ -202,22 +214,7 @@
     })();
   </script>
 
-<script type="module">
-  import mermaid from 'assets/libjs/mermaid.esm.min.mjs';
-  
-  mermaid.initialize({ 
-    startOnLoad: false,
-    theme: 'default',
-    themeVariables: {
-      fontSize: '14px',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    },
-    securityLevel: 'strict'
-  });
-  
-  window.mermaid = mermaid;
-  console.log('✅ Mermaid.js chargé et prêt');
-</script>
+
   
 </body>
 </html>
