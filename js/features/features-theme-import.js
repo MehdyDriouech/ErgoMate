@@ -72,6 +72,46 @@ function initThemeImport() {
   // Bouton de fermeture
   const closeBtn = document.getElementById('btn-import-close');
   closeBtn?.addEventListener('click', closeThemeImport);
+  
+  // Boutons de copie
+  initCopyButtons();
+}
+
+/**
+ * Initialise les boutons de copie pour le JSON et le prompt
+ */
+function initCopyButtons() {
+  const copyButtons = document.querySelectorAll('.btn-copy-json');
+  
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      
+      if (!targetElement) return;
+      
+      const textToCopy = targetElement.tagName === 'TEXTAREA' 
+        ? targetElement.value 
+        : targetElement.textContent;
+      
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        
+        // Feedback visuel
+        const originalText = btn.textContent;
+        btn.textContent = '✅ Copié !';
+        btn.style.background = '#10b981';
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+        }, 2000);
+      } catch (err) {
+        console.error('Erreur de copie:', err);
+        alert('❌ Erreur lors de la copie. Veuillez copier manuellement.');
+      }
+    });
+  });
 }
 
 /**
@@ -294,14 +334,17 @@ function confirmThemeImport() {
       }
     }
     
+    // ✅ Normaliser le thème avant sauvegarde
+    const normalizedTheme = normalizeCustomTheme(currentImportTheme);
+    
     // Sauvegarder le thème
-    saveCustomTheme(currentImportTheme);
+    saveCustomTheme(normalizedTheme);
     
     // Message de succès
-    const qCount = currentImportTheme.questions.length;
+    const qCount = normalizedTheme.questions.length;
     alert(
       `✅ Thème importé avec succès !\n\n` +
-      `📚 ${currentImportTheme.title}\n` +
+      `📚 ${normalizedTheme.title}\n` +
       `❓ ${qCount} question${qCount > 1 ? 's' : ''}\n\n` +
       `Le thème est maintenant disponible dans la liste.`
     );
