@@ -83,6 +83,7 @@ ergo-mate/
 │   ├── app.js                      # Point d'entrée principal
 │   │
 │   ├── features-views/             # Vues / écrans de l'application
+│   │   ├── view-onboarding.js      # Pop up onboarding
 │   │   ├── view-about.js           # Page "À propos"
 │   │   ├── view-custom-themes.js   # Gestion des thèmes personnalisés
 │   │   ├── view-dashboard.js       # Dashboard & statistiques
