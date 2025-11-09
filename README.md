@@ -67,7 +67,7 @@ ergo-mate/
 │
 ├── assets/
 │   ├── libjs/                     # LibrariesJS
-│   │   ├── mermaid.esm.min.mjs    # MermaidJS pour les diagrames
+│   │   ├── mermaid.min.js         # MermaidJS pour les diagrames
 │   ├── icons/                     # icones PWA
 │   │   ├── icon-192.png
 │   │   ├── icon-512.png   
