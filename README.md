@@ -685,4 +685,4 @@ Merci à toutes les personnes qui utilisent et testent cette application. Votre 
 ---
 
 **Version** : 2.0.0  
-**Dernière mise à jour** : Octobre 2025
+**Dernière mise à jour** : Novembre 2025
