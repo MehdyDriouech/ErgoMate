@@ -610,10 +610,7 @@ Copier
 
 ### 💡 Suggestions bienvenues
 - [ ] Mode collaboratif (multi-joueurs)
-- [ ] Audio pour questions de reconnaissance
 - [ ] Dashboard enseignant (statistiques de classe)
-- [ ] Génération de PDF de révision
-- [ ] Intégration d'images/schémas interactifs
 
 ---
 
