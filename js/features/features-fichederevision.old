@@ -460,20 +460,15 @@ function renderMnemonicCard(card) {
 function renderMermaidCard(card) {
   const mermaidId = `mermaid-${card.id}`;
   
-  // ✅ CORRECTION : Nettoyer le code Mermaid avant injection
-  const cleanMermaid = card.mermaid
-    .split('\n')
-    .map(line => line.trimEnd())  // Enlever les espaces de fin
-    .join('\n')
-    .trim();  // Enlever les espaces au début/fin
-  
   return `
     <div class="revision-card-header">
       <span class="badge info">${escapeHtml(card.section?.title || 'Diagramme')}</span>
       <h3>${escapeHtml(card.title)}</h3>
     </div>
     <div class="revision-card-body">
-      <div class="mermaid" id="${mermaidId}">${cleanMermaid}</div>
+      <div class="mermaid" id="${mermaidId}">
+${card.mermaid}
+      </div>
       ${card.note ? `<p class="muted" style="margin-top:12px;">${escapeHtml(card.note)}</p>` : ''}
     </div>
   `;

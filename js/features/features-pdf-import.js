@@ -9,7 +9,8 @@ const pdfImportState = {
   currentFile: null,
   extractedText: '',
   metadata: null,
-  step: 1 // 1=upload, 2=config, 3=preview
+  step: 1, // 1=upload, 2=config, 3=preview
+  apiKey: null  // Clé API utilisateur (BYOK - Bring Your Own Key)
 };
 
 ///////////////////////////
@@ -392,6 +393,56 @@ function initConfigListeners() {
   // Bouton de génération
   const generateBtn = document.getElementById('btn-generate-questions');
   generateBtn?.addEventListener('click', handleGenerateQuestions);
+  
+  // Initialiser la gestion de la clé API (BYOK)
+  initApiKeyManagement();
+}
+
+/**
+ * Initialise la gestion de la clé API (BYOK)
+ */
+function initApiKeyManagement() {
+  const apiKeyInput = document.getElementById('pdf-api-key');
+  const toggleBtn = document.getElementById('btn-toggle-api-key');
+  const saveCheckbox = document.getElementById('pdf-save-api-key');
+  
+  if (!apiKeyInput) return;
+  
+  // Charger la clé sauvegardée si elle existe
+  const savedKey = localStorage.getItem('mistral_api_key');
+  if (savedKey) {
+    apiKeyInput.value = savedKey;
+    if (saveCheckbox) saveCheckbox.checked = true;
+  }
+  
+  // Toggle affichage/masquage de la clé
+  toggleBtn?.addEventListener('click', () => {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleBtn.textContent = isPassword ? '🙈' : '👁️';
+  });
+  
+  // Sauvegarder/effacer la clé
+  saveCheckbox?.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      const key = apiKeyInput.value.trim();
+      if (key) {
+        localStorage.setItem('mistral_api_key', key);
+      }
+    } else {
+      localStorage.removeItem('mistral_api_key');
+    }
+  });
+  
+  // Sauvegarder quand l'utilisateur change la clé
+  apiKeyInput?.addEventListener('input', (e) => {
+    if (saveCheckbox && saveCheckbox.checked) {
+      const key = e.target.value.trim();
+      if (key) {
+        localStorage.setItem('mistral_api_key', key);
+      }
+    }
+  });
 }
 
 /**
@@ -410,7 +461,7 @@ async function handleGenerateQuestions() {
   
   // Passer à l'étape de génération
   showPdfStep(3);
-  showPdfLoader('🤖 Génération des questions par Qwen AI...<br><small>Cela peut prendre plusieurs minutes</small>');
+  showPdfLoader('🤖 Génération des questions par Mistral AI...<br><small>Cela peut prendre quelques minutes</small>');
   
   // Appeler la fonction de génération (dans features-pdf-generator.js)
   try {
@@ -434,10 +485,14 @@ function getPdfGenerationConfig() {
   
   const difficulty = document.querySelector('input[name="pdf-difficulty"]:checked')?.value || 'moyen';
   
+  // Récupérer la clé API si fournie (BYOK)
+  const apiKey = document.getElementById('pdf-api-key')?.value.trim() || null;
+  
   return {
     questionCount,
     types,
-    difficulty
+    difficulty,
+    apiKey  // Clé API optionnelle pour BYOK
   };
 }
 

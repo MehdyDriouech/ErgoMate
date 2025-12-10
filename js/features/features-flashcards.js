@@ -69,7 +69,7 @@ function renderFlashcard() {
 }
 
 async function startFlashcards(themeId) {
-  const theme = state.themes.find(t => t.id === themeId);
+  const theme = getAllThemes().find(t => t.id === themeId);
   if (!theme) return;
 
   state.currentTheme = theme;

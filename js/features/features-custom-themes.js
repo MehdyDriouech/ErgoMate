@@ -25,8 +25,29 @@ function loadCustomThemes() {
  */
 function saveCustomTheme(theme) {
   const themes = loadCustomThemes();
-  themes[theme.id] = theme;
+  
+  // ✅ CORRECTION : Utiliser normalizeCustomTheme() pour garantir le flag isCustom et l'ID
+  const customTheme = normalizeCustomTheme({
+    ...theme,
+    createdAt: theme.createdAt || Date.now(),
+    updatedAt: Date.now()
+  });
+  
+  // ✅ CORRECTION : Utiliser customTheme.id au lieu de theme.id (au cas où l'ID aurait été généré)
+  if (!customTheme.id) {
+    console.error('❌ Impossible de sauvegarder le thème : ID manquant');
+    throw new Error('Le thème doit avoir un ID pour être sauvegardé');
+  }
+  
+  themes[customTheme.id] = customTheme;
   localStorage.setItem(STORAGE_KEYS.CUSTOM_THEMES, JSON.stringify(themes));
+  
+  console.log('✅ Thème sauvegardé:', {
+    id: customTheme.id,
+    title: customTheme.title,
+    isCustom: customTheme.isCustom,
+    questionsCount: customTheme.questions?.length || 0
+  });
 }
 
 /**
@@ -58,10 +79,21 @@ function deleteCustomTheme(themeId) {
  * Récupère tous les thèmes (officiels + personnalisés)
  * @returns {Array} Tableau de tous les thèmes
  */
-function getAllThemes() {
+function OLDgetAllThemes() {
   const official = state.themes || [];
-  const custom = Object.values(loadCustomThemes());
+  const customThemesMap = loadCustomThemes();
+  
+  // ✅ Normaliser tous les thèmes personnalisés pour garantir le flag isCustom
+  const custom = Object.values(customThemesMap).map(theme => normalizeCustomTheme(theme));
+  
   return [...official, ...custom];
+}
+
+function getAllThemes() {
+
+  // state.themes est déjà synchronisé avec les thèmes personnalisés
+  // Pas besoin de les recharger depuis localStorage
+  return state.themes || [];
 }
 
 /**
@@ -202,6 +234,37 @@ function renderCustomThemesList() {
 }
 
 /**
+ * Initialise les event listeners pour la vue Custom Themes
+ */
+function initCustomThemes() {
+  const view = document.getElementById('view-custom-themes');
+  if (!view) return;
+  
+  // Bouton Créer depuis PDF
+  const btnPdf = view.querySelector('#btn-pdf-create');
+  btnPdf?.addEventListener('click', () => {
+    console.log('🔵 Clic PDF détecté');
+    showPdfImportView();
+  });
+  
+  // Bouton Importer JSON
+  const btnJson = view.querySelector('#btn-json-import');
+  btnJson?.addEventListener('click', () => {
+    console.log('🔵 Clic JSON détecté');
+    showThemeImportView();
+  });
+  
+  // Bouton Fermer
+  const btnClose = view.querySelector('#btn-custom-close');
+  btnClose?.addEventListener('click', () => {
+    console.log('🔵 Clic Fermer détecté');
+    showThemes();
+  });
+  
+  console.log('✅ Event listeners Custom Themes initialisés');
+}
+
+/**
  * Supprime un thème avec confirmation
  */
 function deleteCustomThemeWithConfirmation(themeId, themeTitle) {
@@ -222,6 +285,9 @@ function deleteCustomThemeWithConfirmation(themeId, themeTitle) {
       saveErrors(errors);
     }
     
+    // ✅ CORRECTION : Actualiser state.themes
+    refreshThemesState();
+
     // Rafraîchir l'affichage
     renderCustomThemesList();
     renderThemes();

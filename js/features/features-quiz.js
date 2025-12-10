@@ -75,7 +75,7 @@ function stopExamTimer() {
 // DÉMARRAGE QUIZ/SESSION  //
 /////////////////////////////
 async function startTheme(themeId, mode) {
-  const theme = state.themes.find(t => t.id === themeId);
+  const theme = getAllThemes().find(t => t.id === themeId);
   if (!theme) return;
 
   state.currentTheme = theme;

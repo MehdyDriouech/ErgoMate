@@ -103,12 +103,22 @@ const STORAGE_KEYS = {
  * Cette fonction est accessible globalement pour les fichiers features
  */
 function normalizeCustomTheme(theme) {
+  // Générer un ID si manquant
+  if (!theme.id) {
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substring(2, 8);
+    theme.id = `theme-${timestamp}-${random}`;
+    console.log('🔑 ID généré automatiquement:', theme.id);
+  }
+  
   return {
     ...theme,
     isCustom: true, // Force toujours à true
     questions: theme.questions || [],
     tags: theme.tags || [],
-    meta: theme.meta || {}
+    meta: theme.meta || {},
+    createdAt: theme.createdAt || Date.now(),
+    updatedAt: Date.now()
   };
 }
 
@@ -419,6 +429,9 @@ async function loadMainConfig() {
   // ✅ CORRECTION : Charger les thèmes officiels
   const officialThemes = Array.isArray(cfg.themes) ? cfg.themes.slice() : [];
   
+  // ✅ CORRECTION : Sauvegarder les thèmes officiels pour refreshThemesState()
+  state.officialThemes = officialThemes.slice();
+  
   // ✅ CORRECTION : Charger les thèmes personnalisés depuis localStorage
   const customThemes = loadCustomThemes();
   const customThemesArray = Object.values(customThemes).map(theme => normalizeCustomTheme(theme));
@@ -444,8 +457,18 @@ async function loadMainConfig() {
  * Recharge state.themes pour inclure les thèmes personnalisés mis à jour
  */
 function refreshThemesState() {
-  // Récupérer les thèmes officiels (ceux qui ne sont pas custom)
-  const officialThemes = state.themes.filter(t => !t.isCustom);
+  // ✅ CORRECTION : Récupérer les thèmes officiels depuis state.officialThemes ou state.themes
+  let officialThemes = [];
+  
+  if (state.officialThemes && Array.isArray(state.officialThemes)) {
+    // Utiliser les thèmes officiels sauvegardés
+    officialThemes = state.officialThemes.slice();
+  } else {
+    // Sinon, récupérer depuis state.themes (ceux qui ne sont pas custom)
+    officialThemes = state.themes.filter(t => !t.isCustom);
+    // Sauvegarder pour la prochaine fois
+    state.officialThemes = officialThemes.slice();
+  }
   
   // Charger les thèmes personnalisés depuis localStorage
   const customThemes = loadCustomThemes();

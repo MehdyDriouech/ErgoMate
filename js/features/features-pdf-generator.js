@@ -1,5 +1,5 @@
 // js/features/features-pdf-generator.js
-// Génération de questions via OpenRouter API (Qwen3) à partir du texte PDF
+// Génération de questions via Mistral AI API à partir du texte PDF
 
 ///////////////////////////
 // ÉTAT DE LA GÉNÉRATION //
@@ -36,15 +36,20 @@ async function generateQuestionsFromText(text, config) {
       config: config
     });
     
-    // Appeler l'API PHP qui utilise OpenRouter/Qwen3
+    // Appeler l'API PHP qui utilise Mistral AI
     const response = await fetch(BACKEND_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
      body: JSON.stringify({
+       apiKey: config.apiKey || null,  // BYOK : Clé API utilisateur (optionnelle)
        text: text,
-       config: config,
+       config: {
+         questionCount: config.questionCount,
+         types: config.types,
+         difficulty: config.difficulty
+       },
        metadata: {
          fileName: pdfImportState.metadata?.fileName || 'document.pdf',
           author: pdfImportState.metadata?.author || null,
@@ -74,15 +79,10 @@ async function generateQuestionsFromText(text, config) {
     
     console.log('✅ Réponse reçue de l\'API:', data);
     
-    // Extraire le texte de la réponse (format Anthropic compatible)
-    const responseText = data.content[0].text;
+    // La nouvelle API Mistral retourne directement le JSON parsé
+    const theme = data;
     
-    console.log('📝 Texte extrait:', responseText.substring(0, 200) + '...');
-    
-    // Parser la réponse JSON
-    const theme = parseApiResponse(responseText);
-    
-    console.log('🎯 Thème parsé:', theme);
+    console.log('🎯 Thème reçu:', theme);
     
     // Valider le thème
     const validation = validateTheme(theme);
@@ -384,20 +384,48 @@ function handleSavePdfTheme() {
   }
   
   try {
-    // Sauvegarder le thème (utilise la fonction existante)
-    saveCustomTheme(generatorState.generatedTheme);
+    // ✅ Normaliser le thème avant sauvegarde (génère un ID si manquant)
+    const normalizedTheme = normalizeCustomTheme(generatorState.generatedTheme);
     
-    const qCount = generatorState.generatedTheme.questions.length;
+    // Vérifier que l'ID a bien été généré
+    if (!normalizedTheme.id) {
+      throw new Error('Impossible de générer un ID pour le thème');
+    }
+    
+    console.log('💾 Sauvegarde du thème:', {
+      id: normalizedTheme.id,
+      title: normalizedTheme.title,
+      questionsCount: normalizedTheme.questions?.length || 0,
+      isCustom: normalizedTheme.isCustom
+    });
+    
+    // Sauvegarder le thème (utilise la fonction existante)
+    saveCustomTheme(normalizedTheme);
+
+    // ✅ CORRECTION : Actualiser state.themes pour synchroniser avec localStorage
+    refreshThemesState();
+    
+    // Vérifier que le thème est bien dans state.themes
+    const themeInState = state.themes.find(t => t.id === normalizedTheme.id);
+    if (!themeInState) {
+      console.warn('⚠️ Le thème n\'est pas dans state.themes après refreshThemesState()');
+      // Forcer un nouveau rafraîchissement
+      refreshThemesState();
+    }
+    
+    const qCount = normalizedTheme.questions.length;
     
     alert(
       `✅ Thème sauvegardé avec succès !\n\n` +
-      `📚 ${generatorState.generatedTheme.title}\n` +
+      `📚 ${normalizedTheme.title}\n` +
       `❓ ${qCount} question${qCount > 1 ? 's' : ''}\n\n` +
       `Le thème est maintenant disponible dans "Mes Thèmes".`
     );
     
     // Fermer la vue et retourner à la liste des thèmes
     closePdfImport();
+    
+    // Rafraîchir les vues
     showCustomThemesView();
     renderCustomThemesList();
     renderThemes();

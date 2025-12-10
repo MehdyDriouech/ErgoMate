@@ -74,7 +74,6 @@ class ViewAbout extends HTMLElement {
             <h4 style="margin: 0 0 8px 0;">🎯 Modes d'apprentissage variés</h4>
             <ul style="margin: 0; padding-left: 20px; display: grid; gap: 6px;">
               <li><strong>Entraînement :</strong> Pratique libre avec feedback immédiat</li>
-              <li><strong>QCM uniquement :</strong> Focus sur les questions à choix multiples</li>
               <li><strong>Mode Examen :</strong> Simulation d'examen avec notation finale</li>
               <li><strong>Révision d'erreurs :</strong> Système intelligent qui cible vos points faibles</li>
               <li><strong>Flashcards :</strong> Apprentissage par répétition espacée</li>
